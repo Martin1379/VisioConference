@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VisioConference.Repository.Objets;
+
+namespace VisioConference.Repository.Interface
+{
+    public interface IConversation
+    {
+        List<Conversation> findAll();
+        Conversation findByUsers(string user1, string user2);
+        List<User> findFriends(string user);
+        void modifyMessage(Conversation u, string message);
+        void Update(Conversation u);
+    }
+}

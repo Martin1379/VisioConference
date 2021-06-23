@@ -9,7 +9,7 @@ namespace VisioConference.Repository.DAO
     {
 
         public MyContext()
-            : base("name=MyContext")
+            : base(/*name=*/"MyContext")
         {
         }
 
