@@ -9,9 +9,14 @@ namespace VisioConference.Repository.DAO
 {
     public class ConversationDAO : IConversation
     {
+        // à modifier, le contexte doit être créé dans chaque méthode
+        // Accès en ligne, il faut que les méthodes soient async et utiliser HasNotracking pour les histoire de cache OU utiliser le using Mycontext dans les méthodes
         MyContext context = new MyContext();
         public List<Conversation> findAll()
         {
+            //using(MyContexy context = new Mycontext(){
+            // Le code de la méthode
+            //}
             List<Conversation> lst = new List<Conversation>();
 
             //List<Utilisateur> utilisateurs = context.utilisateurs.Include(u => u.login).ToList();
