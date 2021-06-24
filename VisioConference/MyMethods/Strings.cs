@@ -8,8 +8,12 @@ namespace VisioConference.MyMethods
     public class Strings
     {
         // récupère la premier élément d'une chaine compris entre string strStart et StrEnd
+
+        // str chaine ="zeazea<#Remy>Salut !<#Sara> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
         public static string getBetween(string strSource, string strStart, string strEnd)
         {
+            //strStart : <#Sara>
+            //strEnd : <#Remy>
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
             {
                 int Start, End;
@@ -31,6 +35,7 @@ namespace VisioConference.MyMethods
                 End = strSource.IndexOf(strEnd, Start);
 
                 return getBetween(strSource, "<#", ">") + " :" + strSource.Substring(Start, End - Start);
+                //Remy : Salut !
             }
 
             return "";
@@ -64,6 +69,7 @@ namespace VisioConference.MyMethods
         public static string getFirstSender(string strSource)
         {
             return "<#" + getBetween(strSource, "<#", ">") + ">";
+            //retourne <#Remy>
         }
 
         public static string getSecondSender(string strSource)

@@ -10,6 +10,8 @@ namespace VisioConference.Repository.Interface
     public interface IUser
     {
         List<User> findAll();
+        List<User> findAllConnected();
+
         void Update();
         User findByLogin(string login);
     }

@@ -22,13 +22,13 @@ namespace VisioConference.Repository.DAO
             .Property(e => e.login)
             .IsUnicode(false);
 
-            modelBuilder.Entity<Conversation>()
-          .Property(e => e.userID)
-          .IsUnicode(false);
+            //  modelBuilder.Entity<Conversation>()
+            //.Property(e => e.userID)
+            //.IsUnicode(false);
 
-            modelBuilder.Entity<Conversation>()
-               .Property(e => e.userFriendID)
-            .IsUnicode(false);
+            //modelBuilder.Entity<Conversation>()
+            //   .Property(e => e.userFriendID)
+            //.IsUnicode(false);
 
 
 

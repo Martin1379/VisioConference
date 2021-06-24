@@ -137,6 +137,18 @@
     <Compile Include="Migrations\202106221736196_initialmodel.designer.cs">
       <DependentUpon>202106221736196_initialmodel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106241816176_modifconv.cs" />
+    <Compile Include="Migrations\202106241816176_modifconv.designer.cs">
+      <DependentUpon>202106241816176_modifconv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106241821329_modifconv2.cs" />
+    <Compile Include="Migrations\202106241821329_modifconv2.designer.cs">
+      <DependentUpon>202106241821329_modifconv2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106241823409_modifconv21.cs" />
+    <Compile Include="Migrations\202106241823409_modifconv21.designer.cs">
+      <DependentUpon>202106241823409_modifconv21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyMethods\Strings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,6 +219,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202106221736196_initialmodel.resx">
       <DependentUpon>202106221736196_initialmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241816176_modifconv.resx">
+      <DependentUpon>202106241816176_modifconv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241821329_modifconv2.resx">
+      <DependentUpon>202106241821329_modifconv2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241823409_modifconv21.resx">
+      <DependentUpon>202106241823409_modifconv21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

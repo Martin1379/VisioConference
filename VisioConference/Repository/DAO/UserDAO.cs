@@ -9,37 +9,64 @@ namespace VisioConference.Repository.DAO
 {
     public class UserDAO : IUser
     {
-        MyContext context = new MyContext();
         public List<User> findAll()
         {
-            List<User> lst = new List<User>();
-
-            //List<Utilisateur> utilisateurs = context.utilisateurs.Include(u => u.login).ToList();
-            // <=> SELECT * FROM utilisateur
-            var query = context.users;
-            foreach (var item in query)
+            using (MyContext context = new MyContext())
             {
-                if (item.connected == true)
+                List<User> lst = new List<User>();
+
+                // <=> SELECT * FROM utilisateur
+                var query = context.users;
+                foreach (var item in query)
                 {
-                    lst.Add(item);
+                        lst.Add(item);
                 }
+                return lst;
             }
-            return lst;
+        }
+
+        public List<User> findAllConnected()
+        {
+            using (MyContext context = new MyContext())
+            {
+
+
+                List<User> lst = new List<User>();
+
+                //List<Utilisateur> utilisateurs = context.utilisateurs.Include(u => u.login).ToList();
+                // <=> SELECT * FROM utilisateur
+                var query = context.users;
+                foreach (var item in query)
+                {
+                    if (item.connected == true)
+                    {
+                        lst.Add(item);
+                    }
+                }
+                return lst;
+            }
         }
 
         public User findByLogin(string login)
         {
-            User user = new User();
-            var query = from u in context.users
-                        where u.login == login
-                        select u;
-            user = query.FirstOrDefault();
-            return user;
+            using (MyContext context = new MyContext())
+            {
+
+                User user = new User();
+                var query = from u in context.users
+                            where u.login == login
+                            select u;
+                user = query.FirstOrDefault();
+                return user;
+            }
         }
 
         public void Update()
         {
-            context.SaveChanges();
+            using (MyContext context = new MyContext())
+            {
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -4,4 +4,31 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+@{
+
+    <ul>
+        @*@foreach (var user in ViewBag.data)
+        {
+            <li>@user.login</li>
+            if (user.connected)
+            {
+                <li>Connecté</li>
+            }
+            else
+            {
+                <li>Hors ligne</li>
+            }
+        }*@
+    </ul>
+    <h2>Les amis de Jean :</h2>
+    <ul>
+        @foreach (var user2 in ViewBag.Data2)
+        {
+            <li>@user2.login</li>
+        }
+
+
+    </ul>
+}
+
 <p>Use this area to provide additional information.</p>

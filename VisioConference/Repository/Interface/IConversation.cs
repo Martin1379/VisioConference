@@ -10,8 +10,8 @@ namespace VisioConference.Repository.Interface
     public interface IConversation
     {
         List<Conversation> findAll();
-        Conversation findByUsers(string user1, string user2);
-        List<User> findFriends(string user);
+        Conversation findByUsers(User user1, User user2);
+        List<User> findFriends(User user);
         void modifyMessage(Conversation u, string message);
         void Update(Conversation u);
     }

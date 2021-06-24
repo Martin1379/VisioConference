@@ -25,5 +25,12 @@ namespace VisioConference.Repository.Objets
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
+
+        public User(int id, string login, bool connected)
+        {
+            this.id = id;
+            this.login = login;
+            this.connected = connected;
+        }
     }
 }
