@@ -21,16 +21,16 @@ namespace VisioConference.Controllers
 
             
             UserDAO udao = new UserDAO();
-            
+
             //User us = new User();
             //us = udao.findByLogin("Remy");
-            //ViewBag.Variable = us.id;
+            //ViewBag.Variable = us.Id;
 
             //List<User> lst = new List<User>();
             //lst = udao.findAll();
             //ViewBag.Data = lst;
 
-            User us2 = new User(4, "Jean", true);
+            User us2 = new User(4,"Jean");
             ConversationDAO cdao = new ConversationDAO();
             List<User> lst2 = new List<User>();
             lst2 = cdao.findFriends(us2);

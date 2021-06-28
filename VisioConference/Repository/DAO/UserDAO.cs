@@ -38,7 +38,7 @@ namespace VisioConference.Repository.DAO
                 var query = context.users;
                 foreach (var item in query)
                 {
-                    if (item.connected == true)
+                    if (item.Connected == true)
                     {
                         lst.Add(item);
                     }
@@ -54,7 +54,7 @@ namespace VisioConference.Repository.DAO
 
                 User user = new User();
                 var query = from u in context.users
-                            where u.login == login
+                            where u.Login == login
                             select u;
                 user = query.FirstOrDefault();
                 return user;

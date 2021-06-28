@@ -1,0 +1,60 @@
+﻿/*GENERAL*/
+
+body {
+    background-color: green;
+}
+
+.logo {
+    width: 50px;
+    display: inline-block;
+    position: relative;
+    bottom: 18px;
+}
+
+.logo-link {
+    width: 50px;
+    margin: 15px 0;
+}
+
+#navbar-edit {
+    position: relative;
+    top: 34px;
+    font-weight: bolder;
+}
+
+#avatar-vide {
+    width: 221px;
+}
+
+.navbar-inverse {
+    background-color: #3B3B3B;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+footer .row {
+    position: relative;
+}
+
+#footer-col2 {
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+}
+
+/*LAND PAGE*/
+#h1-accueil {
+    display: inline-block;
+}
+
+#landpage-content input {
+    max-width: -webkit-fill-available;
+    margin: 0 15px;
+}
+
+#landpage-content .btn {
+    margin: 0;
+}

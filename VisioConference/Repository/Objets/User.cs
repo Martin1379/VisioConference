@@ -13,24 +13,55 @@ namespace VisioConference.Repository.Objets
         {
             conversations = new HashSet<Conversation>();
         }
+
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
+
         [StringLength(255)]
         [Index(IsUnique = true)]
         [Required]
-        public string login { get; set; }
+        public string Login { get; set; }
 
-        //Indique dans la BD si l'utilisateur est en connexion ou pas - lorsqu'il ferme l'app, il met la valeur à false
-        public bool connected { get; set; }
+        [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
+        [EmailAddress(ErrorMessage = "Adresse eMail incorrecte.")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [FileExtensions(Extensions = "png, jpg, jpeg")]
+        public string Photo { get; set; }
+
+        public bool Connected { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
 
-        public User(int id, string login, bool connected)
+        public User(int id, string login)
         {
-            this.id = id;
-            this.login = login;
-            this.connected = connected;
+            Id = id;
+            Login = login;
+        }
+        //Constructeur pour la méthode de revherche d'ami
+        public User(string email, string login, string photo, bool connected)
+        {
+            Email = email;
+            Password = "";
+            Login = login;
+            Photo = photo;
+            Connected = false;
+        }
+
+
+        public User(string email, string password, string login, string photo, bool connected, int id)
+        {
+            Id = id;
+            Email = email;
+            Password = password;
+            Login = login;
+            Photo = photo;
+            Connected = connected;
         }
     }
 }

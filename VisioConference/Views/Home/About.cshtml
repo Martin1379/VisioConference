@@ -9,8 +9,8 @@
     <ul>
         @*@foreach (var user in ViewBag.data)
         {
-            <li>@user.login</li>
-            if (user.connected)
+            <li>@user.Login</li>
+            if (user.Connected)
             {
                 <li>Connecté</li>
             }
@@ -24,7 +24,7 @@
     <ul>
         @foreach (var user2 in ViewBag.Data2)
         {
-            <li>@user2.login</li>
+            <li>@user2.Login</li>
         }
 
 

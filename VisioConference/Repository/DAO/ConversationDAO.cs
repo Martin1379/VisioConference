@@ -31,7 +31,7 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 var query = from co in context.conversations
-                            where (co.userFriendID == user1.id && co.userID == user2.id) || (co.userFriendID == user2.id && co.userID == user1.id)
+                            where (co.userFriendID == user1.Id && co.userID == user2.Id) || (co.userFriendID == user2.Id && co.userID == user1.Id)
                             select co;
                 Conversation conv = query.FirstOrDefault(); //TODO try catch
                 return conv;
@@ -43,29 +43,34 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 var query = (from us in context.users
-                             join co in context.conversations on us.id equals co.userID
-                             where co.userFriendID == user.id
+                             join co in context.conversations on us.Id equals co.userID
+                             where co.userFriendID == user.Id
                              select new
                              {
-                                 FriendId = us.id,
-                                 FriendLogin = us.login,
-                                 FriendConnected = us.connected
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendLogin = us.Login,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Connected
                              })
                             .Union
                             (from us in context.users
-                             join co in context.conversations on us.id equals co.userFriendID
-                             where co.userID == user.id
+                             join co in context.conversations on us.Id equals co.userFriendID
+                             where co.userID == user.Id
                              select new
                              {
-                                 FriendId = us.id,
-                                 FriendLogin = us.login,
-                                 FriendConnected = us.connected
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendLogin = us.Login,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Connected
                              })
                             ;
+
                 List<User> lst = new List<User>();
                 foreach (var item in query)
                 {
-                    lst.Add(new User(item.FriendId, item.FriendLogin, item.FriendConnected));
+                    lst.Add(new User(item.FriendMail,item.FriendLogin, item.FriendPhoto, item.FriendConnected));
                 }
                 return lst;
             }
