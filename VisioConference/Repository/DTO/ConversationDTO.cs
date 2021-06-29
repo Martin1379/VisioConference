@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VisioConference.Migrations
+namespace VisioConference.Repository.DTO
 {
-    public class Class1
+    public class ConversationDTO
     {
     }
 }
