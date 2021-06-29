@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VisioConference.DTO;
 using VisioConference.Repository.Objets;
 
 namespace VisioConference.Repository.Interface
 {
     public interface IUser
     {
-        List<User> findAll();
-        List<User> findAllConnected();
+        List<UserDTO> findAll();
+        List<UserDTO> findAllConnected();
+
+
 
         void Update();
-        User findByLogin(string login);
+        UserDTO findByUserNameAndPassword(UserDTO dto);
     }
 }
 //Camel case (méthodes): nom composés : commencer par une minuscule
