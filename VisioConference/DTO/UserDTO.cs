@@ -26,12 +26,8 @@ namespace VisioConference.DTO
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string Photo { get; set; }
-
         public bool Connected { get; set; }
-
         public bool IsAdmin { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
 
         public UserDTO(int id, string login)
