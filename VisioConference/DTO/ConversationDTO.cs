@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VisioConference.Repository.DTO
+namespace VisioConference.DTO
 {
     public class ConversationDTO
     {

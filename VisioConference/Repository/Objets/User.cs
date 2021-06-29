@@ -22,18 +22,16 @@ namespace VisioConference.Repository.Objets
         [Required]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
-        [EmailAddress(ErrorMessage = "Adresse eMail incorrecte.")]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
-        [DataType(DataType.Password)]
+        [Required]
         public string Password { get; set; }
 
         [FileExtensions(Extensions = "png, jpg, jpeg")]
         public string Photo { get; set; }
 
         public bool Connected { get; set; }
+
+        public bool IsAdmin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }

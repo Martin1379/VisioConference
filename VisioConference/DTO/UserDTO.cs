@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using VisioConference.Repository.Objets;
 
-namespace VisioConference.Repository.DTO
+namespace VisioConference.DTO
 {
     public class UserDTO
     {
@@ -15,12 +15,7 @@ namespace VisioConference.Repository.DTO
             conversations = new HashSet<Conversation>();
         }
 
-        [Key]
         public int Id { get; set; }
-
-        [StringLength(255)]
-        [Index(IsUnique = true)]
-        [Required]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
@@ -30,11 +25,11 @@ namespace VisioConference.Repository.DTO
         [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [FileExtensions(Extensions = "png, jpg, jpeg")]
         public string Photo { get; set; }
 
         public bool Connected { get; set; }
+
+        public bool IsAdmin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
