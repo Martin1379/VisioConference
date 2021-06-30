@@ -12,10 +12,7 @@ namespace VisioConference.Repository.Interface
     {
         List<UserDTO> findAll();
         List<UserDTO> findAllConnected();
-
-
-
-        void Update();
+        void Update(UserDTO dto);
         UserDTO findByEmailAndPassword(UserDTO dto);
     }
 }

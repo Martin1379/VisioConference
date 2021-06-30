@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using VisioConference.Repository.Interface;
 using VisioConference.Models;
+using VisioConference.DTO;
 
 namespace VisioConference.Repository.DAO
 {
@@ -11,7 +12,7 @@ namespace VisioConference.Repository.DAO
     {
         // Accès en ligne, il faut que les méthodes soient async et utiliser HasNotracking pour les histoire de cache
         // => OU utiliser le using Mycontext dans les méthodes
-        public List<Conversation> findAll()
+        public List<ConversationDTO> findAll()
         {
             using (MyContext context = new MyContext())
             {
