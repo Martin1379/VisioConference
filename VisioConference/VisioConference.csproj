@@ -130,14 +130,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202106301046416_initialModel.cs" />
-    <Compile Include="Migrations\202106301046416_initialModel.designer.cs">
-      <DependentUpon>202106301046416_initialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
     <Compile Include="Tools\Strings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,8 +144,8 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Repository\Interface\IConversation.cs" />
     <Compile Include="Repository\Interface\IUser.cs" />
-    <Compile Include="Repository\Objets\Conversation.cs" />
-    <Compile Include="Repository\Objets\User.cs" />
+    <Compile Include="Models\Conversation.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -196,8 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Service\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -213,8 +208,6 @@
     <Content Include="Content\js\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106301046416_initialModel.resx">
-      <DependentUpon>202106301046416_initialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
