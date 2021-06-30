@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using VisioConference.Repository.Objets;
+using VisioConference.Models;
 
 namespace VisioConference.Repository.DAO
 {
@@ -19,7 +19,7 @@ namespace VisioConference.Repository.DAO
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-            .Property(e => e.Login)
+            .Property(e => e.Pseudo)
             .IsUnicode(false);
 
             //  modelBuilder.Entity<Conversation>()

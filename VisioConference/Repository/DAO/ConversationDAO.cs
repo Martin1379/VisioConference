@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using VisioConference.Repository.Interface;
-using VisioConference.Repository.Objets;
+using VisioConference.Models;
 
 namespace VisioConference.Repository.DAO
 {

@@ -168,8 +168,8 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Repository\Interface\IConversation.cs" />
     <Compile Include="Repository\Interface\IUser.cs" />
-    <Compile Include="Repository\Objets\Conversation.cs" />
-    <Compile Include="Repository\Objets\User.cs" />
+    <Compile Include="Models\Conversation.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -215,7 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Repository\Objets\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
