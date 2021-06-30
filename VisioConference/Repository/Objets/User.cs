@@ -20,8 +20,8 @@ namespace VisioConference.Repository.Objets
         [StringLength(255)]
         [Index(IsUnique = true)]
         [Required]
-        public string Login { get; set; }
-
+        public string Pseudo { get; set; }
+        [Required]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
@@ -36,28 +36,28 @@ namespace VisioConference.Repository.Objets
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
 
-        public User(int id, string login)
+        public User(int id, string pseudo)
         {
             Id = id;
-            Login = login;
+            Pseudo = pseudo;
         }
         //Constructeur pour la méthode de revherche d'ami
-        public User(string email, string login, string photo, bool connected)
+        public User(string email, string pseudo, string photo, bool connected)
         {
             Email = email;
             Password = "";
-            Login = login;
+            Pseudo = Pseudo;
             Photo = photo;
             Connected = false;
         }
 
 
-        public User(string email, string password, string login, string photo, bool connected, int id)
+        public User(string email, string password, string pseudo, string photo, bool connected, int id)
         {
             Id = id;
             Email = email;
             Password = password;
-            Login = login;
+            Pseudo = pseudo;
             Photo = photo;
             Connected = connected;
         }

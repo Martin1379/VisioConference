@@ -16,7 +16,7 @@ namespace VisioConference.DTO
         }
 
         public int Id { get; set; }
-        public string Login { get; set; }
+        public string Pseudo { get; set; }
 
         [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
         [EmailAddress(ErrorMessage = "Adresse eMail incorrecte.")]
@@ -30,28 +30,28 @@ namespace VisioConference.DTO
         public bool IsAdmin { get; set; }
         public virtual ICollection<Conversation> conversations { get; set; }
 
-        public UserDTO(int id, string login)
+        public UserDTO(int id, string pseudo)
         {
             Id = id;
-            Login = login;
+            Pseudo = pseudo;
         }
         //Constructeur pour la méthode de revherche d'ami
-        public UserDTO(string email, string login, string photo, bool connected)
+        public UserDTO(string email, string pseudo, string photo, bool connected)
         {
             Email = email;
             Password = "";
-            Login = login;
+            Pseudo = pseudo;
             Photo = photo;
             Connected = false;
         }
 
 
-        public UserDTO(string email, string password, string login, string photo, bool connected, int id)
+        public UserDTO(string email, string password, string pseudo, string photo, bool connected, int id)
         {
             Id = id;
             Email = email;
             Password = password;
-            Login = login;
+            Pseudo = pseudo;
             Photo = photo;
             Connected = connected;
         }

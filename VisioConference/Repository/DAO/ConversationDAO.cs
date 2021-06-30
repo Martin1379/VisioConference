@@ -49,7 +49,7 @@ namespace VisioConference.Repository.DAO
                              {
                                  FriendId = us.Id,
                                  FriendMail = us.Email,
-                                 FriendLogin = us.Login,
+                                 FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
                                  FriendConnected = us.Connected
                              })
@@ -61,7 +61,7 @@ namespace VisioConference.Repository.DAO
                              {
                                  FriendId = us.Id,
                                  FriendMail = us.Email,
-                                 FriendLogin = us.Login,
+                                 FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
                                  FriendConnected = us.Connected
                              })
@@ -70,7 +70,7 @@ namespace VisioConference.Repository.DAO
                 List<User> lst = new List<User>();
                 foreach (var item in query)
                 {
-                    lst.Add(new User(item.FriendMail,item.FriendLogin, item.FriendPhoto, item.FriendConnected));
+                    lst.Add(new User(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected));
                 }
                 return lst;
             }

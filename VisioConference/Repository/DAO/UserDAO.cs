@@ -49,16 +49,18 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public UserDTO findByUserNameAndPassword(UserDTO dto)
+        public UserDTO findByEmailAndPassword(UserDTO dto)
         {
             UserDTO userDTO = new UserDTO();
             using (MyContext context = new MyContext())
             {
-
+                //à modifier, findby id actuellement
                 User user = new User();
                 var query = from u in context.users
-                            where u.Id == dto.Id
+                            where ((u.Email == dto.Email) && (u.Password == dto.Password))
                             select u;
+
+
                 user = query.FirstOrDefault();
                 if (user != null && user.Id != 0)
                 {
