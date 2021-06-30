@@ -11,9 +11,9 @@ namespace VisioConference.Repository.Interface
     public interface IConversation
     {
         List<ConversationDTO> findAll();
-        ConversationDTO findByUsers(User user1, User user2);
-        List<User> findFriends(User user);
-        void modifyMessage(Conversation u, string message);
-        void Update(Conversation u);
+        ConversationDTO findByUsers(UserDTO user1, UserDTO user2);
+        List<UserDTO> findFriends(UserDTO user);
+        void modifyMessage(ConversationDTO u, string message);
+        void Update(ConversationDTO u);
     }
 }

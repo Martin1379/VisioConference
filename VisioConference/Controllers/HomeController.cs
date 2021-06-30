@@ -49,13 +49,11 @@ namespace VisioConference.Controllers
             //lst = udao.findAll();
             //ViewBag.Data = lst;
 
-            User us2 = new User(4,"Jean");
+            UserDTO us2 = new UserDTO(4,"Jean");
             ConversationDAO cdao = new ConversationDAO();
-            List<User> lst2 = new List<User>();
+            List<UserDTO> lst2 = new List<UserDTO>();
             lst2 = cdao.findFriends(us2);
             ViewBag.Data2 = lst2;
-
-
 
             return View();
         }

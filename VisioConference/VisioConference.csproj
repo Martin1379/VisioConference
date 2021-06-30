@@ -146,6 +146,8 @@
     <Compile Include="Repository\Interface\IUser.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\User.cs" />
+	<Compile Include="Service\ConversationService.cs" />
+	<Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css" />

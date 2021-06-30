@@ -23,6 +23,11 @@ namespace VisioConference.Service
             return repo.findAll();
         }
 
+        internal void Add(UserDTO userDTO)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<UserDTO> findAllConnected()
         {
             return repo.findAllConnected();
