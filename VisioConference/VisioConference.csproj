@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -47,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -133,29 +132,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202106221736196_initialmodel.cs" />
-    <Compile Include="Migrations\202106221736196_initialmodel.designer.cs">
-      <DependentUpon>202106221736196_initialmodel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106241816176_modifconv.cs" />
-    <Compile Include="Migrations\202106241816176_modifconv.designer.cs">
-      <DependentUpon>202106241816176_modifconv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106241821329_modifconv2.cs" />
-    <Compile Include="Migrations\202106241821329_modifconv2.designer.cs">
-      <DependentUpon>202106241821329_modifconv2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106241823409_modifconv21.cs" />
-    <Compile Include="Migrations\202106241823409_modifconv21.designer.cs">
-      <DependentUpon>202106241823409_modifconv21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106281732124_mergeRemiUser.cs" />
-    <Compile Include="Migrations\202106281732124_mergeRemiUser.designer.cs">
-      <DependentUpon>202106281732124_mergeRemiUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106291846337_AjoutIsAdmin.cs" />
-    <Compile Include="Migrations\202106291846337_AjoutIsAdmin.designer.cs">
-      <DependentUpon>202106291846337_AjoutIsAdmin.cs</DependentUpon>
+    <Compile Include="Migrations\202106301100458_intialModel.cs" />
+    <Compile Include="Migrations\202106301100458_intialModel.Designer.cs">
+      <DependentUpon>202106301100458_intialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
@@ -232,23 +211,8 @@
     <Content Include="Content\js\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106221736196_initialmodel.resx">
-      <DependentUpon>202106221736196_initialmodel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106241816176_modifconv.resx">
-      <DependentUpon>202106241816176_modifconv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106241821329_modifconv2.resx">
-      <DependentUpon>202106241821329_modifconv2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106241823409_modifconv21.resx">
-      <DependentUpon>202106241823409_modifconv21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106281732124_mergeRemiUser.resx">
-      <DependentUpon>202106281732124_mergeRemiUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106291846337_AjoutIsAdmin.resx">
-      <DependentUpon>202106291846337_AjoutIsAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106301100458_intialModel.resx">
+      <DependentUpon>202106301100458_intialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -284,10 +248,7 @@
       <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
