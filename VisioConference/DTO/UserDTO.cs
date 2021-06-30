@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using VisioConference.Repository.Objets;
+using VisioConference.Models.Objets;
 
 namespace VisioConference.DTO
 {

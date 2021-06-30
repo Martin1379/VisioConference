@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VisioConference.Repository.DAO;
-using VisioConference.Repository.Objets;
+using VisioConference.Models.Objets;
+
 
 namespace VisioConference.Controllers
 {

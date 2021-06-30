@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace VisioConference.Repository.Objets
+namespace VisioConference.Models.Objets
 {
     public class Conversation
     {

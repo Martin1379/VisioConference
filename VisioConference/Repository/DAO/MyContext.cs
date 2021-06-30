@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using VisioConference.Repository.Objets;
+using VisioConference.Models.Objets;
 
 namespace VisioConference.Repository.DAO
 {
