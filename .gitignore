@@ -5,8 +5,6 @@
 
 # User-specific files
 VisioConference/Web.config
-Migrations/
-Références/
 *.rsuser
 *.suo
 *.user
