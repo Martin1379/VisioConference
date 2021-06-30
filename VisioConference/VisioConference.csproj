@@ -188,11 +188,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repository\Objets\" />
-    <Folder Include="Service\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
