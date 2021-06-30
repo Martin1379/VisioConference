@@ -6,6 +6,7 @@
 # User-specific files
 Web.config
 Migrations/
+Références/
 *.rsuser
 *.suo
 *.user
