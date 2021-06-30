@@ -16,7 +16,7 @@ namespace VisioConference.Repository.Interface
 
 
         void Update();
-        UserDTO findByUserNameAndPassword(UserDTO dto);
+        UserDTO findByEmailAndPassword(UserDTO dto);
     }
 }
 //Camel case (méthodes): nom composés : commencer par une minuscule
