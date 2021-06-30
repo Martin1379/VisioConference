@@ -12,7 +12,7 @@ namespace VisioConference.Tools
         public static UserDTO UserDTOFromUser(UserDTO dto, User model)
         {
             dto.Id = model.Id;
-            dto.Login = model.Login;
+            dto.Pseudo = model.Pseudo;
             dto.Password = model.Password;
             dto.Email = model.Email;
             dto.Photo = model.Photo;
@@ -25,7 +25,7 @@ namespace VisioConference.Tools
         public static User UserFromUserDTO(UserDTO dto, User model)
         {
             model.Id = dto.Id;
-            model.Login = dto.Login;
+            model.Pseudo = dto.Pseudo;
             model.Password = dto.Password;
             model.Email = dto.Email;
             model.Photo = dto.Photo;
