@@ -5,6 +5,7 @@ using System.Web;
 using VisioConference.Repository.Interface;
 using VisioConference.Models;
 using VisioConference.DTO;
+using VisioConference.Tools;
 
 namespace VisioConference.Repository.DAO
 {
@@ -16,30 +17,33 @@ namespace VisioConference.Repository.DAO
         {
             using (MyContext context = new MyContext())
             {
-                List<Conversation> lst = new List<Conversation>();
+                List<ConversationDTO> lst = new List<ConversationDTO>();
+                ConversationDTO dto = new ConversationDTO();
 
                 var query = context.conversations; // <=> SELECT * FROM conversation
                 foreach (var item in query)
                 {
-                    lst.Add(item);
+                    dto = Convertisseur.ConvDTOFromConv(dto, item);
+                    lst.Add(dto);
                 }
                 return lst;
             }
         }
 
-        public Conversation findByUsers(User user1, User user2)
+        public ConversationDTO findByUsers(UserDTO user1, UserDTO user2)
         {
             using (MyContext context = new MyContext())
             {
                 var query = from co in context.conversations
                             where (co.userFriendID == user1.Id && co.userID == user2.Id) || (co.userFriendID == user2.Id && co.userID == user1.Id)
                             select co;
-                Conversation conv = query.FirstOrDefault(); //TODO try catch
-                return conv;
+                ConversationDTO dto = new ConversationDTO();
+                dto = Convertisseur.ConvDTOFromConv(dto, query.FirstOrDefault()); //TODO try catch
+                return dto;
             }
         }
 
-        public List<User> findFriends(User user)
+        public List<UserDTO> findFriends(UserDTO user)
         {
             using (MyContext context = new MyContext())
             {
@@ -68,10 +72,10 @@ namespace VisioConference.Repository.DAO
                              })
                             ;
 
-                List<User> lst = new List<User>();
+                List<UserDTO> lst = new List<UserDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new User(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected));
+                    lst.Add(new UserDTO(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected));
                 }
                 return lst;
             }
@@ -82,7 +86,7 @@ namespace VisioConference.Repository.DAO
         /// </summary>
         /// <param name="u"></param>
         /// <param name="message"></param>
-        public void modifyMessage(Conversation u, string message)
+        public void modifyMessage(ConversationDTO u, string message)
         {
             using (MyContext context = new MyContext())
             {
@@ -94,7 +98,7 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public void Update(Conversation u)
+        public void Update(ConversationDTO u)
         {
             using (MyContext context = new MyContext())
             {
