@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VisioConference.Repository.Interface;
 
 namespace VisioConference.DTO
 {
-    public class ConversationDTO
+    public class ConversationDTO 
     {
         public int convID { get; set; }
         public int userID { get; set; }

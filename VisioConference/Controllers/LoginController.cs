@@ -11,6 +11,8 @@ namespace VisioConference.Controllers
     public class LoginController : Controller
     {
         private UsersService service = new UsersService();
+
+
         // GET: Login
         public ActionResult Index()
         {
@@ -21,7 +23,7 @@ namespace VisioConference.Controllers
         [HttpPost]
         public ActionResult Index(UserDTO dto)
         {
-            if (ModelState.IsValidField("UserName") && ModelState.IsValidField("Password"))
+            if (ModelState.IsValidField("Email") && ModelState.IsValidField("Password"))
             {
                 UserDTO user = service.findByEmailAndPassword(dto);
                 if (user != null && user.Id != 0)
@@ -48,6 +50,16 @@ namespace VisioConference.Controllers
             {
                 return View(dto);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            //Session["userAdmin"] = null;
+            //Session.Abandon();
+            Session.Clear();
+
+
+            return RedirectToAction("Index");
         }
     }
 }
