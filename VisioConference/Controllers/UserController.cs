@@ -7,11 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using VisioConference.DTO;
+using VisioConference.Filters;
 using VisioConference.Repository.DAO;
 using VisioConference.Service;
 
 namespace VisioConference.Controllers
 {
+    //[LoginFilter]
     public class UserController : Controller
     {
         private UsersService service = new UsersService();
@@ -19,7 +21,8 @@ namespace VisioConference.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(service.findAll());
+            List<UserDTO> lst = service.findAll();
+            return View(lst);
         }
 
         // GET: User/Details/5

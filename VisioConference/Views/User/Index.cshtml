@@ -13,7 +13,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
             @Html.DisplayNameFor(model => model.Pseudo)
+            @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
