@@ -143,6 +143,7 @@
       <DependentUpon>202106301301038_initialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Service\UsersService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
     <Compile Include="Tools\Strings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
