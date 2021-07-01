@@ -11,7 +11,7 @@ namespace VisioConference.Service
     public class UsersService
     {
         private UserDAO repo = new UserDAO();
-        internal UserDTO findByEmailAndPassword(UserDTO dto)
+        public  UserDTO findByEmailAndPassword(UserDTO dto)
         {
             UserDTO user = new UserDTO();
             user = repo.findByEmailAndPassword(dto);
@@ -23,9 +23,9 @@ namespace VisioConference.Service
             return repo.findAll();
         }
 
-        internal void Add(UserDTO userDTO)
+        public  void Add(UserDTO userDTO)
         {
-            throw new NotImplementedException();
+            repo.Add(userDTO);
         }
 
         public List<UserDTO> findAllConnected()

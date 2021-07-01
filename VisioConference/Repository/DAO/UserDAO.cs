@@ -29,6 +29,16 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        internal void Add(UserDTO userDTO)
+        {
+            User u = Convertisseur.UserFromUserDTO(userDTO, new User());
+            using (MyContext context = new MyContext())
+            {
+                context.users.Add(u);
+                context.SaveChanges();
+            }
+        }
+
         public List<UserDTO> findAllConnected()
         {
             using (MyContext context = new MyContext())
@@ -55,13 +65,15 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 //à modifier, findby id actuellement
-                User user = new User();
-                var query = from u in context.users
-                            where ((u.Email == dto.Email) && (u.Password == dto.Password))
-                            select u;
+                /*User user = new User();*/
+                /* var query = from u in context.users
+                             where ((u.Email == dto.Email) && (u.Password == dto.Password))
+                             select u;
 
 
-                user = query.FirstOrDefault();
+                 user = query.FirstOrDefault();*/
+                List<User> lst = context.users.ToList();
+                User user = context.users.Where(u => u.Email.Equals(dto.Email) && u.Password.Equals(dto.Password)).FirstOrDefault();
                 if (user != null && user.Id != 0)
                 {
                     userDTO = Convertisseur.UserDTOFromUser(userDTO, user);
