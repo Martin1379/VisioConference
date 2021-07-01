@@ -143,7 +143,6 @@
       <DependentUpon>202106301301038_initialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Service\UserService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
     <Compile Include="Tools\Strings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,8 +155,8 @@
     <Compile Include="Repository\Interface\IUser.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\User.cs" />
-	<Compile Include="Service\ConversationService.cs" />
-	<Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\ConversationService.cs" />
+    <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css" />
