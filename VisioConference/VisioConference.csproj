@@ -143,9 +143,6 @@
       <DependentUpon>202106301301038_initialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="..\..\..\..\Desktop\projet visioconf\ConversationService.cs">
-      <Link>Service\ConversationService.cs</Link>
-    </Compile>
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
     <Compile Include="Tools\Strings.cs" />
