@@ -16,14 +16,12 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 List<UserDTO> lst = new List<UserDTO>();
-                UserDTO dto = new UserDTO();
-
+                
                 // <=> SELECT * FROM utilisateur
                 var query = context.users;
                 foreach (var item in query)
                 {
-                    dto = Convertisseur.UserDTOFromUser(dto, item);
-                    lst.Add(dto);
+                    lst.Add(Convertisseur.UserDTOFromUser(new UserDTO(), item));
                 }
                 return lst;
             }

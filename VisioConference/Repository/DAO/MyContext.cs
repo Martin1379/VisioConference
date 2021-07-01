@@ -34,6 +34,8 @@ namespace VisioConference.Repository.DAO
 
 
         }
+        //A laisser, créé lors en même temps que le UserController
+        public System.Data.Entity.DbSet<VisioConference.DTO.UserDTO> UserDTOes { get; set; }
     }
 
 }
