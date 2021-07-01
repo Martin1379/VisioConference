@@ -34,6 +34,30 @@ namespace VisioConference.Tools
 
             return model;
         }
+
+        public static ConversationDTO ConvDTOFromConv(ConversationDTO dto, Conversation model)
+        {
+            dto.convID = model.convID;
+            dto.message = model.message;
+            dto.userFriendID = model.userFriendID;
+            dto.userID = model.userID;
+
+
+            return dto;
+        }
+
+
+
+
+        public static Conversation ConvFromConvDTO(ConversationDTO dto, Conversation model)
+        {
+            model.convID = dto.convID;
+            model.message = dto.message;
+            model.userFriendID = dto.userFriendID;
+            model.userID = dto.userID;
+
+            return model;
+        }
     }
 
 }

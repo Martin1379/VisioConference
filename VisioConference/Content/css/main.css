@@ -1,7 +1,11 @@
 ﻿/*GENERAL*/
-
 body {
-/*    background-color: green;*/
+    background-color: #DADADA;
+    /*background-color: red;*/
+}
+
+.jumbotron {
+    margin-top: 46px;
 }
 
 .logo {
@@ -11,14 +15,28 @@ body {
     bottom: 18px;
 }
 
+#website-name {
+    font-size: 56px;
+    font-weight: bolder;
+    color: #eeeeee;
+    position: relative;
+    top: 19px;
+}
+
 .logo-link {
     width: 50px;
     margin: 15px 0;
+    margin-right: 10px;
+}
+
+
+#navbar-edit-main {
+    background-color: #454545;
 }
 
 #navbar-edit {
     position: relative;
-    top: 34px;
+    top: 48px;
     font-weight: bolder;
 }
 
@@ -45,9 +63,10 @@ footer .row {
     right: 0%;
 }
 
-/*LAND PAGE*/
-#h1-accueil {
+/*CONNEXION PAGE*/
+#h2-accueil {
     display: inline-block;
+    font-size: 36px;
 }
 
 #landpage-content input {
@@ -57,4 +76,124 @@ footer .row {
 
 #landpage-content .btn {
     margin: 0;
+}
+
+/*MAIN PAGE*/
+
+#main-container {
+    display: flex;
+}
+
+#div-main-col-1 {
+    display: inline-block;
+    width: 20%;
+    padding: 20px 30px;
+}
+
+#div-main-col-2 {
+    display: inline-block;
+    width: 60%;
+    background-color: #eeeeee;
+    padding: 20px 30px;
+}
+
+#div-main-col-3 {
+    display: inline-block;
+    padding: 20px 30px;
+}
+
+
+/*MAIN COL 1*/
+#avatar-main {
+    width: 221px;
+    border: 1px solid #454545;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#main-col-1-name {
+    font-size: 26px;
+}
+
+#btn-edit {
+    width: 30px;
+}
+
+#main-div-nom-edit {
+    display: flex;
+    justify-content: space-between;
+}
+
+#div-main-col-1 select {
+    min-width: 200px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/*FOOTER*/
+#div-main-col-1 footer img {
+    width: 70px;
+}
+
+#div-main-col-1 footer {
+    font-size: 11px;
+}
+
+#main-div-footer-1,
+#main-div-footer-2 {
+    display: inline-block;
+    bottom: 0;
+}
+
+#main-div-footer-1 {
+    margin-right: 7px;
+}
+
+#main-div-footer-2 {
+    position: relative;
+    bottom: -30px;
+}
+
+/*MAIN COL 2*/
+#input-group-tchat {
+    min-width: -webkit-fill-available;
+}
+
+/*MAIN COL 3*/
+#myTab,
+#myTab li {
+    border-bottom: solid 1px #333333;
+}
+
+#myTab {
+    text-align: center;
+}
+
+#myTab li {
+    width:50%;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #DADADA;
+}
+
+.nav-tabs > li > a {
+    background-color: #7A7A7A;
+    color: #DADADA;
+}
+
+#search-friend {
+    display: inline-flex;
+    width: -webkit-fill-available;
+}
+
+#select-trier {
+    min-width: 200px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#div-select-trier {
+    display: flex;
+    justify-content: flex-end;
 }
