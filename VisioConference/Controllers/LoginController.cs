@@ -10,7 +10,7 @@ namespace VisioConference.Controllers
 {
     public class LoginController : Controller
     {
-        private UserService service = new UserService();
+        private UsersService service = new UsersService();
         // GET: Login
         public ActionResult Index()
         {
