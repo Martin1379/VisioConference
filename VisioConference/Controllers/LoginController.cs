@@ -31,12 +31,12 @@ namespace VisioConference.Controllers
                     if (user.IsAdmin)
                     {
                         Session["userAdmin"] = user;
-                        return RedirectToAction("Index", "User");
+                        return RedirectToAction("Accueil");
                     }
                     else
                     {
-                        //TODO
-                        return null;
+                        
+                        return RedirectToAction("Accueil"); ;
                     }
 
                 }
@@ -60,6 +60,11 @@ namespace VisioConference.Controllers
 
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Accueil()
+        { 
+            return View();
         }
     }
 }
