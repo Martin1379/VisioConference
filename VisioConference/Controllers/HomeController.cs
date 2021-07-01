@@ -9,7 +9,7 @@ namespace VisioConference.Controllers
 {
     public class HomeController : Controller
     {
-        private UserService service = new UserService();
+        private UsersService service = new UsersService();
         public ActionResult Index()
         {
             return View(new UserDTO());
