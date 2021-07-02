@@ -23,10 +23,13 @@ namespace VisioConference.Service
             user = repo.findById(id);
             return user;
         }
-
         public List<UserDTO> findAll()
         {
             return repo.findAll();
+        }
+        public List<UserDTO> findAll(string search)
+        {
+            return repo.findAll(search);
         }
 
         public  void Add(UserDTO userDTO)

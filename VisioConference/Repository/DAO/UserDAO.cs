@@ -31,6 +31,24 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        public List<UserDTO> findAll(string search)
+        {
+            using (MyContext context = new MyContext())
+            {
+                List<UserDTO> lst = new List<UserDTO>();
+
+                // <=> SELECT * FROM utilisateur
+                var query = from us in context.users
+                            where (us.Pseudo.Contains(search) || us.Email.Contains(search))
+                            select us;
+                foreach (var item in query)
+                {
+                    lst.Add(Convertisseur.UserDTOFromUser(new UserDTO(), item));
+                }
+                return lst;
+            }
+        }
+
         public void Add(UserDTO userDTO)
         {
             User u = Convertisseur.UserFromUserDTO(userDTO, new User());

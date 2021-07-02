@@ -28,6 +28,9 @@
     <table class="table">
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.First().Id)
+            </th>
+            <th>
                 @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
                 @Html.DisplayNameFor(model => model.First().Pseudo)
                 @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
@@ -52,31 +55,34 @@
 
         @foreach (var item in Model)
         {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Pseudo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Password)
-    </td>
-    <td>
-        <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Connected)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsAdmin)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pseudo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Connected)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAdmin)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
 }
 
     </table>
