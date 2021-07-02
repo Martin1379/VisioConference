@@ -59,6 +59,12 @@
       <HintPath>..\packages\Grpc.Core.Api.2.38.1\lib\net45\Grpc.Core.Api.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -83,6 +89,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -159,6 +166,10 @@
     <Compile Include="Migrations\202107020849349_modelInitial.designer.cs">
       <DependentUpon>202107020849349_modelInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107021231531_changementUnicitePseudo.cs" />
+    <Compile Include="Migrations\202107021231531_changementUnicitePseudo.designer.cs">
+      <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Service\UsersService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
@@ -186,6 +197,8 @@
     <Content Include="Content\img\edit-button.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\sara01.jpg" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\img\remy.jpg" />
     <Content Include="Content\img\state-wireframe.png" />
     <Content Include="Content\img\state.png" />
     <Content Include="favicon.ico" />
@@ -248,6 +261,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107020849349_modelInitial.resx">
       <DependentUpon>202107020849349_modelInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107021231531_changementUnicitePseudo.resx">
+      <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

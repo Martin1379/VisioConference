@@ -8,6 +8,8 @@ using VisioConference.Models;
 using VisioConference.Tools;
 using System.IO;
 using System.Web.Mvc;
+using System.Windows.Forms;
+
 
 namespace VisioConference.Repository.DAO
 {
@@ -59,6 +61,16 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        internal void DeleteUserDTO(int id)
+        {
+            using (MyContext context = new MyContext())
+            {
+                User u = context.users.Find(id);
+                context.users.Remove(u);
+                context.SaveChanges();
+            }
+        }
+
         public UserDTO findByEmailAndPassword(UserDTO dto)
         {
             UserDTO userDTO = new UserDTO();
@@ -92,6 +104,18 @@ namespace VisioConference.Repository.DAO
                 u = Convertisseur.UserFromUserDTO(dto, u); 
                 context.SaveChanges(); ;
             }
+        }
+
+        public UserDTO findById(int? Id)
+        {
+            if (Id != null) 
+            { 
+                using (MyContext context = new MyContext())
+                {
+                    UserDTO dto = Convertisseur.UserDTOFromUser(new UserDTO(),context.users.Find(Id));
+                }
+            }
+            throw new NotImplementedException();
         }
     }
 }
