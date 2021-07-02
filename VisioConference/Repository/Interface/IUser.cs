@@ -11,6 +11,7 @@ namespace VisioConference.Repository.Interface
     public interface IUser
     {
         List<UserDTO> findAll();
+        List<UserDTO> findAll(string search);
         UserDTO findById(int? Id);
         List<UserDTO> findAllConnected();
         void Update(UserDTO dto);

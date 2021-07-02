@@ -25,10 +25,10 @@ namespace VisioConference.Controllers
         {
             List<UserDTO> lst = new List<UserDTO>();
 
-            //Filtre
+            
             if (search != null)
-                lst = service.findAll().Where(u => u.Pseudo.Contains(search)).ToList();
-
+                //lst = (List<UserDTO>)service.findAll().Where(u => u.Pseudo.Contains(search)).ToList().Union(service.findAll().Where(u => u.Email.Contains(search)).ToList());
+                lst = service.findAll(search).ToList();
             else
                 lst = service.findAll();
 
