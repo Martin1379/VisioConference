@@ -53,6 +53,12 @@
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -64,6 +70,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -140,6 +147,10 @@
     <Compile Include="Migrations\202107020849349_modelInitial.designer.cs">
       <DependentUpon>202107020849349_modelInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107021231531_changementUnicitePseudo.cs" />
+    <Compile Include="Migrations\202107021231531_changementUnicitePseudo.designer.cs">
+      <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Service\UsersService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
@@ -165,6 +176,7 @@
     <Content Include="Content\img\avatar-vide.png" />
     <Content Include="Content\img\dawan-logo.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -225,6 +237,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107020849349_modelInitial.resx">
       <DependentUpon>202107020849349_modelInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107021231531_changementUnicitePseudo.resx">
+      <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

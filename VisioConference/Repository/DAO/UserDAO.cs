@@ -6,6 +6,7 @@ using VisioConference.DTO;
 using VisioConference.Repository.Interface;
 using VisioConference.Models;
 using VisioConference.Tools;
+using System.Windows.Forms;
 
 namespace VisioConference.Repository.DAO
 {
@@ -27,7 +28,7 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        internal void Add(UserDTO userDTO)
+        public void Add(UserDTO userDTO)
         {
             User u = Convertisseur.UserFromUserDTO(userDTO, new User());
             using (MyContext context = new MyContext())

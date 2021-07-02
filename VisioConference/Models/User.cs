@@ -16,14 +16,15 @@ namespace VisioConference.Models
 
         [Key]
         public int Id { get; set; }
-
         [StringLength(255)]
-        [Index(IsUnique = true)]
         [Required]
         public string Pseudo { get; set; }
         [Required]
+        [StringLength(255)]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
         [Required]
+        [StringLength(255)]
         public string Password { get; set; }
 
         [FileExtensions(Extensions = "png, jpg, jpeg")]
