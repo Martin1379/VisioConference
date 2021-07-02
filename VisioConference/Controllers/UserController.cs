@@ -28,6 +28,7 @@ namespace VisioConference.Controllers
             //Filtre
             if (search != null)
                 lst = service.findAll().Where(u => u.Pseudo.Contains(search)).ToList();
+
             else
                 lst = service.findAll();
 
@@ -67,7 +68,7 @@ namespace VisioConference.Controllers
             // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new UserDTO());
         }
 
         // POST: User/Create
@@ -75,10 +76,13 @@ namespace VisioConference.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Photo,Connected,IsAdmin")] UserDTO userDTO)
+        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Connected,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
+                userDTO.Photo = userDTO.Pseudo + userDTO.Id +Path.GetExtension(Photo.FileName);
+                Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
+
                 service.Add(userDTO);
                 return RedirectToAction("Index");
             }
@@ -98,7 +102,12 @@ namespace VisioConference.Controllers
             {
                 return HttpNotFound();
             }
-            return View(userDTO);
+            else
+            {
+                Session["image"] = userDTO.Photo;
+                return View(userDTO);
+
+            }
         }
 
         // POST: User/Edit/5
@@ -110,10 +119,21 @@ namespace VisioConference.Controllers
         {
             if (ModelState.IsValid)
             {
-                userDTO.Photo = userDTO.Pseudo + Path.GetExtension(Photo.FileName);
-                Photo.SaveAs(Server.MapPath("~/Content/images/") + userDTO.Photo);
+                if (Photo != null)
+                {
+                    //ToDO : Supprimer la photo d'origine (différentes extensions = pas d'écrasement)
+                    userDTO.Photo = userDTO.Pseudo + userDTO.Id + Path.GetExtension(Photo.FileName);
+                    Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
-                service.Add(userDTO);
+                    //service.Add(userDTO);
+                    //return RedirectToAction("Index");
+                }
+                else
+                {
+                    userDTO.Photo = (string)Session["image"];
+                    Session.Remove("image");
+                }
+                service.Update(userDTO);
                 return RedirectToAction("Index");
             }
             return View(userDTO);
