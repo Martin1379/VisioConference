@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -20,10 +21,32 @@ namespace VisioConference.Controllers
         private UsersService service = new UsersService();
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string search, int? i, string sortBy)
         {
-            List<UserDTO> lst = service.findAll();
-            return View(lst);
+            List<UserDTO> lst = new List<UserDTO>();
+
+            //Filtre
+            if (search != null)
+                lst = service.findAll().Where(u => u.Pseudo.Contains(search)).ToList();
+            else
+                lst = service.findAll();
+
+            //Tri
+            switch (sortBy)
+            {
+                case "nameAsc":
+                    lst = lst.OrderBy(x => x.Pseudo).ToList();
+                    break;
+                case "nameDesc":
+                    lst = lst.OrderByDescending(x => x.Pseudo).ToList();
+                    break;
+                case null:
+                    break;
+                default:
+                    break;
+            }
+
+            return View(lst.ToPagedList(i ?? 1, 2));
         }
 
         /*GET: User/Details/5*/
