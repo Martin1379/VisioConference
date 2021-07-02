@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,6 +52,23 @@ namespace VisioConference.Controllers
                 return View(dto);
             }
         }
+
+
+        public ActionResult Create([Bind(Include = "Pseudo,Password,Email")] UserDTO userDTO, HttpPostedFileBase Photo)
+        {
+            if (ModelState.IsValid)
+            {
+                userDTO.Photo = userDTO.Pseudo + Path.GetExtension(Photo.FileName);
+                Photo.SaveAs(Server.MapPath("~/Content/images/") + userDTO.Photo);
+
+                service.Add(userDTO);
+                return RedirectToAction("Index");
+            }
+
+            return View(userDTO);
+        }
+
+
 
         public ActionResult Logout()
         {
