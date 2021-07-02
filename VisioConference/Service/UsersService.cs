@@ -17,6 +17,12 @@ namespace VisioConference.Service
             user = repo.findByEmailAndPassword(dto);
             return user;
         }
+        public UserDTO findById(int? id)
+        {
+            UserDTO user = new UserDTO();
+            user = repo.findById(id);
+            return user;
+        }
 
         public List<UserDTO> findAll()
         {
@@ -36,6 +42,11 @@ namespace VisioConference.Service
         public void Update(UserDTO dto)
         {
             repo.Update(dto);
+        }
+
+        internal void DeleteUserDTO(int id)
+        {
+            repo.DeleteUserDTO(id);
         }
     }
 }
