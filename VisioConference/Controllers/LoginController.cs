@@ -36,7 +36,7 @@ namespace VisioConference.Controllers
                     }
                     else
                     {
-                        
+                        Session["userNormal"] = user;
                         return RedirectToAction("Accueil"); ;
                     }
 

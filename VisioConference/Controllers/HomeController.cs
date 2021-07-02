@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using VisioConference.DTO;
 using VisioConference.Models;
@@ -16,10 +18,12 @@ namespace VisioConference.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(UserDTO userDTO)
+        public ActionResult Index(UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
+                userDTO.Photo = userDTO.Pseudo + Path.GetExtension(Photo.FileName);
+                Photo.SaveAs(Server.MapPath("~/Content/img/") + userDTO.Photo);
                 service.Add(userDTO);
                 return RedirectToAction("Index", "Login");
             }
