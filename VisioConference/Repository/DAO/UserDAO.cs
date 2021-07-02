@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using VisioConference.DTO;
 using VisioConference.Repository.Interface;
-using VisioConference.Repository.Objets;
+using VisioConference.Models;
 using VisioConference.Tools;
 
 namespace VisioConference.Repository.DAO
@@ -72,11 +72,13 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public void Update()
+        public void Update(UserDTO dto)
         {
             using (MyContext context = new MyContext())
             {
-                context.SaveChanges();
+                User u = context.users.Find(dto.Id); 
+                u = Convertisseur.UserFromUserDTO(dto, u); 
+                context.SaveChanges(); ;
             }
         }
     }

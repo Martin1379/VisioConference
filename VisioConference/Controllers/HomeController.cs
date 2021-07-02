@@ -1,16 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using VisioConference.DTO;
+using VisioConference.Models;
 using VisioConference.Repository.DAO;
-using VisioConference.Repository.Objets;
+using VisioConference.Service;
 
 namespace VisioConference.Controllers
 {
     public class HomeController : Controller
     {
+        private UserService service = new UserService();
         public ActionResult Index()
+        {
+            return View(new UserDTO());
+        }
+
+        [HttpPost]
+        public ActionResult Index(UserDTO userDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                service.Add(userDTO);
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View(userDTO);
+            };
+        }
+
+        public ActionResult Main()
+        {
+            return View();
+        }
+
+        public ActionResult Main()
         {
             return View();
         }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace VisioConference.Repository.Objets
+namespace VisioConference.Models
 {
     public class User
     {
