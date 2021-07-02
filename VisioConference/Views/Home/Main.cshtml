@@ -1,0 +1,247 @@
+﻿@model VisioConference.Repository.Objets.User
+
+@{ ViewBag.Title = "Main"; }
+
+<br />
+
+<div id="main-container">
+
+    @*COLONNE 1*@
+    <div id="div-main-col-1">
+        <br />
+        <br />
+        <br />
+        <img src="~/Content/img/remy.jpg" alt="Alternate Text" id="avatar-main" />
+        <br />
+        <br />
+        <br />
+        <div id="main-div-nom-edit">
+            <div>
+                <strong id="main-col-1-name">Remy</strong>
+                <br />
+                #2
+            </div>
+            <div>
+                <img src="~/Content/img/edit-button.png" id="btn-edit" />
+            </div>
+        </div>
+        <select>
+            <option value="value">En ligne</option>
+            <option value="value">Occupé(e)</option>
+            <option value="value">Absent(e)</option>
+            <option value="value">Invisible</option>
+        </select>
+
+        @*FOOTER*@
+        <footer>
+            <div>
+                <div id="main-div-footer-1">
+                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+                </div>
+                <div id="main-div-footer-2">
+                    YouCom&copy;  est une application développée par :
+                    <br />
+                    Sara - Martin - Remy
+                    <br />
+                    Développeurs .NET - DAWAN - @DateTime.Now.Year
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @*COLONNE 2*@
+    <div id="div-main-col-2">
+        <br />
+        <br />
+        <br />
+
+        @* CHAT CONTENT *@
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices eget velit quis consequat.
+            Mauris pretium nulla id lorem consectetur pulvinar. Pellentesque pulvinar dui sagittis metus pretium,
+            vel posuere purus sollicitudin. Vestibulum semper tortor vitae turpis accumsan, sit amet dapibus tellus luctus.
+            Cras pellentesque nisl arcu, vel imperdiet tellus suscipit mattis. Aliquam erat volutpat. Aliquam porta mi mauris, eu ultricies diam facilisis id.
+            Pellentesque mauris felis, dictum at hendrerit sed, elementum eu erat.
+            <br />
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ante cursus, faucibus neque ac, sagittis sem.
+            Proin laoreet cursus molestie. Proin ex urna, bibendum et mi a, ultricies volutpat nunc. Suspendisse rutrum mollis ante, eget bibendum orci finibus sed.
+            Morbi pulvinar erat sem. Cras pretium sodales tellus vitae ultrices. Mauris in viverra sapien. Suspendisse nec turpis ac lorem cursus viverra congue quis velit.
+            Curabitur tincidunt, sem et vestibulum efficitur, velit ligula feugiat mauris, non ornare neque sapien a mauris.
+            Integer fringilla scelerisque tempor. Nunc sed luctus dui, tempor consectetur libero. Donec ultrices, nunc ac tristique pretium, sapien nulla placerat tellus,
+            nec molestie purus magna et ex.
+            Donec lorem urna, pulvinar in finibus et, faucibus ut risus. Nullam tempor purus id diam hendrerit dapibus.
+            Pellentesque vel enim eu nibh sagittis sollicitudin. Cras posuere lacus quis nunc sodales volutpat.
+            Fusce aliquam suscipit nibh, ac eleifend diam tristique dapibus. In ut dignissim ante.
+            <br />
+            <br />
+            Vivamus sed sem ante. Duis eget vulputate libero. Curabitur augue velit, ornare a augue ut, condimentum placerat risus.
+            Vestibulum porta pretium libero, ut ornare urna viverra sit amet. Phasellus nec nisl ullamcorper,
+            consequat dui ut, laoreet sem. Integer nec faucibus turpis. Proin volutpat efficitur eros eu euismod. Suspendisse dictum,
+            elit scelerisque vulputate hendrerit, eros ante gravida tortor, sit amet elementum ante nisi nec urna.
+            Donec sit amet velit a lacus porta rhoncus vitae vel purus. Integer tempor tortor consequat nulla eleifend porttitor.
+            Duis quis augue nec augue condimentum ullamcorper. Nam tempus dui a lorem molestie, vel aliquam arcu tempor.
+            Nunc sit amet arcu fermentum, tempor lectus a, dictum turpis. Duis sem enim, fermentum vitae dui id, varius sollicitudin sapien.
+            Cras id dolor rutrum enim varius rhoncus eu non nisl. Praesent vel ex dolor. Vestibulum laoreet ac justo in iaculis.
+            <br />
+            <br />
+            Sed imperdiet vulputate lacus. Nunc rutrum molestie auctor. Curabitur porttitor orci vitae tristique iaculis.
+            Quisque tempor, sem nec ultrices scelerisque, nisl nisl vulputate enim, non pharetra nibh diam sit amet ipsum.
+            Vivamus pulvinar dui a turpis consectetur, non efficitur mi tristique. Nam efficitur volutpat consequat.
+            Aenean sagittis molestie vehicula.
+            Nulla ultricies, ligula ut molestie scelerisque, purus elit commodo ante, non volutpat arcu nisi fringilla est.
+            Integer pellentesque faucibus neque eu pharetra. Integer pretium efficitur mi at hendrerit. Sed sit amet purus in leo tincidunt facilisis.
+            Mauris sed nunc felis. Curabitur ex erat, cursus eget urna eget, cursus suscipit lectus. Aenean nec urna vel lectus sagittis rhoncus non eu orci.
+            Etiam at tellus quis erat blandit vehicula eget nec diam. Vivamus posuere leo mauris, quis tristique dolor tempor in. Duis non malesuada purus.
+        </p>
+
+        @* INPUT ENVOYER MESSAGE *@
+        <div class="input-group mb-3" id="input-group-tchat">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Joindre</button>
+                </span>
+                <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="input-tchat">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Envoyer</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    @*COLONNE 3*@
+    <div id="div-main-col-3">
+        <br />
+        <br />
+        <br />
+        @* ONGLETS *@
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item active">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Contacts" role="tab" aria-controls="Contacts" aria-selected="true">Contacts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Invitations" role="tab" aria-controls="Invitations" aria-selected="false">Invitations</a>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="contacts-tab">...</div>
+            <div class="tab-pane fade" id="" role="tabpanel" aria-labelledby="invitations-tab">...</div>
+        </div>
+
+        @* RECHERCHE AMI *@
+        <form id="search-friend">
+            <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
+        </form>
+        <br />
+        <br />
+
+        @* TRIER PAR *@
+        <div id="div-select-trier">
+            <select id="select-trier">
+                <option value="value">Trier par</option>
+                <option value="value">Ordre alphabétique</option>
+                <option value="value">Présence</option>
+            </select>
+        </div>
+        <br />
+
+        @* LISTE AMIS *@
+        <div>
+
+            @* AMI CARD *@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-wireframe.png" class="state-img"/>
+                </div>
+                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Paul</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #24
+                    <br />
+                    Hors ligne
+                    <br />
+                </div>
+            </div>
+
+            @* AMI CARD *@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-wireframe.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Marie</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #7
+                    <br />
+                    Occupé(e)
+                    <br />
+                </div>
+            </div>
+
+            @* AMI CARD *@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-wireframe.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Sara</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #1
+                    <br />
+                    En ligne
+                    <br />
+                </div>
+            </div>
+
+            @* AMI CARD *@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-wireframe.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Martin</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #3
+                    <br />
+                    En ligne
+                    <br />
+                </div>
+            </div>
+
+            @* AMI CARD *@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-wireframe.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Nico</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #98
+                    <br />
+                    Inactif
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
