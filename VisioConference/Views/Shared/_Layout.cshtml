@@ -13,21 +13,30 @@
 
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" id="navbar-edit-main">
+
         <div class="container">
-            <div class="navbar-header">
-                <a href='@Url.Action("MyAction", "MyController")'>
-                    <img src='@Url.Content("~/Content/img/logo.png")' class="logo-link" />
-                    <span id="website-name">YouCom</span>
-                </a>
-                @*@Html.ActionLink("Logo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-            </div>
             <div class="navbar-collapse collapse">
+
+                <div id="nav-content">
+                    @*LOGO & TITRE*@
+                    <div class="navbar-header">
+                        <a href='@Url.Action("MyAction", "MyController")'>
+                            <img src='@Url.Content("~/Content/img/logo.png")' class="logo-link" />
+                            <span id="website-name">YouCom</span>
+                        </a>
+                        @*@Html.ActionLink("Logo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                    </div>
+
+                    @*NAV BUTTONS*@
                 <ul class="nav navbar-nav" id="navbar-edit">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Discussion", "Main", "Home")</li>
-                    <li>@Html.ActionLink("À propos", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Home")</li>
+                    <li><img src="~/Content/img/discussion.png" id="icone-tchat"/>@Html.ActionLink("Discussion", "Main", "Home")</li>
+                    <li><img src="~/Content/img/info.png" id="icone-infos"/>@Html.ActionLink("À propos", "About", "Home")</li>
+                    <li><img src="~/Content/img/letter.png" id="icone-contact"/>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><img src="~/Content/img/power-button.png" id="icone-logout"/>@Html.ActionLink("Deconnexion", "Logout", "Home")</li>
                 </ul>
+
+                </div>
             </div>
         </div>
     </div>

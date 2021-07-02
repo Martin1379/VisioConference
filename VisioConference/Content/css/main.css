@@ -1,7 +1,6 @@
 ﻿/*GENERAL*/
 body {
     background-color: #DADADA;
-    /*background-color: red;*/
 }
 
 a:hover, a:visited, a:link, a:active {
@@ -10,6 +9,17 @@ a:hover, a:visited, a:link, a:active {
 
 .jumbotron {
     margin-top: 46px;
+}
+
+.label-default {
+    background-color: #1c688d;
+}
+
+/*NAVBAR*/
+#nav-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
 }
 
 .logo {
@@ -44,8 +54,45 @@ a:hover, a:visited, a:link, a:active {
     font-weight: bolder;
 }
 
+    #navbar-edit img {
+        position: relative;
+        top: 13px;
+        left: 10px;
+    }
+
+#icone-home {
+    width: 21px;
+    height: 21px;
+}
+
+#icone-tchat {
+    width: 24px;
+    height: 24px;
+}
+
+#icone-infos {
+    width: 21px;
+    height: 21px;
+    top: 14px;
+}
+
+#icone-contact {
+    width: 24px;
+    height: 24px;
+}
+
+#icone-logout {
+    width: 20px;
+    height: 20px;
+    top: 14px;
+}
+
 #avatar-vide {
     width: 221px;
+}
+
+.nav > li {
+    display: flex;
 }
 
 .navbar-inverse {
@@ -96,11 +143,10 @@ footer .row {
 }
 
 #div-main-col-2 {
-    display: inline-block;
     width: 60%;
     background-color: #eeeeee;
     padding: 20px 30px;
-    position: relative;
+    max-height: 900px;
 }
 
 #div-main-col-3 {
@@ -112,7 +158,7 @@ footer .row {
 /*MAIN COL 1*/
 #avatar-main {
     width: 250px;
-    border: 6px solid #454545;
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.29);
     border-radius: 10px;
     height: 250px;
     object-fit: cover;
@@ -171,12 +217,21 @@ footer .row {
 }
 
 #input-group-tchat {
-    min-width: 92%;
+    min-width: 100%;
 }
 
-#input-group-tchat {
-    position: absolute;
-    bottom: 36px;
+#div-list-amis > div {
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.29);
+    width: -webkit-fill-available;
+}
+
+#div-list-amis > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #454545;
 }
 
 .div-ami-card-text button {
@@ -191,6 +246,7 @@ footer .row {
     border-radius: 40px;
     border: 1px solid #454545;
     padding: 3px;
+    top: 5px;
 }
 
 .state-img {
@@ -205,13 +261,23 @@ footer .row {
 }
 
 .div-ami-card-text {
-    min-width: -webkit-fill-available;
+    width: -webkit-fill-available;
     margin-top: 8px;
 }
 
+    .div-ami-card-text button {
+        font-size: 29px;
+    }
+
+    .div-ami-card-text .label {
+        display: block;
+        width: 113px;
+        font-size: 100%;
+    }
+
+
 /*MAIN COL 3*/
-#myTab,
-#myTab li {
+#myTab, #myTab li {
     border-bottom: solid 1px #333333;
 }
 
@@ -221,6 +287,7 @@ footer .row {
 
     #myTab li {
         width: 50%;
+        display: block;
     }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {

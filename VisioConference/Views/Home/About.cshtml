@@ -1,34 +1,27 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-@{
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    Contenue de About
+    <br />
+    <br />
+    <br />
+    <br />
 
-    <ul>
-        @*@foreach (var user in ViewBag.data)
-        {
-            <li>@user.Login</li>
-            if (user.Connected)
-            {
-                <li>Connecté</li>
-            }
-            else
-            {
-                <li>Hors ligne</li>
-            }
-        }*@
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
     </ul>
-    <h2>Les amis de Jean :</h2>
-    <ul>
-        @foreach (var user2 in ViewBag.Data2)
-        {
-            <li>@user2.Login</li>
-        }
 
 
-    </ul>
-}
 
-<p>Use this area to provide additional information.</p>
+</div>
