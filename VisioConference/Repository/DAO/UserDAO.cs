@@ -86,10 +86,11 @@ namespace VisioConference.Repository.DAO
                 if (user != null && user.Id != 0)
                 {
                     userDTO = Convertisseur.UserDTOFromUser(userDTO, user);
+                    return userDTO;
+                } else
+                {
+                    throw new NotImplementedException();
                 }
-
-                return userDTO;
-
             }
         }
 
@@ -99,7 +100,7 @@ namespace VisioConference.Repository.DAO
             {
                 User u = context.users.Find(dto.Id); 
                 u = Convertisseur.UserFromUserDTO(dto, u); 
-                context.SaveChanges(); ;
+                context.SaveChanges();
             }
         }
 
@@ -110,6 +111,7 @@ namespace VisioConference.Repository.DAO
                 using (MyContext context = new MyContext())
                 {
                     UserDTO dto = Convertisseur.UserDTOFromUser(new UserDTO(),context.users.Find(Id));
+                    return dto;
                 }
             }
             throw new NotImplementedException();

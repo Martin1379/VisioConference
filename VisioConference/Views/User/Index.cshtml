@@ -1,5 +1,6 @@
-﻿@model IEnumerable<VisioConference.DTO.UserDTO>
-
+﻿@model IPagedList<VisioConference.DTO.UserDTO>
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,62 +11,75 @@
 <br>
 <br>
 
-<h2>Index</h2>
+<div class="container">
+    <p>
+        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+        {
+<input type="text" name="search" placeholder="Mot clé........." />
+                <input type="submit" value="Rechercher" name="submit" class="btn btn-dark" />}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
-            @Html.DisplayNameFor(model => model.Pseudo)
-            @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Connected)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsAdmin)
-        </th>
-        <th></th>
-    </tr>
+    </p>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pseudo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Connected)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAdmin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<div class="container">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
+                @Html.DisplayNameFor(model => model.First().Pseudo)
+                @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Connected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().IsAdmin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Pseudo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+    <td>
+        <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Connected)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsAdmin)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
 }
 
-</table>
+    </table>
+    <br />
+    @Html.PagedListPager(Model, i => Url.Action("Index", "User", new { i, search = Request.QueryString["search"] }))
+</div>
