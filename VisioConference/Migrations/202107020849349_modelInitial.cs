@@ -1,9 +1,9 @@
-namespace VisioConference.Migrations
+﻿namespace VisioConference.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class intialModel : DbMigration
+    public partial class modelInitial : DbMigration
     {
         public override void Up()
         {
