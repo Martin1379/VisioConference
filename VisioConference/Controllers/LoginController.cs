@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VisioConference.DTO;
+using VisioConference.Filters;
 using VisioConference.Service;
 
 namespace VisioConference.Controllers
@@ -79,9 +80,14 @@ namespace VisioConference.Controllers
 
             return RedirectToAction("Index");
         }
-
+        [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
         public ActionResult Accueil()
         { 
+            return View();
+        }
+
+        public ActionResult AccessDenied()
+        {
             return View();
         }
     }

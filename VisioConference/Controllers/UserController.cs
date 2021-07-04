@@ -15,7 +15,7 @@ using VisioConference.Service;
 
 namespace VisioConference.Controllers
 {
-    [LoginFilter]
+    [UserFilter]
     public class UserController : Controller
     {
         private UsersService service = new UsersService();

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AccessDenied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>AccessDenied</h2>
+
+Vous n'avez pas le droit d'accéder à ce contenu
+@if (Session["userAdmin"] != null)
+{
+    @: en tant qu'administrateur.
+}
+else if (Session["userNormal"] == null)
+{
+    @:en tant que visiteur.
+}
+
+
