@@ -15,16 +15,16 @@ using VisioConference.Service;
 
 namespace VisioConference.Controllers
 {
-    //[LoginFilter]
+    [LoginFilter]
     public class UserController : Controller
     {
         private UsersService service = new UsersService();
 
-        // GET: User
-        public ActionResult Index(string search, int? i, string sortBy)
+            // GET: User
+            public ActionResult Index(string search, int? i, string sortBy)
         {
             List<UserDTO> lst = new List<UserDTO>();
-
+            
             
             if (search != null)
                 //lst = (List<UserDTO>)service.findAll().Where(u => u.Pseudo.Contains(search)).ToList().Union(service.findAll().Where(u => u.Email.Contains(search)).ToList());
@@ -47,7 +47,7 @@ namespace VisioConference.Controllers
                     break;
             }
 
-            return View(lst.ToPagedList(i ?? 1, 2));
+            return View(lst.ToPagedList(i ?? 1, 10));
         }
 
         /*GET: User/Details/5*/
@@ -122,7 +122,7 @@ namespace VisioConference.Controllers
                 if (Photo != null)
                 {
                     //ToDO : Supprimer la photo d'origine (différentes extensions = pas d'écrasement)
-                    userDTO.Photo = userDTO.Pseudo + userDTO.Id + Path.GetExtension(Photo.FileName);
+                    userDTO.Photo = userDTO.Pseudo +0+ userDTO.Id + Path.GetExtension(Photo.FileName);
                     Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
                     //service.Add(userDTO);

@@ -68,5 +68,15 @@ namespace VisioConference.Controllers
 
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            ViewBag.Message = "Your contact page.";
+            //à voir avec Mourad s'il est nécessaire d'avoir deux type de sessions différentes
+            Session["userAdmin"] = null;
+            Session["userNormal"] = null;
+
+            return View();
+        }
     }
 }
