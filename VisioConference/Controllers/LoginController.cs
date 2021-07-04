@@ -32,7 +32,7 @@ namespace VisioConference.Controllers
                     if (user.IsAdmin)
                     {
                         Session["userAdmin"] = user;
-                        return RedirectToAction("Accueil");
+                        return RedirectToAction("Index", "User");
                     }
                     else
                     {
@@ -58,8 +58,8 @@ namespace VisioConference.Controllers
         {
             if (ModelState.IsValid)
             {
-                userDTO.Photo = userDTO.Pseudo + Path.GetExtension(Photo.FileName);
-                Photo.SaveAs(Server.MapPath("~/Content/images/") + userDTO.Photo);
+                userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
+                Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
                 service.Add(userDTO);
                 return RedirectToAction("Index");
