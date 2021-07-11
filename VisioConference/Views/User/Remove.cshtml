@@ -1,0 +1,60 @@
+﻿@model VisioConference.DTO.UserDTO
+
+
+
+@{ int idUser = (int)Session["edituser"]; }
+@{
+    ViewBag.Title = "Remove";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Remove</h2>
+
+<h3>Êtes vous sûr de vouloir retirer l'amitié de @Html.DisplayFor(model => model.Pseudo) ? Cela supprimera toute conversation entre ces deux personnes </h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pseudo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pseudo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Connected)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Connected)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Remove" class="btn btn-default" />
+            @*<input type="hidden" name="auctionEventId" value="@idUser" />*@|
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

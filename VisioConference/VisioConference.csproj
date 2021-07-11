@@ -236,6 +236,9 @@
     <Content Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Home\Logout.cshtml" />
     <Content Include="Views\Login\AccessDenied.cshtml" />
+    <Content Include="Views\User\Conversation.cshtml" />
+    <Content Include="Views\User\DisplayFriends.cshtml" />
+    <Content Include="Views\User\Remove.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -245,6 +248,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Conversation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

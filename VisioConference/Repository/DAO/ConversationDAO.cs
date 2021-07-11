@@ -30,6 +30,7 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+
         public ConversationDTO findByUsers(UserDTO user1, UserDTO user2)
         {
             using (MyContext context = new MyContext())
@@ -75,7 +76,7 @@ namespace VisioConference.Repository.DAO
                 List<UserDTO> lst = new List<UserDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new UserDTO(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected));
+                    lst.Add(new UserDTO(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected, item.FriendId));
                 }
                 return lst;
             }
@@ -98,16 +99,33 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        public void removeConversation(int convId)
+        {
+            using (MyContext context = new MyContext())
+            {
+                var query = (from co in context.conversations
+                            where convId == co.convID
+                            select co).FirstOrDefault();
+
+                if (query != null)
+                {
+                    context.conversations.Remove(query);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         public void Update(ConversationDTO u)
         {
             using (MyContext context = new MyContext())
             {
-                var query = from co in context.conversations
+                var query = (from co in context.conversations
                             where u.convID == co.convID
-                            select co;
-                query.FirstOrDefault().message = u.message;
-                query.FirstOrDefault().userFriendID = u.userFriendID;
-                query.FirstOrDefault().userID = u.userID;
+                            select co).FirstOrDefault();
+                query.message = u.message;
+                query.userFriendID = u.userFriendID;
+                query.userID = u.userID;
 
                 context.SaveChanges();
             }
