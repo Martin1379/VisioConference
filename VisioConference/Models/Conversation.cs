@@ -12,14 +12,23 @@ namespace VisioConference.Models
         public int convID { get; set; }
         [Required]
         public int userID { get; set; }
-        
-        
-        //[StringLength(255)]
         [Required]
         public int userFriendID { get; set; }
         [StringLength(10000)]
         public string message { get; set; }
         public virtual User user { get; set; }
 
+        public Conversation()
+        {
+        }
+
+        public Conversation(int convID, int userID, int userFriendID, string message, User user)
+        {
+            this.convID = convID;
+            this.userID = userID;
+            this.userFriendID = userFriendID;
+            this.message = message;
+            this.user = user;
+        }
     }
 }

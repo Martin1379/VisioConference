@@ -35,9 +35,10 @@ namespace VisioConference.DTO
             Id = id;
             Pseudo = pseudo;
         }
-        //Constructeur pour la méthode de revherche d'ami
-        public UserDTO(string email, string pseudo, string photo, bool connected)
+        //Constructeur pour la méthode de recherche d'ami, on ne retourne pas le mdp
+        public UserDTO(string email, string pseudo, string photo, bool connected, int id)
         {
+            Id = id;
             Email = email;
             Password = "";
             Pseudo = pseudo;
