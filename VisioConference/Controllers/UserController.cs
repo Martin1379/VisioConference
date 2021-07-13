@@ -80,7 +80,7 @@ namespace VisioConference.Controllers
             if (ModelState.IsValid)
             {
                 int currentId = service.findAll().Max(u => u.Id) +1; // max récupère l'id MAX en BD
-                userDTO.Photo = userDTO.Pseudo + currentId +Path.GetExtension(Photo.FileName);
+                userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
                 Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
                 service.Add(userDTO);
@@ -119,7 +119,7 @@ namespace VisioConference.Controllers
                 if (Photo != null)
                 {
                     //ToDO : Supprimer la photo d'origine (différentes extensions = pas d'écrasement)
-                    userDTO.Photo = userDTO.Pseudo + userDTO.Id + Path.GetExtension(Photo.FileName);
+                    userDTO.Photo = userDTO.Pseudo + '_' + userDTO.Id + Path.GetExtension(Photo.FileName);
                     Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
                     //service.Add(userDTO);
