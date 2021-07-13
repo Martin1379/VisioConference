@@ -14,7 +14,7 @@
         <br />
         <br />
         @*img src="~/Content/img/remy.jpg" alt="Alternate Text" id="avatar-main" />*@
-        <img src="~/Content/img/@dto.Photo" alt="Alternate Text" id="avatar-main" />
+        <img src="~/Content/avatar_user/@dto.Photo" alt="Alternate Text" id="avatar-main" />
         <br />
         <br />
         <br />
@@ -23,7 +23,7 @@
                 @*<strong id="main-col-1-name">Remy</strong>*@
                 <strong id="main-col-1-name">@dto.Pseudo</strong>
                 <br />
-                #2
+                #@dto.Id
             </div>
             <div>
                 <img src="~/Content/img/edit-button.png" id="btn-edit" />

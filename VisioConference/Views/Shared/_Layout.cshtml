@@ -31,8 +31,8 @@
                 <ul class="nav navbar-nav" id="navbar-edit">
                     <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Login")</li>
                     <li><img src="~/Content/img/discussion.png" id="icone-tchat" />@Html.ActionLink("Discussion", "Accueil", "Login")</li>
-                    <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Home")</li>
-                    <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Login")</li>
+                    <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Contact", "Login")</li>
                     @if (Session["userAdmin"] != null || Session["userNormal"] != null)
                     {
                     <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Login")</li>
