@@ -39,7 +39,7 @@ namespace VisioConference.Controllers
                     else
                     {
                         Session["userNormal"] = user;
-                        return RedirectToAction("Accueil"); ;
+                        return RedirectToAction("Discussion"); ;
                     }
 
                 }
@@ -60,13 +60,17 @@ namespace VisioConference.Controllers
         {
             if (ModelState.IsValid)
             {
-                userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
+                int currentId = service.findAll().Max(u => u.Id) + 1; // max récupère l'id MAX en BD
+                userDTO.Photo = userDTO.Pseudo + currentId + Path.GetExtension(Photo.FileName);
+                //userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
                 Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
                 service.Add(userDTO);
-                return RedirectToAction("Index");
+                //return RedirectToRoute("Discussion", "Login" );
+                Session["userNormal"] = userDTO;
+                userDTO.Id = currentId;
+                return View("~/Views/Login/Discussion.cshtml", userDTO);
             }
-
             return View(userDTO);
         }
 
@@ -82,14 +86,14 @@ namespace VisioConference.Controllers
             }
             else 
             {
-                return RedirectToAction("Accueil", "Login");
+                return RedirectToAction("Discussion", "Login");
             }
 
         }
 
 
         [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
-        public ActionResult Accueil()
+        public ActionResult Discussion()
         { 
             return View();
         }

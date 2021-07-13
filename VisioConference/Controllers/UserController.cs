@@ -79,7 +79,7 @@ namespace VisioConference.Controllers
         {
             if (ModelState.IsValid)
             {
-                int currentId = service.findAll().Max(u => u.Id); // max récupère l'id MAX en BD
+                int currentId = service.findAll().Max(u => u.Id) +1; // max récupère l'id MAX en BD
                 userDTO.Photo = userDTO.Pseudo + currentId +Path.GetExtension(Photo.FileName);
                 Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 

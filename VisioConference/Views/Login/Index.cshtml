@@ -27,7 +27,7 @@
             <br />
 
             @*form-data nous permet également d'envoyer des fichiers*@
-            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Create", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@*Protege notre formulaire contre les attauqes CSRF*@
             @Html.AntiForgeryToken()
 
