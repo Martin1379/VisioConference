@@ -35,7 +35,7 @@
                     <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Session["userAdmin"] != null || Session["userNormal"] != null)
                     {
-                    <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Home")</li>
+                    <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Login")</li>
                     }
 
                 </ul>

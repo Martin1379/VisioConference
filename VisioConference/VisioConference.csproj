@@ -198,6 +198,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\avatar_user\sara01.jpg" />
     <Content Include="Content\css\PagedList.css" />
+    <Content Include="Content\img\majda01.png" />
     <Content Include="Content\img\state-wireframe.png" />
     <Content Include="Content\img\state.png" />
     <Content Include="favicon.ico" />

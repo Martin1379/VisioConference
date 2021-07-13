@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using VisioConference.DTO;
 using VisioConference.Filters;
 using VisioConference.Service;
@@ -73,13 +74,20 @@ namespace VisioConference.Controllers
 
         public ActionResult Logout()
         {
-            //Session["userAdmin"] = null;
-            //Session.Abandon();
-            Session.Clear();
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Session.Clear();
+                return RedirectToAction("Index", "Login");
+            }
+            else 
+            {
+                return RedirectToAction("Accueil", "Login");
+            }
 
-
-            return RedirectToAction("Index");
         }
+
+
         [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
         public ActionResult Accueil()
         { 
