@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,6 +52,7 @@ namespace VisioConference.Controllers
             }
             else
             {
+                
                 return View(dto);
             }
         }
@@ -93,9 +95,13 @@ namespace VisioConference.Controllers
 
 
         [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
-        public ActionResult Discussion()
-        { 
-            return View();
+        public ActionResult Discussion(int? i)
+        {
+            UserDTO userDTO = (UserDTO)Session["userNormal"];
+            ConversationService Cvservice = new ConversationService();
+            List<UserDTO> friendList = Cvservice.findFriends(userDTO);
+
+            return View(friendList.ToPagedList(i ?? 1, 10));
         }
 
         public ActionResult AccessDenied()
