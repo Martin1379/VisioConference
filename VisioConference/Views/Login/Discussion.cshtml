@@ -117,13 +117,16 @@
         <br />
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
         @* INPUT ENVOYER MESSAGE *@
-
-
         @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
         {
-
             <div class="input-group mb-3" id="input-group-tchat">
                 <div class="input-group">
                     <span class="input-group-btn">
@@ -135,11 +138,7 @@
                     </span>
                 </div>
             </div>
-
         }
-
-
-
     </div>
 
     @*COLONNE 3*@
@@ -147,25 +146,36 @@
         <br />
         <br />
         <br />
+
         @* ONGLETS *@
         <ul class="nav nav-tabs">
             <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
             <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
         </ul>
-        <br />
+
+        @*NOTIFS*@
+        <span>
+            <div id="div-notif-nb-disc">
+                <span id="notif-nb-disc">12</span>
+            </div>
+            <div id="div-notif-nb-inv">
+                <span id="notif-nb-inv">14</span>
+            </div>
+        </span>
+
         <div id="contacts-content">
+
             @* RECHERCHE AMI *@
             <form id="search-friend">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
                 <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
             </form>
-            <br />
-            <br />
 
             @* TRIER PAR *@
             <div id="div-select-trier">
                 <select id="select-trier">
                     <option value="value">Trier par</option>
+                    <option value="value">Nouveaux messages</option>
                     <option value="value">Ordre alphabétique</option>
                     <option value="value">Présence</option>
                 </select>
@@ -175,8 +185,52 @@
             @* LISTE AMIS *@
             <div id="div-list-amis">
 
+                @*AMI CARD*@
+                @foreach (UserDTO item in Model)
+                {
+                    <hr />
+                    <div classe="div-ami-card" style=" display:inline-flex">
+                        <div>
+                            <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                            @if (item.Connected == true)
+                            {
+                                <img src="~/Content/img/state-online.png" class="state-img" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/img/state-offline.png" class="state-img" />
+                            }
+
+                        </div>
+
+                        @*AMI TEXT*@
+                        <div class="div-ami-card-text">
+                            <div>
+                                <span class="ami-nom">@item.Pseudo</span>
+                                <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                            </div>
+                            #@item.Id
+                            <br />
+
+                            @if (item.Connected == true)
+                            {
+                                <span class="label label-success">
+                                    Online
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="label label-default">
+                                    Offline
+                                </span>
+                            }
+                            <br />
+                        </div>
+                    </div>
+                }
+
                 @* AMI CARD *@
-                <hr />
+                <!--<hr />
                 <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
                         <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
@@ -192,66 +246,21 @@
                         <span class="label label-default">Hors ligne</span>
                         <br />
                     </div>
-                </div>
-                 AMI CARD 
-                @foreach (UserDTO item in Model)
-                    {
-                        <hr />
-                        <div classe="div-ami-card" style=" display:inline-flex">
-                            <div>
-                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                                @if (item.Connected == true)
-                                {
-                                    <img src="~/Content/img/state-online.png" class="state-img" />
-                                }
-                                else
-                                {
-                                    <img src="~/Content/img/state-offline.png" class="state-img" />
-                                }
-
-                            </div>                <div class="div-ami-card-text">
-                                <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                #@item.Id
-                                <br />
-
-                                @if (item.Connected == true)
-                                {
-                                    <span class="label label-success">
-                                        Online
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="label-default">
-                                        Offline
-                                    </span>
-                                }
-
-                                <br />
-                            </div>
-                        </div>
-
-                    }
-
-
-
+                </div>-->
                 @* AMI CARD *@
                 <!--<hr />
                 <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                        <img src="~/Content/img/state-online.png" class="state-img" />
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-online.png" class="state-img" />
                     </div>                <div class="div-ami-card-text">
                         <div>
-                            <span class="ami-nom">Sara</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span class="ami-nom">sara</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         #1
                         <br />
-                        <span class="label label-success">En ligne</span>
+                        <span class="label label-success">en ligne</span>
                         <br />
                     </div>
                 </div>-->
@@ -259,16 +268,16 @@
                 <!--<hr />
                 <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                        <img src="~/Content/img/state-online.png" class="state-img" />
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-online.png" class="state-img" />
                     </div>                <div class="div-ami-card-text">
                         <div>
-                            <span class="ami-nom">Martin</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span class="ami-nom">martin</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         #3
                         <br />
-                        <span class="label label-success">En ligne</span>
+                        <span class="label label-success">en ligne</span>
                         <br />
                     </div>
                 </div>-->
@@ -276,18 +285,18 @@
                 <!--<hr />
                 <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                        <img src="~/Content/img/state-afk.png" class="state-img" />
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-afk.png" class="state-img" />
                     </div>                <div class="div-ami-card-text">
                         <div>
-                            <span class="ami-nom">Nico</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span class="ami-nom">nico</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         #98
                         <br />
                         <div class="label label-warning">-->
-                @*<span class="label label-warning">Inactif</span>*@
-                <!--Inactif
+                @*<span class="label label-warning">inactif</span>*@
+                <!--inactif
                         </div>
                         <br />
                     </div>
@@ -296,18 +305,81 @@
         </div>
 
         <div id="invitations-content" class="d-no">
+
+            @*INVITATIONS RECUES*@
+            <span class="subcat">
+                Invitations reçues
+            </span>
+            <hr class="hr-subcat" />
+
+            <div id="div-list-invit-in">
+
+                @*EXEMPLE USER*@
+                <hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    </div>
+
+                    @*AMI TEXT*@
+                    <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Nom</span>
+                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        </div>
+                        #ID
+                        <br />
+                        <span class="label label-default">
+                            Offline
+                        </span>
+                        <br />
+                    </div>
+                </div>
+
+                @*EXEMPLE USER*@
+                <hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    </div>
+
+                    @*AMI TEXT*@
+                    <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Nom</span>
+                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        </div>
+                        #ID
+                        <br />
+                        <span class="label label-default">
+                            Offline
+                        </span>
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+
+            @* RECHERCHE UTILISATEUR *@
+            <br />
+            <br />
+            <span class="subcat">
+                Recherche d'utilisateur
+            </span>
+            <hr class="hr-subcat" />
+
+
             @* RECHERCHE AMI *@
             <form id="search-friend">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-                <input class="form-control me-2" type="search" placeholder="Rechercher un membre" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Rechercher un utilisateur" aria-label="Search">
             </form>
-            <br />
-            <br />
 
             @* TRIER PAR *@
             <div id="div-select-trier">
                 <select id="select-trier">
                     <option value="value">Trier par</option>
+                    <option value="value">Nouveaux messages</option>
                     <option value="value">Ordre alphabétique</option>
                     <option value="value">Présence</option>
                 </select>
@@ -315,7 +387,54 @@
             <br />
 
             @* LISTE DE LA RECHERCHE *@
-            Aucun membre trouvé.
+        <div id="div-list-invit-in">
+
+            @*EXEMPLE USER*@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                </div>
+
+                @*AMI TEXT*@
+                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Nom</span>
+                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                    </div>
+                    #ID
+                    <br />
+                    <span class="label label-default">
+                        Offline
+                    </span>
+                    <br />
+                </div>
+            </div>
+
+            @*EXEMPLE USER*@
+            <hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                </div>
+
+                @*AMI TEXT*@
+                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Nom</span>
+                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                    </div>
+                    #ID
+                    <br />
+                    <span class="label label-default">
+                        Offline
+                    </span>
+                    <br />
+                </div>
+            </div>
+
+        </div>
+
         </div>
     </div>
 </div>
