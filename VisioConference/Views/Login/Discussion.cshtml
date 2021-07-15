@@ -41,8 +41,28 @@
         <br />
 
         @*MODIFIER PROFIL*@
+        @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
         <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
-
+        <br />
+        <br />
+        <div class="input-group mb-3" id="input-group-tchat">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pseudo" id="input-tchat" name="Pseudo">
+                <br />
+                <br />
+                <input type="text" class="form-control" placeholder="Password" id="input-tchat" name="Password">
+                <br />
+                <br />
+                <input type="file" id="myFile" name="Photo">
+                <br />
+                <br />
+                <div class="flex-end">
+                    <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        }
         @*FOOTER*@
         <footer>
             <div>
