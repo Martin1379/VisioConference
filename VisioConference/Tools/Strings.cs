@@ -8,7 +8,6 @@ namespace VisioConference.Tools
     public class Strings
     {
         // récupère la premier élément d'une chaine compris entre string strStart et StrEnd
-
         // str chaine ="zeazea<#Remy2>Salut !<#Sara3> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
         public static string getBetween(string strSource, string strStart, string strEnd)
         {
@@ -26,7 +25,7 @@ namespace VisioConference.Tools
             return "";
         }
 
-        public static string getMessage(string strSource, string strStart, string strEnd)
+        private static string getMessage(string strSource, string strStart, string strEnd)
         {
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
             {
@@ -40,7 +39,7 @@ namespace VisioConference.Tools
 
             return "";
         }
-        public static string getMessage(string strSource, string strStart)
+        private static string getMessage(string strSource, string strStart)
         {
             if (strSource.Contains(strStart))
             {
@@ -52,7 +51,7 @@ namespace VisioConference.Tools
 
             return "";
         }
-        public static string hashMessage(string strSource, string strStart, string strEnd)
+       private static string hashMessage(string strSource, string strStart, string strEnd)
         {
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
             {
@@ -66,13 +65,13 @@ namespace VisioConference.Tools
             return "";
         }
 
-        public static string getFirstSender(string strSource)
+        private static string getFirstSender(string strSource)
         {
             return "<#" + getBetween(strSource, "<#", ">") + ">";
             //retourne <#Remy>
         }
 
-        public static string getSecondSender(string strSource)
+        private static string getSecondSender(string strSource)
         {
             try
             {
@@ -87,7 +86,7 @@ namespace VisioConference.Tools
 
         }
 
-        public static void afficherConv (string conversation)
+        public static IEnumerable<string> afficherConv (string conversation)
         {
             string login;
             string login2;
@@ -107,10 +106,11 @@ namespace VisioConference.Tools
                     conversation = hashMessage(conversation, login, login2);
                 }
 
-                Console.WriteLine(message);
+                yield return message ;
 
-            } while (login2 != "<#>");
+            } while (login2 != "<#>" || login2 == null);
 
+            yield break;
         }
 
 
