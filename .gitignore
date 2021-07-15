@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/VisioConference/Content/avatar_user/Stylo_12.jpg
+/VisioConference/Content/avatar_user/Martin_8.jpg
+/VisioConference/Content/avatar_user/Bla_14.jpg
+/VisioConference/Content/avatar_user/Admin_7.png

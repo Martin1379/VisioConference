@@ -9,7 +9,7 @@ namespace VisioConference.Tools
     {
         // récupère la premier élément d'une chaine compris entre string strStart et StrEnd
 
-        // str chaine ="zeazea<#Remy>Salut !<#Sara> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
+        // str chaine ="zeazea<#Remy2>Salut !<#Sara3> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
         public static string getBetween(string strSource, string strStart, string strEnd)
         {
             //strStart : <#Sara>
