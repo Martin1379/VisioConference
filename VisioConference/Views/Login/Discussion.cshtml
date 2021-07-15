@@ -44,7 +44,7 @@
 
         @*MODIFIER PROFIL*@
         <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
-        
+
         @*FOOTER*@
         <footer>
             <div>
@@ -138,65 +138,64 @@
     </div>
 
     @*COLONNE 3*@
-    <div id="div-main-col-3">
+<div id="div-main-col-3">
+    <br />
+    <br />
+    <br />
+    @* ONGLETS *@
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
+        <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
+    </ul>
+    <br />
+    <div id="contacts-content">
+        @* RECHERCHE AMI *@
+        <form id="search-friend">
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+            <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
+        </form>
         <br />
         <br />
-        <br />
-        @* ONGLETS *@
-        <ul class="nav nav-tabs">
-            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
-            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
-        </ul>
-        <br />
-        <div id="contacts-content">
-            @* RECHERCHE AMI *@
-            <form id="search-friend">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-                <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
-            </form>
-            <br />
-            <br />
 
-            @* TRIER PAR *@
-            <div id="div-select-trier">
-                <select id="select-trier">
-                    <option value="value">Trier par</option>
-                    <option value="value">Ordre alphabétique</option>
-                    <option value="value">Présence</option>
-                </select>
-            </div>
-            <br />
+        @* TRIER PAR *@
+        <div id="div-select-trier">
+            <select id="select-trier">
+                <option value="value">Trier par</option>
+                <option value="value">Ordre alphabétique</option>
+                <option value="value">Présence</option>
+            </select>
+        </div>
+        <br />
 
         @* LISTE AMIS *@
-    <div id="div-list-amis">
+        <div id="div-list-amis">
 
-        @* AMI CARD *@
-        <!--<hr />
-        <div classe="div-ami-card" style=" display:inline-flex">
-            <div>
-                <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                <img src="~/Content/img/state-offline.png" class="state-img" />
-            </div>
-            <div class="div-ami-card-text">
-                <div>
-                    <span class="ami-nom">Paul</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                #24
-                <br />
-                <span class="label label-default">Hors ligne</span>
-                <br />
-            </div>
-        </div>-->
-
-        @* AMI CARD *@
-        @foreach (UserDTO item in Model)
-        {
-            <hr />
+            @* AMI CARD *@
+            <!--<hr />
             <div classe="div-ami-card" style=" display:inline-flex">
                 <div>
-                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                    @if (item.Connected == true)
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-offline.png" class="state-img" />
+                </div>
+                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Paul</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #24
+                    <br />
+                    <span class="label label-default">Hors ligne</span>
+                    <br />
+                </div>
+            </div>-->
+            @* AMI CARD *@
+            @foreach (UserDTO item in Model)
+            {
+                <hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                        @if (item.Connected == true)
                         {
                             <img src="~/Content/img/state-online.png" class="state-img" />
                         }
@@ -204,114 +203,114 @@
                         {
                             <img src="~/Content/img/state-offline.png" class="state-img" />
                         }
-                    
+
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">@item.Pseudo</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #@item.Id
+                        <br />
+
+                        @if (item.Connected == true)
+                        {
+                            <span class="label label-success">
+                                Online
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="label-default">
+                                Offline
+                            </span>
+                        }
+
+                        <br />
+                    </div>
+                </div>
+
+            }
+
+
+            @Html.PagedListPager(Model, i => Url.Action("Discussion", "Login", new { i, search = Request.QueryString["search"] }))
+            @* AMI CARD *@
+            <!--<hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-online.png" class="state-img" />
                 </div>                <div class="div-ami-card-text">
-    <div>
-        <span class="ami-nom">@item.Pseudo</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div>
+                        <span class="ami-nom">Sara</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #1
+                    <br />
+                    <span class="label label-success">En ligne</span>
+                    <br />
+                </div>
+            </div>-->
+            @* AMI CARD *@
+            <!--<hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-online.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Martin</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #3
+                    <br />
+                    <span class="label label-success">En ligne</span>
+                    <br />
+                </div>
+            </div>-->
+            @* AMI CARD *@
+            <!--<hr />
+            <div classe="div-ami-card" style=" display:inline-flex">
+                <div>
+                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    <img src="~/Content/img/state-afk.png" class="state-img" />
+                </div>                <div class="div-ami-card-text">
+                    <div>
+                        <span class="ami-nom">Nico</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    #98
+                    <br />
+                    <div class="label label-warning">-->
+            @*<span class="label label-warning">Inactif</span>*@
+            <!--Inactif
+                    </div>
+                    <br />
+                </div>
+            </div>-->
+        </div>
     </div>
-    #@item.Id
-    <br />
 
-    @if (item.Connected == true)
-    {
-        <span class="label label-success">
-            Online
-        </span>
-    }
-    else
-    {
-        <span class="label-default">
-            Offline
-        </span>
-    }
+    <div id="invitations-content" class="d-no">
+        @* RECHERCHE AMI *@
+        <form id="search-friend">
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+            <input class="form-control me-2" type="search" placeholder="Rechercher un membre" aria-label="Search">
+        </form>
+        <br />
+        <br />
 
-    <br />
-</div>
-            </div>
-
-        }
-
-
-        @Html.PagedListPager(Model, i => Url.Action("Discussion", "Login", new { i, search = Request.QueryString["search"] }))
-        @* AMI CARD *@
-        <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-            <img src="~/Content/img/state-online.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">Sara</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #1
-            <br />
-            <span class="label label-success">En ligne</span>
-            <br />
+        @* TRIER PAR *@
+        <div id="div-select-trier">
+            <select id="select-trier">
+                <option value="value">Trier par</option>
+                <option value="value">Ordre alphabétique</option>
+                <option value="value">Présence</option>
+            </select>
         </div>
-    </div>-->
-        @* AMI CARD *@
-        <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-            <img src="~/Content/img/state-online.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">Martin</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #3
-            <br />
-            <span class="label label-success">En ligne</span>
-            <br />
-        </div>
-    </div>-->
-        @* AMI CARD *@
-        <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-            <img src="~/Content/img/state-afk.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">Nico</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #98
-            <br />
-            <div class="label label-warning">-->
-        @*<span class="label label-warning">Inactif</span>*@
-        <!--Inactif
-            </div>
-            <br />
-        </div>
-    </div>-->
-    </div>
-  
-   <div id="invitations-content" class="d-no">
-            @* RECHERCHE AMI *@
-            <form id="search-friend">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-                <input class="form-control me-2" type="search" placeholder="Rechercher un membre" aria-label="Search">
-            </form>
-            <br />
-            <br />
+        <br />
 
-            @* TRIER PAR *@
-            <div id="div-select-trier">
-                <select id="select-trier">
-                    <option value="value">Trier par</option>
-                    <option value="value">Ordre alphabétique</option>
-                    <option value="value">Présence</option>
-                </select>
-            </div>
-            <br />
-
-            @* LISTE DE LA RECHERCHE *@
-            Aucun membre trouvé.
-        </div>
+        @* LISTE DE LA RECHERCHE *@
+        Aucun membre trouvé.
     </div>
 </div>
 
