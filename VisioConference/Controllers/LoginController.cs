@@ -72,7 +72,7 @@ namespace VisioConference.Controllers
                 //return RedirectToRoute("Discussion", "Login" );
                 Session["userNormal"] = userDTO;
                 userDTO.Id = currentId;
-                return View("~/Views/Login/Discussion.cshtml", userDTO);
+                return RedirectToAction("Discussion");
             }
             return View(userDTO);
         }
@@ -102,7 +102,7 @@ namespace VisioConference.Controllers
             ConversationService Cvservice = new ConversationService();
             List<UserDTO> friendList = Cvservice.findFriends(userDTO);
 
-            return View(friendList.ToPagedList(i ?? 1, 10));
+            return View(friendList);
         }
 
         public ActionResult AccessDenied()

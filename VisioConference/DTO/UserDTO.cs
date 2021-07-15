@@ -43,7 +43,7 @@ namespace VisioConference.DTO
             Password = "";
             Pseudo = pseudo;
             Photo = photo;
-            Connected = false;
+            Connected = connected;
         }
 
 
