@@ -160,6 +160,37 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
 
         }
+        [HttpPost]
+        public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
+        {
+            UserDTO userDTO = (UserDTO)Session["userNormal"];
+            if (Photo != null)
+            {
+                //ToDO : Supprimer la photo d'origine (différentes extensions = pas d'écrasement)
+                userDTO.Photo = userDTO.Pseudo + '_' + userDTO.Id + Path.GetExtension(Photo.FileName);
+                Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
+
+                //service.Add(userDTO);
+                //return RedirectToAction("Index");
+            }
+            else
+            {
+                userDTO.Photo = (string)Session["image"];
+                Session.Remove("image");
+            }
+            UserDTO usermodif = new UserDTO()
+            {
+                Id = userDTO.Id,
+                Email = userDTO.Email,
+                Pseudo = form.Get("Pseudo"),
+                Password = form.Get("Password"),
+                Photo = userDTO.Photo
+            };
+            service.Update(usermodif);
+            Session["userNormal"] = usermodif;
+            return RedirectToAction("Discussion");
+
+        }
     }
 }
 /*
