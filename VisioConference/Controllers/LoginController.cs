@@ -9,13 +9,14 @@ using System.Windows.Forms;
 using VisioConference.DTO;
 using VisioConference.Filters;
 using VisioConference.Service;
-
+using VisioConference.Tools;
 
 namespace VisioConference.Controllers
 {
     public class LoginController : Controller
     {
         private UsersService service = new UsersService();
+        private ConversationService Cvservice = new ConversationService();
 
 
         // GET: Login
@@ -96,11 +97,29 @@ namespace VisioConference.Controllers
 
 
         [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
-        public ActionResult Discussion(int? i)
+        public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
-            ConversationService Cvservice = new ConversationService();
             List<UserDTO> friendList = Cvservice.findFriends(userDTO);
+
+            if (TempData["Id_ami"] != null)
+            {
+                int ami_id = (int)TempData["Id_ami"];
+                if (ami_id != 0)
+                {
+                    ConversationDTO CvDto = Cvservice.findByUsers(userDTO, service.findById(ami_id));
+                    if (CvDto != null)
+                    {
+                        if(CvDto.message != null)
+                        {
+                            List<string> messages = Strings.afficherConv(CvDto.message).ToList();
+                            ViewBag.Messages = messages;
+                        }
+
+                    }
+                    TempData.Keep();
+                }
+            }
 
             return View(friendList);
         }
@@ -109,14 +128,37 @@ namespace VisioConference.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult EnvoyerMessage(System.Web.Mvc.FormCollection form)
         {
-            string contenu = form.Get("message_envoye");
-            TempData["message"]= contenu;
+            if (TempData["Id_ami"] != null)
+            {
+                UserDTO utilisateur = (UserDTO)Session["userNormal"];
+                UserDTO ami = service.findById((int)TempData["Id_ami"]);
+                ConversationDTO CvDto = Cvservice.findByUsers(utilisateur, ami);
+                string contenu = CvDto.message + "<#" + utilisateur.Id + '>' + form.Get("message_envoye");
+                Cvservice.modifyMessage(CvDto, contenu);
+
+            }
+            
+
+
+            //TempData["message"]= contenu;
+            //TempData.Keep();
+            return RedirectToAction("Discussion");
+
+        }
+
+        [HttpPost]
+        public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
+        {
+            //Afficher nouvelle conversation
+            int ami_id = Convert.ToInt32(form.Get("user_id"));
+            TempData["Id_ami"] = ami_id;
             TempData.Keep();
             return RedirectToAction("Discussion");
-            
+
         }
     }
 }
