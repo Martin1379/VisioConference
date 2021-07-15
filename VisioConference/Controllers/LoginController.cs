@@ -10,6 +10,7 @@ using VisioConference.DTO;
 using VisioConference.Filters;
 using VisioConference.Service;
 
+
 namespace VisioConference.Controllers
 {
     public class LoginController : Controller
@@ -108,5 +109,31 @@ namespace VisioConference.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult EnvoyerMessage(System.Web.Mvc.FormCollection form)
+        {
+            string contenu = form.Get("message_envoye");
+            TempData["message"]= contenu;
+            TempData.Keep();
+            return RedirectToAction("Discussion");
+            
+        }
     }
 }
+/*
+ * ViewResult - View()
+ * RedirectToRouteResult - RedirectToAction(), RedirectToRoute()...
+ * ContentResult - Content()
+ * FileContentResult - File()
+ * JavaScript - Javascript()
+ * JSONResult - JSON()
+ * EmptyResult - null
+ * HttpNotFoundResult - HttpNotFound()
+ * 
+ * Stocker des données de type clés-valeur
+ * ViewBag - ViewData : dès que l'action est executée, le dictionnaire est remis à 0
+ * TempData : conserve des données entre différentes actions grâce à la méthode keep
+ * 
+ * Session : valable pendant toute la durée de la session (20-30 minutes par défaut) - Géré côté serveur (pas côté client)
+ * 
+ */
