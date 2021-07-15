@@ -1,7 +1,5 @@
-﻿@model IPagedList<VisioConference.DTO.UserDTO>
+﻿@model List<VisioConference.DTO.UserDTO>
 
-@using PagedList;
-@using PagedList.Mvc;
 
 @{ ViewBag.Title = "Accueil"; }
 @using VisioConference.DTO;
@@ -63,261 +61,262 @@
     </div>
 
     @*COLONNE 2*@
-<div id="div-main-col-2">
-    <br />
-    <br />
-    <br />
+    <div id="div-main-col-2">
+        <br />
+        <br />
+        <br />
 
-    @* CHAT CONTENT *@
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices eget velit quis consequat.
-    Mauris pretium nulla id lorem consectetur pulvinar. Pellentesque pulvinar dui sagittis metus pretium,
-    vel posuere purus sollicitudin. Vestibulum semper tortor vitae turpis accumsan, sit amet dapibus tellus luctus.
-    Cras pellentesque nisl arcu, vel imperdiet tellus suscipit mattis. Aliquam erat volutpat. Aliquam porta mi mauris, eu ultricies diam facilisis id.
-    Pellentesque mauris felis, dictum at hendrerit sed, elementum eu erat.
-    <br />
-    <br />
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ante cursus, faucibus neque ac, sagittis sem.
-    Proin laoreet cursus molestie. Proin ex urna, bibendum et mi a, ultricies volutpat nunc. Suspendisse rutrum mollis ante, eget bibendum orci finibus sed.
-    Morbi pulvinar erat sem. Cras pretium sodales tellus vitae ultrices. Mauris in viverra sapien. Suspendisse nec turpis ac lorem cursus viverra congue quis velit.
-    Curabitur tincidunt, sem et vestibulum efficitur, velit ligula feugiat mauris, non ornare neque sapien a mauris.
-    Integer fringilla scelerisque tempor. Nunc sed luctus dui, tempor consectetur libero. Donec ultrices, nunc ac tristique pretium, sapien nulla placerat tellus,
-    nec molestie purus magna et ex.
-    Donec lorem urna, pulvinar in finibus et, faucibus ut risus. Nullam tempor purus id diam hendrerit dapibus.
-    Pellentesque vel enim eu nibh sagittis sollicitudin. Cras posuere lacus quis nunc sodales volutpat.
-    Fusce aliquam suscipit nibh, ac eleifend diam tristique dapibus. In ut dignissim ante.
-    <br />
-    <br />
-    Vivamus sed sem ante. Duis eget vulputate libero. Curabitur augue velit, ornare a augue ut, condimentum placerat risus.
-    Vestibulum porta pretium libero, ut ornare urna viverra sit amet. Phasellus nec nisl ullamcorper,
-    consequat dui ut, laoreet sem. Integer nec faucibus turpis. Proin volutpat efficitur eros eu euismod. Suspendisse dictum,
-    elit scelerisque vulputate hendrerit, eros ante gravida tortor, sit amet elementum ante nisi nec urna.
-    Donec sit amet velit a lacus porta rhoncus vitae vel purus. Integer tempor tortor consequat nulla eleifend porttitor.
-    Duis quis augue nec augue condimentum ullamcorper. Nam tempus dui a lorem molestie, vel aliquam arcu tempor.
-    Nunc sit amet arcu fermentum, tempor lectus a, dictum turpis. Duis sem enim, fermentum vitae dui id, varius sollicitudin sapien.
-    Cras id dolor rutrum enim varius rhoncus eu non nisl. Praesent vel ex dolor. Vestibulum laoreet ac justo in iaculis.
-    <br />
-    <br />
-    
-    @if (TempData["message"] != null)
-    {
-      @:Message: @TempData["message"]
-    }
-</p>
+        @* CHAT CONTENT *@
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices eget velit quis consequat.
+            Mauris pretium nulla id lorem consectetur pulvinar. Pellentesque pulvinar dui sagittis metus pretium,
+            vel posuere purus sollicitudin. Vestibulum semper tortor vitae turpis accumsan, sit amet dapibus tellus luctus.
+            Cras pellentesque nisl arcu, vel imperdiet tellus suscipit mattis. Aliquam erat volutpat. Aliquam porta mi mauris, eu ultricies diam facilisis id.
+            Pellentesque mauris felis, dictum at hendrerit sed, elementum eu erat.
+            <br />
+            <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ante cursus, faucibus neque ac, sagittis sem.
+            Proin laoreet cursus molestie. Proin ex urna, bibendum et mi a, ultricies volutpat nunc. Suspendisse rutrum mollis ante, eget bibendum orci finibus sed.
+            Morbi pulvinar erat sem. Cras pretium sodales tellus vitae ultrices. Mauris in viverra sapien. Suspendisse nec turpis ac lorem cursus viverra congue quis velit.
+            Curabitur tincidunt, sem et vestibulum efficitur, velit ligula feugiat mauris, non ornare neque sapien a mauris.
+            Integer fringilla scelerisque tempor. Nunc sed luctus dui, tempor consectetur libero. Donec ultrices, nunc ac tristique pretium, sapien nulla placerat tellus,
+            nec molestie purus magna et ex.
+            Donec lorem urna, pulvinar in finibus et, faucibus ut risus. Nullam tempor purus id diam hendrerit dapibus.
+            Pellentesque vel enim eu nibh sagittis sollicitudin. Cras posuere lacus quis nunc sodales volutpat.
+            Fusce aliquam suscipit nibh, ac eleifend diam tristique dapibus. In ut dignissim ante.
+            <br />
+            <br />
+            Vivamus sed sem ante. Duis eget vulputate libero. Curabitur augue velit, ornare a augue ut, condimentum placerat risus.
+            Vestibulum porta pretium libero, ut ornare urna viverra sit amet. Phasellus nec nisl ullamcorper,
+            consequat dui ut, laoreet sem. Integer nec faucibus turpis. Proin volutpat efficitur eros eu euismod. Suspendisse dictum,
+            elit scelerisque vulputate hendrerit, eros ante gravida tortor, sit amet elementum ante nisi nec urna.
+            Donec sit amet velit a lacus porta rhoncus vitae vel purus. Integer tempor tortor consequat nulla eleifend porttitor.
+            Duis quis augue nec augue condimentum ullamcorper. Nam tempus dui a lorem molestie, vel aliquam arcu tempor.
+            Nunc sit amet arcu fermentum, tempor lectus a, dictum turpis. Duis sem enim, fermentum vitae dui id, varius sollicitudin sapien.
+            Cras id dolor rutrum enim varius rhoncus eu non nisl. Praesent vel ex dolor. Vestibulum laoreet ac justo in iaculis.
+            <br />
+            <br />
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+            @if (TempData["message"] != null)
+            {
+                @:Message: @TempData["message"]
+            }
+        </p>
 
-    @* INPUT ENVOYER MESSAGE *@
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        @* INPUT ENVOYER MESSAGE *@
 
 
-    @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
-    {
+        @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
+        {
 
-        <div class="input-group mb-3" id="input-group-tchat">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-                </span>
-                <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="input-tchat" name="message_envoye">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-reply"></i> Envoyer</button>
-                </span>
+            <div class="input-group mb-3" id="input-group-tchat">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="input-tchat" name="message_envoye">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-reply"></i> Envoyer</button>
+                    </span>
+                </div>
             </div>
-        </div>
 
-    }
-
+        }
 
 
-</div>
+
+    </div>
 
     @*COLONNE 3*@
-<div id="div-main-col-3">
-    <br />
-    <br />
-    <br />
-    @* ONGLETS *@
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
-        <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
-    </ul>
-    <br />
-    <div id="contacts-content">
-        @* RECHERCHE AMI *@
-        <form id="search-friend">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-            <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
-        </form>
+    <div id="div-main-col-3">
         <br />
         <br />
-
-        @* TRIER PAR *@
-        <div id="div-select-trier">
-            <select id="select-trier">
-                <option value="value">Trier par</option>
-                <option value="value">Ordre alphabétique</option>
-                <option value="value">Présence</option>
-            </select>
-        </div>
         <br />
+        @* ONGLETS *@
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
+            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
+        </ul>
+        <br />
+        <div id="contacts-content">
+            @* RECHERCHE AMI *@
+            <form id="search-friend">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+                <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
+            </form>
+            <br />
+            <br />
 
-        @* LISTE AMIS *@
-        <div id="div-list-amis">
+            @* TRIER PAR *@
+            <div id="div-select-trier">
+                <select id="select-trier">
+                    <option value="value">Trier par</option>
+                    <option value="value">Ordre alphabétique</option>
+                    <option value="value">Présence</option>
+                </select>
+            </div>
+            <br />
 
-            @* AMI CARD *@
-            <!--<hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    <img src="~/Content/img/state-offline.png" class="state-img" />
-                </div>
-                <div class="div-ami-card-text">
-                    <div>
-                        <span class="ami-nom">Paul</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    #24
-                    <br />
-                    <span class="label label-default">Hors ligne</span>
-                    <br />
-                </div>
-            </div>-->
-            @* AMI CARD *@
-            @foreach (UserDTO item in Model)
-            {
+            @* LISTE AMIS *@
+            <div id="div-list-amis">
+
+                @* AMI CARD *@
                 <hr />
                 <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                        @if (item.Connected == true)
-                        {
-                            <img src="~/Content/img/state-online.png" class="state-img" />
-                        }
-                        else
-                        {
-                            <img src="~/Content/img/state-offline.png" class="state-img" />
-                        }
-
-                    </div>                <div class="div-ami-card-text">
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                        <img src="~/Content/img/state-offline.png" class="state-img" />
+                    </div>
+                    <div class="div-ami-card-text">
                         <div>
-                            <span class="ami-nom">@item.Pseudo</span>
+                            <span class="ami-nom">Paul</span>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
-                        #@item.Id
+                        #24
                         <br />
-
-                        @if (item.Connected == true)
-                        {
-                            <span class="label label-success">
-                                Online
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="label-default">
-                                Offline
-                            </span>
-                        }
-
+                        <span class="label label-default">Hors ligne</span>
                         <br />
                     </div>
                 </div>
+                 AMI CARD 
+                @foreach (UserDTO item in Model)
+                    {
+                        <hr />
+                        <div classe="div-ami-card" style=" display:inline-flex">
+                            <div>
+                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                @if (item.Connected == true)
+                                {
+                                    <img src="~/Content/img/state-online.png" class="state-img" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/img/state-offline.png" class="state-img" />
+                                }
 
-            }
+                            </div>                <div class="div-ami-card-text">
+                                <div>
+                                    <span class="ami-nom">@item.Pseudo</span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                #@item.Id
+                                <br />
+
+                                @if (item.Connected == true)
+                                {
+                                    <span class="label label-success">
+                                        Online
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="label-default">
+                                        Offline
+                                    </span>
+                                }
+
+                                <br />
+                            </div>
+                        </div>
+
+                    }
 
 
-            @Html.PagedListPager(Model, i => Url.Action("Discussion", "Login", new { i, search = Request.QueryString["search"] }))
-            @* AMI CARD *@
-            <!--<hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    <img src="~/Content/img/state-online.png" class="state-img" />
-                </div>                <div class="div-ami-card-text">
+
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <span class="ami-nom">Sara</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                        <img src="~/Content/img/state-online.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Sara</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #1
+                        <br />
+                        <span class="label label-success">En ligne</span>
+                        <br />
                     </div>
-                    #1
-                    <br />
-                    <span class="label label-success">En ligne</span>
-                    <br />
-                </div>
-            </div>-->
-            @* AMI CARD *@
-            <!--<hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    <img src="~/Content/img/state-online.png" class="state-img" />
-                </div>                <div class="div-ami-card-text">
+                </div>-->
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <span class="ami-nom">Martin</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                        <img src="~/Content/img/state-online.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Martin</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #3
+                        <br />
+                        <span class="label label-success">En ligne</span>
+                        <br />
                     </div>
-                    #3
-                    <br />
-                    <span class="label label-success">En ligne</span>
-                    <br />
-                </div>
-            </div>-->
-            @* AMI CARD *@
-            <!--<hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    <img src="~/Content/img/state-afk.png" class="state-img" />
-                </div>                <div class="div-ami-card-text">
+                </div>-->
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <span class="ami-nom">Nico</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                        <img src="~/Content/img/state-afk.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Nico</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #98
+                        <br />
+                        <div class="label label-warning">-->
+                @*<span class="label label-warning">Inactif</span>*@
+                <!--Inactif
+                        </div>
+                        <br />
                     </div>
-                    #98
-                    <br />
-                    <div class="label label-warning">-->
-            @*<span class="label label-warning">Inactif</span>*@
-            <!--Inactif
-                    </div>
-                    <br />
-                </div>
-            </div>-->
+                </div>-->
+            </div>
         </div>
-    </div>
 
-    <div id="invitations-content" class="d-no">
-        @* RECHERCHE AMI *@
-        <form id="search-friend">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-            <input class="form-control me-2" type="search" placeholder="Rechercher un membre" aria-label="Search">
-        </form>
-        <br />
-        <br />
+        <div id="invitations-content" class="d-no">
+            @* RECHERCHE AMI *@
+            <form id="search-friend">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+                <input class="form-control me-2" type="search" placeholder="Rechercher un membre" aria-label="Search">
+            </form>
+            <br />
+            <br />
 
-        @* TRIER PAR *@
-        <div id="div-select-trier">
-            <select id="select-trier">
-                <option value="value">Trier par</option>
-                <option value="value">Ordre alphabétique</option>
-                <option value="value">Présence</option>
-            </select>
+            @* TRIER PAR *@
+            <div id="div-select-trier">
+                <select id="select-trier">
+                    <option value="value">Trier par</option>
+                    <option value="value">Ordre alphabétique</option>
+                    <option value="value">Présence</option>
+                </select>
+            </div>
+            <br />
+
+            @* LISTE DE LA RECHERCHE *@
+            Aucun membre trouvé.
         </div>
-        <br />
-
-        @* LISTE DE LA RECHERCHE *@
-        Aucun membre trouvé.
     </div>
 </div>
 
