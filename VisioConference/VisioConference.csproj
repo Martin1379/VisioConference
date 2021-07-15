@@ -198,6 +198,7 @@
     <Content Include="Content\css\PagedList.css" />
     <Content Include="Content\img\state-wireframe.png" />
     <Content Include="Content\img\state.png" />
+    <Content Include="Content\js\main.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

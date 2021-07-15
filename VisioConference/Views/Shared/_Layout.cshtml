@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 
 <body>
@@ -28,17 +29,17 @@
                     </div>
 
                     @*NAV BUTTONS*@
-                <ul class="nav navbar-nav" id="navbar-edit">
-                    <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Login")</li>
-                    <li><img src="~/Content/img/discussion.png" id="icone-tchat" />@Html.ActionLink("Discussion", "Accueil", "Login")</li>
-                    <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Login")</li>
-                    <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Contact", "Login")</li>
-                    @if (Session["userAdmin"] != null || Session["userNormal"] != null)
-                    {
-                    <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Login")</li>
-                    }
+                    <ul class="nav navbar-nav" id="navbar-edit">
+                        <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Login")</li>
+                        <li><img src="~/Content/img/discussion.png" id="icone-tchat" />@Html.ActionLink("Discussion", "Accueil", "Login")</li>
+                        <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Login")</li>
+                        <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Contact", "Login")</li>
+                        @if (Session["userAdmin"] != null || Session["userNormal"] != null)
+                        {
+                            <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Login")</li>
+                        }
 
-                </ul>
+                    </ul>
 
                 </div>
             </div>
@@ -49,6 +50,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Content/js/main.js"></script>
+
 
 </body>
 </html>
