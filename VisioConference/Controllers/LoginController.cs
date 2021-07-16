@@ -54,7 +54,7 @@ namespace VisioConference.Controllers
             }
             else
             {
-                
+
                 return View(dto);
             }
         }
@@ -88,7 +88,7 @@ namespace VisioConference.Controllers
                 Session.Clear();
                 return RedirectToAction("Index", "Login");
             }
-            else 
+            else
             {
                 return RedirectToAction("Discussion", "Login");
             }
@@ -100,19 +100,21 @@ namespace VisioConference.Controllers
         public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
+
             List<UserDTO> friendList = Cvservice.findFriends(userDTO);
 
             if (TempData["Id_ami"] != null)
             {
                 int ami_id = (int)TempData["Id_ami"];
+                UserDTO amiDTO = service.findById(ami_id);
                 if (ami_id != 0)
                 {
                     ConversationDTO CvDto = Cvservice.findByUsers(userDTO, service.findById(ami_id));
                     if (CvDto != null)
                     {
-                        if(CvDto.message != null)
+                        if (CvDto.message != null)
                         {
-                            List<string> messages = Strings.afficherConv(CvDto.message).ToList();
+                            List<string> messages = Strings.afficherConv(CvDto.message, userDTO, amiDTO).ToList();
                             ViewBag.Messages = messages;
                         }
 
@@ -141,7 +143,7 @@ namespace VisioConference.Controllers
                 Cvservice.modifyMessage(CvDto, contenu);
 
             }
-            
+
 
 
             //TempData["message"]= contenu;
@@ -150,11 +152,16 @@ namespace VisioConference.Controllers
 
         }
 
+
+
+
         [HttpPost]
         public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
         {
             //Afficher nouvelle conversation
             int ami_id = Convert.ToInt32(form.Get("user_id"));
+            string nom_ami = service.findById(ami_id).Pseudo;
+            TempData["Nom_ami"] = nom_ami;
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
             return RedirectToAction("Discussion");
