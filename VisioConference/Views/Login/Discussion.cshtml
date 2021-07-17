@@ -107,13 +107,23 @@
             <br />
             @*<ul id="discussion">
                 </ul>*@
-
-            @if ((List<string>)ViewBag.Messages != null)
-            {
-                foreach (string message in (List<string>)ViewBag.Messages)
+            <ul>
+                @if ((List<string>)ViewBag.Messages != null)
                 {
-<ul id="discussion"><li><strong> #@message </strong></li> </ul>}
-            }
+                    foreach (string message in (List<string>)ViewBag.Messages)
+                    {
+
+    <li>
+        <strong> #@message </strong>
+    </li>
+}
+}
+                <li>
+                    <strong id="discussion">
+
+                    </strong>
+                </li>
+            </ul>
             <br />
             <br />
 
@@ -160,8 +170,8 @@
                     var encodedName = $('<div />').text(name).html();
                     var encodedMsg = $('<div />').text(message).html();
                     // Add the message to the page.
-                    $('#discussion').append('<li><strong>' + encodedName
-                        + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+                    $('#discussion').append(encodedName
+                        + ':&nbsp;&nbsp;' + encodedMsg);
                 };
                 // Get the user name and store it to prepend to messages.
                 /*$('#displayname').val(prompt('Enter your name:', ''));*/
@@ -172,8 +182,8 @@
                     $('#sendmessage').click(function () {
                         // Call the Send method on the hub.
                         chat.server.send($('#displayname').val(), $('#message').val());
-                        // Clear text box and reset focus for next comment.
-                        $('#message').val('').focus();
+                        //// Clear text box and reset focus for next comment.
+                        //$('#message').val('').focus();
                     });
                 });
             });</script>
@@ -199,7 +209,6 @@
         <span class="input-group-btn">
             <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
         </span>
-        <input type="text" id="displayname" value="@dto.Pseudo" hidden />
         <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
         <span class="input-group-btn">
             <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
@@ -211,7 +220,7 @@
 
     </div>
 
-
+    <input type="text" id="displayname" value="@dto.Pseudo" hidden />
 
     @*COLONNE 3*@
     <div id="div-main-col-3">
