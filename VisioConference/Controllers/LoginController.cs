@@ -141,7 +141,6 @@ namespace VisioConference.Controllers
                 ConversationDTO CvDto = Cvservice.findByUsers(utilisateur, ami);
                 string contenu = CvDto.message + "<#" + utilisateur.Id + '>' + form.Get("message_envoye");
                 Cvservice.modifyMessage(CvDto, contenu);
-
             }
 
 
