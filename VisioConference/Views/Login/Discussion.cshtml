@@ -41,76 +41,52 @@
                 #@dto.Id
             </div>
         </div>
-        <br />
 
         @*STATUS SELECTEUR*@
-        <select>
+        <select id="select-state">
             <option value="value">En ligne</option>
             <option value="value">Occupé(e)</option>
             <option value="value">Absent(e)</option>
             <option value="value">Invisible</option>
         </select>
-        <br />
+        <hr />
 
         @*MODIFIER PROFIL*@
-        <script>
-            function myFunction() {
-                var x = document.getElementById("formulaire");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                } else {
-                    x.style.display = "none";
-                }
-            }
-        </script>
-
-        <button type="button"
-                class="btn btn-primary"
-                onclick="myFunction()">
-            <i class="fas fa-user-edit"></i>Modifier mon profil
+        <button type="button" class="btn btn-primary" onclick="btnModifProfil()" id="btn-modif-profil">
+            <i class="fas fa-user-edit"></i> Modifier mon profil
         </button>
+        <br />
 
+        @* MODIFIER MON PROFIL *@
+        <div id="modifier-profil-content">
+            <div id="div-titre-modifier">
+                <i class="fas fa-user-edit iblue"></i>
+                <h3>Modifier mon profil</h3>
+            </div>
 
-        @*@if (TempData["ModifProfil"] != null)
-        {
-        if ((bool)TempData["ModifProfil"] == true)
-        {*@
-
-        @*formulaire modif profil *@
-        <div id="formulaire" style="display:none;">
             @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                <div class="input-group" id="div-modif-profile">
 
-                <div class="input-group" style="margin:20px 10px;">
-                    <div class="form-group">
-                        <label for="Pseudo">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" style="margin-bottom:10px;" placeholder="Nom d'utilisateur" name="Pseudo">
-                    </div>
-                    <div class="form-group">
-                        <label for="Password">Mot de passe</label>
-                        <input type="text" class="form-control" style="margin-bottom:10px;" placeholder="Mot de passe" name="Password">
-                    </div>
-                    <div class="custom-file">
-                        <label class="custom-file-label" for="customFileLang">Sélectionner une image </label>
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
-                    </div>
-
-                    @*<input type="file" id="myFile" name="Photo">*@
+                    @*INPUTS*@
+                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
                     <br />
                     <br />
-                    <div class="d-flex justify-content-between">
+                    <input type="password" class="form-control" placeholder="Mot de passe" name="Password">
+                    <br />
+                    <br />
+                    <div id="div-modif-avatar">
+                        <i class="fas fa-camera iblue"></i>
+                        <input type="file" id="myFile" name="Photo">
+                    </div>
+                    <br />
 
-                        <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" style="" />
-
-                        <button type="button"
-                                class="btn btn-success"
-                                onclick="myFunction()">
-                            Annuler
-                        </button>
-
+                    @*BUTTONS*@
+                    <div>
+                        <button type="button" class="btn btn-danger" onclick="btnAnnulerProfil()"> Annuler</button>
+                        <button type="submit" class="btn btn-success" onclick="" name="btnSubmit" value="Save"> Enregistrer</button>
                     </div>
                 </div>
-
             }
         </div>
         @*@if (TempData["AnnulerModif"] == null)
@@ -120,6 +96,23 @@
                 <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
             </div>
         }*@
+
+        @*FOOTER*@
+        <footer>
+            <div>
+                <div id="main-div-footer-1">
+                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+                </div>
+                <div id="main-div-footer-2">
+                    YouCom&copy;  est une application développée par :
+                    <br />
+                    Sara - Martin - Remy
+                    <br />
+                    Développeurs .NET - DAWAN - @DateTime.Now.Year
+                </div>
+            </div>
+        </footer>
+    </div>
 
         @*FOOTER*@
         <footer>
@@ -184,7 +177,6 @@
                 }
                 @*<li id="discussion">
                         <strong>
-
                         </strong>
                     </li>*@
             </ul>
@@ -243,23 +235,18 @@
 
         @if (TempData["Id_ami"] != null)
         {
-            using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
-            {
-                <div class="input-group mb-3" id="input-group-tchat">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
-                        </span>
-                    </div>
+            <div class="input-group mb-3" id="input-group-tchat">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
+                    </span>
                 </div>
-            }
+            </div>
         }
-
-
     </div>
 
     <input type="text" id="displayname" value="@dto.Pseudo" hidden />
@@ -272,8 +259,8 @@
 
         @* ONGLETS *@
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
-            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
+            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users iblue" id="iusers"></i> Contacts</a></li>
+            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus" id="iuserplus"></i> Invitations</a></li>
         </ul>
 
         @*NOTIFS*@

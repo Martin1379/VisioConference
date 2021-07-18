@@ -24,6 +24,9 @@ a:hover, a:visited, a:link, a:active {
     display: none;
 }
 
+.iblue {
+    color: #337ab7;
+
 ul {
     list-style-type: none;
 }
@@ -186,17 +189,51 @@ footer .row {
     font-size: 26px;
 }
 
-#btn-edit {
-    width: 30px;
+#select-state{
+    margin-top: 5px;
 }
+
+#modifier-profil-content {
+    display: none;
+    position: relative;
+    bottom: 19px;
+}
+
+#div-titre-modifier {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+    #div-titre-modifier i {
+        font-size: 21px;
+        margin-right: 6px;
+        position: relative;
+        top: 2px;
+    }
+
+    #div-titre-modifier h3{
+        margin:0 ;
+    }
+
+    #btn-edit {
+        width: 30px;
+    }
 
 #main-div-nom-edit {
     display: flex;
     justify-content: space-between;
 }
 
+#div-modif-profile {
+    display: block;
+}
+
+#div-modif-profile input {
+    min-width: 100%;
+}
+
 #div-main-col-1 select {
-    min-width: 200px;
+    min-width: 250px;
     padding: 5px 10px;
     border-radius: 5px;
     background-color: #7A7A7A;
@@ -204,9 +241,22 @@ footer .row {
     display: block;
 }
 
+#div-modif-avatar {
+    display: flex;
+    margin-top: 6px;
+}
+
+    #div-modif-avatar i {
+        font-size: 21px;
+        margin-right: 10px;
+    }
+
+    #myFile {
+        display: inline-block;
+    }
+
+
 /*FOOTER*/
-
-
 #div-main-col-1 footer img {
     width: 70px;
 }
@@ -233,7 +283,7 @@ footer .row {
 }
 
 /*MAIN COL 2*/
-#input-tchat {
+#message {
     min-width: -webkit-fill-available;
 }
 

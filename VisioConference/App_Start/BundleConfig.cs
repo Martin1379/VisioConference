@@ -11,7 +11,7 @@ namespace VisioConference
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Content/js/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
-    "~/Content/js/jquery.signalR-2.2.2.js"));
+                        "~/Content/js/jquery.signalR-2.2.2.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Content/js/jquery.validate*"));
