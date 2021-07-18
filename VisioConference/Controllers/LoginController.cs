@@ -53,7 +53,7 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Echec", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
+                    ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
                     //ViewBag.Erreur = "Echec connexion.....";
                     return View();
                 }
@@ -75,12 +75,7 @@ namespace VisioConference.Controllers
                     userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
                     //userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
                     Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
-                }
-                else
-                {
-                    userDTO.Photo = "avatar-vide.png";
-                }
-                
+                }  
                 service.Add(userDTO);
                 //return RedirectToRoute("Discussion", "Login" );
                 Session["userNormal"] = userDTO;
@@ -208,21 +203,7 @@ namespace VisioConference.Controllers
             Session["userNormal"] = usermodif;
             return RedirectToAction("Discussion");
 
-        }
-
-        public ActionResult ClickModif()
-        {
-            //Afficher nouvelle la formulaire profil
-            TempData["ModifProfil"] = true;
-            TempData.Keep();
-            return RedirectToAction("Discussion");
-
-        }
-        public ActionResult AnnulerModif()
-        {
-            return RedirectToAction("Discussion");
-
-        }
+        }      
         public ActionResult TerminerModif()
         {
             return View();
