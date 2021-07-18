@@ -28,11 +28,15 @@ namespace VisioConference.Models
         public string Password { get; set; }
 
         [FileExtensions(Extensions = "png, jpg, jpeg")]
-        public string Photo { get; set; }
+        public string Photo { get; set; } 
 
         public bool Connected { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string ResetPassewordCode { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
@@ -47,17 +51,19 @@ namespace VisioConference.Models
         {
             Email = email;
             Password = "";
+            ResetPassewordCode = "";
             Pseudo = Pseudo;
             Photo = photo;
             Connected = false;
         }
 
 
-        public User(string email, string password, string pseudo, string photo, bool connected, int id)
+        public User(string email, string password, string resetPassewordCode, string pseudo, string photo, bool connected, int id)
         {
             Id = id;
             Email = email;
             Password = password;
+            ResetPassewordCode = resetPassewordCode;
             Pseudo = pseudo;
             Photo = photo;
             Connected = connected;

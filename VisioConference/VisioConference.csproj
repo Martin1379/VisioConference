@@ -161,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BasicEmojis.cs" />
     <Compile Include="Migrations\202107020849349_modelInitial.cs" />
     <Compile Include="Migrations\202107020849349_modelInitial.designer.cs">
       <DependentUpon>202107020849349_modelInitial.cs</DependentUpon>
@@ -169,7 +170,12 @@
     <Compile Include="Migrations\202107021231531_changementUnicitePseudo.designer.cs">
       <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107171401059_ModifUser.cs" />
+    <Compile Include="Migrations\202107171401059_ModifUser.Designer.cs">
+      <DependentUpon>202107171401059_ModifUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Service\UsersService.cs" />
     <Compile Include="Tools\Convertisseur.cs" />
     <Compile Include="Tools\Strings.cs" />
@@ -186,6 +192,7 @@
     <Compile Include="Service\ConversationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\avatar_user\avatar-vide.png" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -235,6 +242,9 @@
     <Content Include="Views\User\Remove.cshtml" />
     <Content Include="Views\Login\About.cshtml" />
     <Content Include="Views\Login\Contact.cshtml" />
+    <Content Include="Views\Login\ResetPassword.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\EmailEnvoyer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -244,7 +254,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\avatar_user\" />
     <Folder Include="Views\Conversation\" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107021231531_changementUnicitePseudo.resx">
       <DependentUpon>202107021231531_changementUnicitePseudo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107171401059_ModifUser.resx">
+      <DependentUpon>202107171401059_ModifUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

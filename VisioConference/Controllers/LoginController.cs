@@ -3,11 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows.Forms;
 using VisioConference.DTO;
 using VisioConference.Filters;
+using VisioConference.Models;
+using VisioConference.Repository.DAO;
 using VisioConference.Service;
 using VisioConference.Tools;
 
@@ -48,27 +53,34 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
-                    ViewBag.Erreur = "Echec connexion.....";
-                    return View(dto);
+                    ModelState.AddModelError("Echec", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
+                    //ViewBag.Erreur = "Echec connexion.....";
+                    return View();
                 }
             }
             else
             {
-                
+
                 return View(dto);
             }
         }
-
 
         public ActionResult Create([Bind(Include = "Pseudo,Password,Email")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
                 int currentId = service.findAll().Max(u => u.Id) + 1; // max récupère l'id MAX en BD
-                userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
-                //userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
-                Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
-
+                if(Photo != null)
+                {
+                    userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
+                    //userDTO.Photo = userDTO.Pseudo + 0+ userDTO.Id+ Path.GetExtension(Photo.FileName);
+                    Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
+                }
+                else
+                {
+                    userDTO.Photo = "avatar-vide.png";
+                }
+                
                 service.Add(userDTO);
                 //return RedirectToRoute("Discussion", "Login" );
                 Session["userNormal"] = userDTO;
@@ -88,7 +100,7 @@ namespace VisioConference.Controllers
                 Session.Clear();
                 return RedirectToAction("Index", "Login");
             }
-            else 
+            else
             {
                 return RedirectToAction("Discussion", "Login");
             }
@@ -110,7 +122,7 @@ namespace VisioConference.Controllers
                     ConversationDTO CvDto = Cvservice.findByUsers(userDTO, service.findById(ami_id));
                     if (CvDto != null)
                     {
-                        if(CvDto.message != null)
+                        if (CvDto.message != null)
                         {
                             List<string> messages = Strings.afficherConv(CvDto.message).ToList();
                             ViewBag.Messages = messages;
@@ -141,7 +153,7 @@ namespace VisioConference.Controllers
                 Cvservice.modifyMessage(CvDto, contenu);
 
             }
-            
+
 
 
             //TempData["message"]= contenu;
@@ -190,6 +202,144 @@ namespace VisioConference.Controllers
             Session["userNormal"] = usermodif;
             return RedirectToAction("Discussion");
 
+        }
+
+        public ActionResult ClickModif()
+        {
+            //Afficher nouvelle la formulaire profil
+            TempData["ModifProfil"] = true;
+            TempData.Keep();
+            return RedirectToAction("Discussion");
+
+        }
+        public ActionResult AnnulerModif()
+        {
+            return RedirectToAction("Discussion");
+
+        }
+        public ActionResult TerminerModif()
+        {
+            return View();
+
+        }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public ActionResult Password(string EmailID)
+        {
+            string resetCode = Guid.NewGuid().ToString();
+            var verifyUrl = "/Login/ResetPassword/" + resetCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+            using (MyContext context = new MyContext())
+            {
+                var getUser = (from s in context.users where s.Email == EmailID select s).FirstOrDefault();
+                if (getUser != null)
+                {
+                    getUser.ResetPassewordCode = resetCode;
+
+                    //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
+
+                    context.Configuration.ValidateOnSaveEnabled = false;
+                    context.SaveChanges();
+
+                    var subject = "Password Reset Request";
+                    var body = "Hi " + getUser.Pseudo + ", <br/> You recently requested to reset your password for your account. Click the link below to reset it. " +
+
+                         " <br/><br/><a href='" + link + "'>" + link + "</a> <br/><br/>" +
+                         "If you did not request a password reset, please ignore this email or reply to let us know.<br/><br/> Thank you";
+
+                    SendEmail(getUser.Email, body, subject);
+
+                    //ViewBag.Message = "Une e-mail a été envoyé à votre adresse j****@g*****.com.Suivez les instructions fournies pour réinitialiser votre mot de passe.";
+                    return View("EmailEnvoyer");
+                }
+                else
+                {
+                    ViewBag.Message = "User doesn't exists.";
+                    return View("ForgotPassword");
+                }
+            }
+
+            return View("ForgotPassword");
+        }
+
+        private void SendEmail(string emailAddress, string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("sarabanitouagga@gmail.com", emailAddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("banisara565@gmail.com", "sara@@0624");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+
+            }
+        }
+        public ActionResult ResetPassword(string id)
+        {
+            //Verify the reset password link
+            //Find account associated with this link
+            //redirect to reset password page
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return HttpNotFound();
+            }
+
+            using (MyContext context = new MyContext())
+            {
+                var user = context.users.Where(a => a.ResetPassewordCode == id).FirstOrDefault();
+                if (user != null)
+                {
+                    ResetPasswordModel model = new ResetPasswordModel();
+                    model.ResetCode = id;
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            var message = "";
+            if (ModelState.IsValid)
+            {
+                using (MyContext context = new MyContext())
+                {
+                    var user = context.users.Where(a => a.ResetPassewordCode == model.ResetCode).FirstOrDefault();
+                    if (user != null)
+                    {
+                        //you can encrypt password here, we are not doing it
+                        user.Password = model.NewPassword;
+                        //make resetpasswordcode empty string now
+                        user.ResetPassewordCode = "";
+                        //to avoid validation issues, disable it
+                        context.Configuration.ValidateOnSaveEnabled = false;
+                        context.SaveChanges();
+                        message = "New password updated successfully";
+                    }
+                }
+            }
+            else
+            {
+                message = "Something invalid";
+            }
+            ViewBag.Message = message;
+            return View(model);
         }
     }
 }
