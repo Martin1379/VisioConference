@@ -43,25 +43,27 @@
         @*MODIFIER PROFIL*@
         @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-<button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
-                <br />
-                                <br />
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
-                                                        <br />
-                                                        <br />
-                                                        <input type="text" class="form-control" placeholder="Password" name="Password">
-                                                        <br />
-                                                        <br />
-                                                        <input type="file" id="myFile" name="Photo">
-                                                        <br />
-                                                        <br />
-                                                        <div class="flex-end">
-                                                            <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
-                                                        </div>
-                                                    </div>
-                                                </div>}
+            <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
+                    <br />
+                    <br />
+                    <input type="text" class="form-control" placeholder="Password" name="Password">
+                    <br />
+                    <br />
+                    <input type="file" id="myFile" name="Photo">
+                    <br />
+                    <br />
+                    <div class="flex-end">
+                        <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
         @*FOOTER*@
         <footer>
             <div>
@@ -86,26 +88,11 @@
         <br />
 
         @* CHAT CONTENT *@
+        <h3>
+            Nom de l'ami
+        </h3>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices eget velit quis consequat.
-            Mauris pretium nulla id lorem consectetur pulvinar. Pellentesque pulvinar dui sagittis metus pretium,
-            vel posuere purus sollicitudin. Vestibulum semper tortor vitae turpis accumsan, sit amet dapibus tellus luctus.
-            Cras pellentesque nisl arcu, vel imperdiet tellus suscipit mattis. Aliquam erat volutpat. Aliquam porta mi mauris, eu ultricies diam facilisis id.
-            Pellentesque mauris felis, dictum at hendrerit sed, elementum eu erat.
-            <br />
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ante cursus, faucibus neque ac, sagittis sem.
-            Proin laoreet cursus molestie. Proin ex urna, bibendum et mi a, ultricies volutpat nunc. Suspendisse rutrum mollis ante, eget bibendum orci finibus sed.
-            Morbi pulvinar erat sem. Cras pretium sodales tellus vitae ultrices. Mauris in viverra sapien. Suspendisse nec turpis ac lorem cursus viverra congue quis velit.
-            Curabitur tincidunt, sem et vestibulum efficitur, velit ligula feugiat mauris, non ornare neque sapien a mauris.
-            Integer fringilla scelerisque tempor. Nunc sed luctus dui, tempor consectetur libero. Donec ultrices, nunc ac tristique pretium, sapien nulla placerat tellus,
-            nec molestie purus magna et ex.
-            Donec lorem urna, pulvinar in finibus et, faucibus ut risus. Nullam tempor purus id diam hendrerit dapibus.
-            Pellentesque vel enim eu nibh sagittis sollicitudin. Cras posuere lacus quis nunc sodales volutpat.
-            Fusce aliquam suscipit nibh, ac eleifend diam tristique dapibus. In ut dignissim ante.
-            <br />
-            <br />
-            @*<ul id="discussion">
+           @*<ul id="discussion">
                 </ul>*@
             <ul>
                 @if ((List<string>)ViewBag.Messages != null)
@@ -124,32 +111,8 @@
                     </strong>
                 </li>
             </ul>
-            <br />
-            <br />
-
         </p>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+              
         @* INPUT ENVOYER MESSAGE *@
         <!--Script references.
         <!--Reference the jQuery library. -->
@@ -269,45 +232,51 @@
                 @*AMI CARD*@
                 @foreach (UserDTO item in Model)
                 {
-    <hr /> using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
-    {
-<input type="text" name="user_id" hidden value="@item.Id" />
-                    <button classe="div-ami-card" style=" display:inline-flex">
-                        <div>
-                            <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                            @if (item.Connected == true)
-                            {
-        <img src="~/Content/img/state-online.png" class="state-img" /> }
-    else
-    {
-<img src="~/Content/img/state-offline.png" class="state-img" />}
-
-                        </div>
-
-                        @*AMI TEXT*@
-                        <div class="div-ami-card-text">
+                    <hr />
+                    using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                    {
+                        <input type="text" name="user_id" hidden value="@item.Id" />
+                        <button>
                             <div>
-                                <span class="ami-nom">@item.Pseudo</span>
-                                <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                @if (item.Connected == true)
+                                {
+                                    <img src="~/Content/img/state-online.png" class="state-img" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/img/state-offline.png" class="state-img" />
+                                }
+
+
                             </div>
-                            #@item.Id
-                            <br />
 
-                            @if (item.Connected == true)
-                            {
-        <span class="label label-success">
-            Online
-        </span> }
-    else
-    {
-<span class="label label-default">
-    Offline
-</span>}
-                            <br />
-                        </div>
-                    </button>}
+                            @*AMI TEXT*@
+                            <div class="div-ami-card-text">
+                                <div>
+                                    <span class="ami-nom">@item.Pseudo</span>
+                                </div>
+                                #@item.Id
+                                <br />
 
-            }
+                                @if (item.Connected == true)
+                                {
+                                    <span class="label label-success">
+                                        Online
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default">
+                                        Offline
+                                    </span>
+                                }
+                                <br />
+                            </div>
+                        </button>
+                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                    }
+                }
 
                 @* AMI CARD *@
                 <!--<hr />
@@ -406,7 +375,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -428,7 +396,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -481,7 +448,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -503,7 +469,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -524,5 +489,3 @@
     @Scripts.Render("~/bundles/signalr")
     @Scripts.Render("~/signalr/hubs")
 }
-
-

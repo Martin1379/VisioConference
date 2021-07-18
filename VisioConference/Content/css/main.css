@@ -1,9 +1,7 @@
 ﻿/*GENERAL*/
-select {
-    font-family: 'FontAwesome', 'sans-serif';
-}
 body {
     background-color: #DADADA;
+    overflow: hidden;
 }
 
 a:hover, a:visited, a:link, a:active {
@@ -18,7 +16,7 @@ a:hover, a:visited, a:link, a:active {
     background-color: #1c688d;
 }
 
-.d-in{
+.d-in {
     display: inline-block;
 }
 
@@ -231,17 +229,24 @@ footer .row {
 }
 
 #input-group-tchat {
-    min-width: 100%;
+    min-width: 1090px;
+    position: absolute;
+    bottom: 29px;
 }
 
 #div-list-amis {
     position: relative;
     bottom: 16px;
+    padding:  0 10px 10px 10px;
+    width: 111%;
+    position: relative;
+    right: 10px;
+    overflow: auto;
+    height: 688px;
 }
 
     #div-list-amis > div,
-    #div-list-invit-in > div
-    {
+    #div-list-invit-in > div {
         display: inline-flex;
         padding: 10px;
         border-radius: 10px;
@@ -250,17 +255,15 @@ footer .row {
     }
 
 
-
     #div-list-amis > hr,
-    #div-list-invit-in > hr
-    {
+    #div-list-invit-in > hr {
         margin-top: 10px;
         margin-bottom: 10px;
         color: #454545;
     }
 
-.div-ami-card-text button {
-    margin-right: 21px;
+#div-list-amis > hr:first-child {
+    margin-top: 2px;
 }
 
 .ami-card-img {
@@ -277,8 +280,8 @@ footer .row {
 
 .state-img {
     position: relative;
-    bottom: 24px;
-    left: 68px;
+    bottom: 16px;
+    left: 25px;
     width: 20px;
 }
 
@@ -293,11 +296,13 @@ footer .row {
     width: 22px;
     font-size: 22px;
     opacity: 1.0;
+    position: relative;
+    bottom: 85px;
+    right: 21px;
 }
 
 #div-list-amis .edit-span-close,
-#div-list-invit-in .edit-span-close
-{
+#div-list-invit-in .edit-span-close {
     position: relative;
     top: 1px;
     color: #DADADA;
@@ -305,9 +310,23 @@ footer .row {
     text-shadow: none;
 }
 
+#div-list-amis button:nth-child(2) {
+    display: inline-flex;
+    width: -webkit-fill-available;
+    border: none;
+    border-radius: 10px;
+    padding-top: 13px;
+    -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.29);
+}
+
+#div-list-amis button:nth-child(2):hover {
+    background-color: #DADADA;
+}
+
 .div-ami-card-text {
     width: -webkit-fill-available;
     margin-top: 8px;
+    text-align: initial;
 }
 
     .div-ami-card-text button {
@@ -319,8 +338,6 @@ footer .row {
         width: 113px;
         font-size: 100%;
     }
-
-
 /*MAIN COL 3*/
 #myTab, #myTab li {
     border-bottom: solid 1px #333333;
@@ -335,9 +352,7 @@ footer .row {
         display: block;
     }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background-color: #DADADA;
 }
 
@@ -384,8 +399,7 @@ footer .row {
     left: 2px;
 }
 
-#contacts-content,
-#invitations-content{
+#contacts-content, #invitations-content {
     position: relative;
     bottom: 34px;
 }
@@ -417,4 +431,5 @@ footer .row {
     display: flex;
     justify-content: flex-end;
     margin-top: 11px;
+    margin-bottom: 7px;
 }
