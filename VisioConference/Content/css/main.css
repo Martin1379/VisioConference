@@ -24,6 +24,10 @@ a:hover, a:visited, a:link, a:active {
     display: none;
 }
 
+ul {
+    list-style-type: none;
+}
+
 /*NAVBAR*/
 #nav-content {
     display: flex;
