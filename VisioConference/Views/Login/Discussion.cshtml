@@ -43,25 +43,25 @@
         @*MODIFIER PROFIL*@
         @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-        <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
-        <br />
-        <br />
-        <div class="input-group mb-3" id="input-group-tchat">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Pseudo" id="input-tchat" name="Pseudo">
-                <br />
-                <br />
-                <input type="text" class="form-control" placeholder="Password" id="input-tchat" name="Password">
-                <br />
-                <br />
-                <input type="file" id="myFile" name="Photo">
-                <br />
-                <br />
-                <div class="flex-end">
-                    <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
+            <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
+            <br />
+            <br />
+            <div class="input-group mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
+                    <br />
+                    <br />
+                    <input type="text" class="form-control" placeholder="Password" name="Password">
+                    <br />
+                    <br />
+                    <input type="file" id="myFile" name="Photo">
+                    <br />
+                    <br />
+                    <div class="flex-end">
+                        <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
+                    </div>
                 </div>
             </div>
-        </div>
         }
         @*FOOTER*@
         <footer>
@@ -87,58 +87,18 @@
         <br />
 
         @* CHAT CONTENT *@
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices eget velit quis consequat.
-        Mauris pretium nulla id lorem consectetur pulvinar. Pellentesque pulvinar dui sagittis metus pretium,
-        vel posuere purus sollicitudin. Vestibulum semper tortor vitae turpis accumsan, sit amet dapibus tellus luctus.
-        Cras pellentesque nisl arcu, vel imperdiet tellus suscipit mattis. Aliquam erat volutpat. Aliquam porta mi mauris, eu ultricies diam facilisis id.
-        Pellentesque mauris felis, dictum at hendrerit sed, elementum eu erat.
-        <br />
-        <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id ante cursus, faucibus neque ac, sagittis sem.
-        Proin laoreet cursus molestie. Proin ex urna, bibendum et mi a, ultricies volutpat nunc. Suspendisse rutrum mollis ante, eget bibendum orci finibus sed.
-        Morbi pulvinar erat sem. Cras pretium sodales tellus vitae ultrices. Mauris in viverra sapien. Suspendisse nec turpis ac lorem cursus viverra congue quis velit.
-        Curabitur tincidunt, sem et vestibulum efficitur, velit ligula feugiat mauris, non ornare neque sapien a mauris.
-        Integer fringilla scelerisque tempor. Nunc sed luctus dui, tempor consectetur libero. Donec ultrices, nunc ac tristique pretium, sapien nulla placerat tellus,
-        nec molestie purus magna et ex.
-        Donec lorem urna, pulvinar in finibus et, faucibus ut risus. Nullam tempor purus id diam hendrerit dapibus.
-        Pellentesque vel enim eu nibh sagittis sollicitudin. Cras posuere lacus quis nunc sodales volutpat.
-        Fusce aliquam suscipit nibh, ac eleifend diam tristique dapibus. In ut dignissim ante.
-        <br />
-        <br />
-        @if((List<string>)ViewBag.Messages != null)
-        {
-            foreach (string item in (List<string>)ViewBag.Messages)
+        <h3>
+            Nom de l'ami
+        </h3>
+        <p>
+            @if ((List<string>)ViewBag.Messages != null)
             {
-               @:<br/>#@item
-
+                foreach (string item in (List<string>)ViewBag.Messages)
+                {
+                    @:<br />#@item
+                }
             }
-        }
-        <br />
-        <br />
-
-    </p>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        </p>
 
         @* INPUT ENVOYER MESSAGE *@
         @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
@@ -199,131 +159,130 @@
             <br />
 
             @* LISTE AMIS *@
-        <div id="div-list-amis">
+            <div id="div-list-amis">
 
-            @*AMI CARD*@
-            @foreach (UserDTO item in Model)
-            {
-                <hr />
-                using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                @*AMI CARD*@
+                @foreach (UserDTO item in Model)
                 {
-                    <input type="text" name="user_id" hidden value="@item.Id" />
-                    <div classe="div-ami-card" style=" display:inline-flex">
-                        <div>
-                            <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                            @if (item.Connected == true)
-                            {
-                                <img src="~/Content/img/state-online.png" class="state-img" />
-                            }
-                            else
-                            {
-                                <img src="~/Content/img/state-offline.png" class="state-img" />
-                            }
-
-                        </div>
-
-                        @*AMI TEXT*@
-                        <div class="div-ami-card-text">
+                    <hr />
+                    using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                    {
+                        <input type="text" name="user_id" hidden value="@item.Id" />
+                        <button>
                             <div>
-                                <span class="ami-nom">@item.Pseudo</span>
-                                <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
-                            </div>
-                            #@item.Id
-                            <br />
+                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                @if (item.Connected == true)
+                                {
+                                    <img src="~/Content/img/state-online.png" class="state-img" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/img/state-offline.png" class="state-img" />
+                                }
 
-                            @if (item.Connected == true)
-                            {
-                                <span class="label label-success">
-                                    Online
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="label label-default">
-                                    Offline
-                                </span>
-                            }
-                            <br />
-                        </div>
-                    </div>
+                            </div>
+
+                            @*AMI TEXT*@
+                            <div class="div-ami-card-text">
+                                <div>
+                                    <span class="ami-nom">@item.Pseudo</span>
+                                </div>
+                                #@item.Id
+                                <br />
+
+                                @if (item.Connected == true)
+                                {
+                                    <span class="label label-success">
+                                        Online
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default">
+                                        Offline
+                                    </span>
+                                }
+                                <br />
+                            </div>
+                        </button>
+                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                    }
                 }
 
-            }
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                        <img src="~/Content/img/state-offline.png" class="state-img" />
+                    </div>
+                    <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Paul</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #24
+                        <br />
+                        <span class="label label-default">Hors ligne</span>
+                        <br />
+                    </div>
 
-            @* AMI CARD *@
-            <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-            <img src="~/Content/img/state-offline.png" class="state-img" />
-        </div>
-        <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">Paul</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>-->
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-online.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">sara</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #1
+                        <br />
+                        <span class="label label-success">en ligne</span>
+                        <br />
+                    </div>
+                </div>-->
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-online.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">martin</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #3
+                        <br />
+                        <span class="label label-success">en ligne</span>
+                        <br />
+                    </div>
+                </div>-->
+                @* AMI CARD *@
+                <!--<hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
+                    <div>
+                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
+                        <img src="~/content/img/state-afk.png" class="state-img" />
+                    </div>                <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">nico</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        #98
+                        <br />
+                        <div class="label label-warning">-->
+                @*<span class="label label-warning">inactif</span>*@
+                <!--inactif
+                        </div>
+                        <br />
+                    </div>
+                </div>-->
             </div>
-            #24
-            <br />
-            <span class="label label-default">Hors ligne</span>
-            <br />
-        </div>
-
-    </div>-->
-            @* AMI CARD *@
-            <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-            <img src="~/content/img/state-online.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">sara</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #1
-            <br />
-            <span class="label label-success">en ligne</span>
-            <br />
-        </div>
-    </div>-->
-            @* AMI CARD *@
-            <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-            <img src="~/content/img/state-online.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">martin</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #3
-            <br />
-            <span class="label label-success">en ligne</span>
-            <br />
-        </div>
-    </div>-->
-            @* AMI CARD *@
-            <!--<hr />
-    <div classe="div-ami-card" style=" display:inline-flex">
-        <div>
-            <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-            <img src="~/content/img/state-afk.png" class="state-img" />
-        </div>                <div class="div-ami-card-text">
-            <div>
-                <span class="ami-nom">nico</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            #98
-            <br />
-            <div class="label label-warning">-->
-            @*<span class="label label-warning">inactif</span>*@
-            <!--inactif
-            </div>
-            <br />
-        </div>
-    </div>-->
-        </div>
         </div>
 
         <div id="invitations-content" class="d-no">
@@ -347,7 +306,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -369,7 +327,6 @@
                     <div class="div-ami-card-text">
                         <div>
                             <span class="ami-nom">Nom</span>
-                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                         </div>
                         #ID
                         <br />
@@ -409,53 +366,51 @@
             <br />
 
             @* LISTE DE LA RECHERCHE *@
-        <div id="div-list-invit-in">
+            <div id="div-list-invit-in">
 
-            @*EXEMPLE USER*@
-            <hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                </div>
-
-                @*AMI TEXT*@
-                <div class="div-ami-card-text">
+                @*EXEMPLE USER*@
+                <hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <span class="ami-nom">Nom</span>
-                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
                     </div>
-                    #ID
-                    <br />
-                    <span class="label label-default">
-                        Offline
-                    </span>
-                    <br />
-                </div>
-            </div>
 
-            @*EXEMPLE USER*@
-            <hr />
-            <div classe="div-ami-card" style=" display:inline-flex">
-                <div>
-                    <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
+                    @*AMI TEXT*@
+                    <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Nom</span>
+                        </div>
+                        #ID
+                        <br />
+                        <span class="label label-default">
+                            Offline
+                        </span>
+                        <br />
+                    </div>
                 </div>
 
-                @*AMI TEXT*@
-                <div class="div-ami-card-text">
+                @*EXEMPLE USER*@
+                <hr />
+                <div classe="div-ami-card" style=" display:inline-flex">
                     <div>
-                        <span class="ami-nom">Nom</span>
-                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
                     </div>
-                    #ID
-                    <br />
-                    <span class="label label-default">
-                        Offline
-                    </span>
-                    <br />
-                </div>
-            </div>
 
-        </div>
+                    @*AMI TEXT*@
+                    <div class="div-ami-card-text">
+                        <div>
+                            <span class="ami-nom">Nom</span>
+                        </div>
+                        #ID
+                        <br />
+                        <span class="label label-default">
+                            Offline
+                        </span>
+                        <br />
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </div>
