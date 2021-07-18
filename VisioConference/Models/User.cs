@@ -34,7 +34,7 @@ namespace VisioConference.Models
 
         public bool IsAdmin { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(255)]
         public string ResetPassewordCode { get; set; }
 
