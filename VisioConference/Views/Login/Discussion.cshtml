@@ -90,29 +90,12 @@
             }
         </div>
         @*@if (TempData["AnnulerModif"] == null)
-        {
+            {
 
-            <div class="flex-start">
-                <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
-            </div>
-        }*@
-
-        @*FOOTER*@
-        <footer>
-            <div>
-                <div id="main-div-footer-1">
-                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+                <div class="flex-start">
+                    <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
                 </div>
-                <div id="main-div-footer-2">
-                    YouCom&copy;  est une application développée par :
-                    <br />
-                    Sara - Martin - Remy
-                    <br />
-                    Développeurs .NET - DAWAN - @DateTime.Now.Year
-                </div>
-            </div>
-        </footer>
-    </div>
+            }*@
 
         @*FOOTER*@
         <footer>
@@ -159,10 +142,7 @@
             </h4>
         }
 
-
         <p>
-            @*<ul id="discussion">
-                </ul>*@
             <ul id="discussion">
                 @if ((List<string>)ViewBag.Messages != null)
                 {
@@ -175,10 +155,6 @@
                         <br />
                     }
                 }
-                @*<li id="discussion">
-                        <strong>
-                        </strong>
-                    </li>*@
             </ul>
         </p>
 
@@ -219,19 +195,6 @@
                     });
                 });
             });</script>
-
-        @*<div class="input-group mb-3" id="input-group-tchat">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-                    </span>
-                    <input type="text" id="displayname" value="@dto.Pseudo" hidden />
-                    <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
-                    </span>
-                </div>
-            </div>*@
 
         @if (TempData["Id_ami"] != null)
         {
@@ -305,16 +268,26 @@
                         <button>
                             <div>
                                 <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                                @if (item.Etat == 0)
-                                {
-                                    <img src="~/Content/img/state-online.png" class="state-img" />
-                                }
-                                else
-                                {
-                                    <img src="~/Content/img/state-offline.png" class="state-img" />
-                                }
 
+                                @*POINTS*@
+                                @switch (item.Etat)
+                                {
+                                    case 0:
+                                        <img src="~/Content/img/state-offline.png" class="state-img" />
+                                        break;
+                                    case 1:
+                                        <img src="~/Content/img/state-online.png" class="state-img" />
+                                        break;
 
+                                    case 2:
+                                        <img src="~/Content/img/state-busy.png" class="state-img" />
+                                        break;
+                                    case 3:
+                                        <img src="~/Content/img/state-afk.png" class="state-img" />
+                                        break;
+                                    default:
+                                        break;
+                                }
                             </div>
 
                             @*AMI TEXT*@
@@ -325,17 +298,31 @@
                                 #@item.Id
                                 <br />
 
-                                @if (item.Etat == 0)
+                                @*LABEL*@
+                                @switch (item.Etat)
                                 {
-                                    <span class="label label-success">
-                                        Online
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="label label-default">
-                                        Offline
-                                    </span>
+                                    case 0:
+                                        <span class="label label-default">
+                                            Hors ligne
+                                        </span>
+                                        break;
+                                    case 1:
+                                        <span class="label label-success">
+                                            En ligne
+                                        </span>
+                                        break;
+                                    case 2:
+                                        <span class="label label-danger">
+                                            Occupé(e)
+                                        </span>
+                                        break;
+                                    case 3:
+                                        <span class="label label-warning">
+                                            Inactif
+                                        </span>
+                                        break;
+                                    default:
+                                        break;
                                 }
                                 <br />
                             </div>
@@ -544,9 +531,7 @@
                         <br />
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
