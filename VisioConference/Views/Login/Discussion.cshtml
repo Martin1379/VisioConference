@@ -291,7 +291,7 @@
                         <button>
                             <div>
                                 <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                                @if (item.Connected == true)
+                                @if (item.Etat == 0)
                                 {
                                     <img src="~/Content/img/state-online.png" class="state-img" />
                                 }
@@ -311,7 +311,7 @@
                                 #@item.Id
                                 <br />
 
-                                @if (item.Connected == true)
+                                @if (item.Etat == 0)
                                 {
                                     <span class="label label-success">
                                         Online

@@ -199,6 +199,14 @@
     <Compile Include="Migrations\202107171401059_ModifUser.Designer.cs">
       <DependentUpon>202107171401059_ModifUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107181625286_modifRestPassewordCode.cs" />
+    <Compile Include="Migrations\202107181625286_modifRestPassewordCode.Designer.cs">
+      <DependentUpon>202107181625286_modifRestPassewordCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107181932376_changementConnected.cs" />
+    <Compile Include="Migrations\202107181932376_changementConnected.Designer.cs">
+      <DependentUpon>202107181932376_changementConnected.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Service\UsersService.cs" />
@@ -308,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107171401059_ModifUser.resx">
       <DependentUpon>202107171401059_ModifUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107181625286_modifRestPassewordCode.resx">
+      <DependentUpon>202107181625286_modifRestPassewordCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107181932376_changementConnected.resx">
+      <DependentUpon>202107181932376_changementConnected.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -38,7 +38,7 @@ namespace VisioConference.DTO
             Pseudo = pseudo;
         }
         //Constructeur pour la méthode de recherche d'ami, on ne retourne pas le mdp
-        public UserDTO(string email, string pseudo, string photo, bool connected, int id)
+        public UserDTO(string email, string pseudo, string photo, int etat, int id)
         {
             Id = id;
             Email = email;
@@ -46,11 +46,11 @@ namespace VisioConference.DTO
             ResetPassewordCode = "";
             Pseudo = pseudo;
             Photo = photo;
-            Connected = connected;
+            Etat = etat;
         }
 
 
-        public UserDTO(string email, string password, string resetPassewordCode, string pseudo, string photo, bool connected, int id)
+        public UserDTO(string email, string password, string resetPassewordCode, string pseudo, string photo, int etat, int id)
         {
             Id = id;
             Email = email;
@@ -58,7 +58,7 @@ namespace VisioConference.DTO
             ResetPassewordCode = resetPassewordCode;
             Pseudo = pseudo;
             Photo = photo;
-            Connected = connected;
+            Etat = etat;
         }
     }
 }

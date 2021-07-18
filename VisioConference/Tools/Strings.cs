@@ -8,8 +8,7 @@ namespace VisioConference.Tools
 {
     public class Strings
     {
-        private UserDTO userDTO;
-        private UserDTO amiDTO;
+
 
         // récupère la premier élément d'une chaine compris entre string strStart et StrEnd
         // str chaine ="zeazea<#Remy2>Salut !<#Sara3> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
