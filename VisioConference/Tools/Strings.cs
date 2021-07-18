@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VisioConference.DTO;
 
 namespace VisioConference.Tools
 {
     public class Strings
     {
+        private UserDTO userDTO;
+        private UserDTO amiDTO;
+
         // récupère la premier élément d'une chaine compris entre string strStart et StrEnd
         // str chaine ="zeazea<#Remy2>Salut !<#Sara3> Ca va ? \n bien ou quoi <#Remy> bien bien \n deuxieme message"
         public static string getBetween(string strSource, string strStart, string strEnd)
@@ -51,7 +55,7 @@ namespace VisioConference.Tools
 
             return "";
         }
-       private static string hashMessage(string strSource, string strStart, string strEnd)
+        private static string hashMessage(string strSource, string strStart, string strEnd)
         {
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
             {
@@ -86,7 +90,7 @@ namespace VisioConference.Tools
 
         }
 
-        public static IEnumerable<string> afficherConv (string conversation)
+        public static IEnumerable<string> afficherConv(string conversation, UserDTO userDTO, UserDTO amiDTO)
         {
             string login;
             string login2;
@@ -106,7 +110,7 @@ namespace VisioConference.Tools
                     conversation = hashMessage(conversation, login, login2);
                 }
 
-                yield return message ;
+                yield return message;
 
             } while (login2 != "<#>" || login2 == null);
 
