@@ -16,7 +16,19 @@
         <br />
 
         @*AVATAR*@
-        <img src="~/Content/avatar_user/@dto.Photo" alt="Alternate Text" id="avatar-main" />
+        @if (dto.Photo == null)
+        {
+
+
+            <img src="~/Content/img/avatar-vide.png" id="avatar-main" />
+
+        }
+        else
+        {
+            <img src="~/Content/avatar_user/@dto.Photo" alt="Image not found" id="avatar-main" />
+        }
+
+
         <br />
         <br />
         <br />
@@ -41,56 +53,73 @@
         <br />
 
         @*MODIFIER PROFIL*@
-        @if (TempData["ModifProfil"] == null)
-        {
-            <button type="button"
-                    class="btn btn-primary"
-                    onclick="location.href='@Url.Action("ClickModif", "Login")'">
-                <i class="fas fa-user-edit"></i>Modifier mon profil
-            </button>
-        }
-
-        @if (TempData["ModifProfil"] != null)
-        {
-            if ((bool)TempData["ModifProfil"] == true)
-            {
-                using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <div class="input-group mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
-                            <br />
-                            <br />
-                            <input type="text" class="form-control" placeholder="Password" name="Password">
-                            <br />
-                            <br />
-                            <input type="file" id="myFile" name="Photo">
-                            <br />
-                            <br />
-                            <div class="form-horizontal">
-                                <div class="flex-end">
-                                    <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" style="" />
-                                </div>
-                                <div class="flex-start">
-                                    <button type="button"
-                                            class="btn btn-success"
-                                            onclick="location.href='@Url.Action("AnnulerModif", "Login")'">
-                                        Annuler
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("formulaire");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
                 }
             }
-        }
-        @*@if (TempData["AnnulerModif"] == null)
+        </script>
+
+        <button type="button"
+                class="btn btn-primary"
+                onclick="myFunction()">
+            <i class="fas fa-user-edit"></i>Modifier mon profil
+        </button>
+
+
+        @*@if (TempData["ModifProfil"] != null)
+        {
+        if ((bool)TempData["ModifProfil"] == true)
+        {*@
+
+        @*formulaire modif profil *@
+        <div id="formulaire" style="display:none;">
+            @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
 
-                <div class="flex-start">
-                    <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
+                <div class="input-group" style="margin:20px 10px;">
+                    <div class="form-group">
+                        <label for="Pseudo">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" style="margin-bottom:10px;" placeholder="Nom d'utilisateur" name="Pseudo">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Mot de passe</label>
+                        <input type="text" class="form-control" style="margin-bottom:10px;" placeholder="Mot de passe" name="Password">
+                    </div>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="customFileLang">Sélectionner une image </label>
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="fr">
+                    </div>
+
+                    @*<input type="file" id="myFile" name="Photo">*@
+                    <br />
+                    <br />
+                    <div class="d-flex justify-content-between">
+
+                        <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" style="" />
+
+                        <button type="button"
+                                class="btn btn-success"
+                                onclick="myFunction()">
+                            Annuler
+                        </button>
+
+                    </div>
                 </div>
-            }*@
+
+            }
+        </div>
+        @*@if (TempData["AnnulerModif"] == null)
+        {
+
+            <div class="flex-start">
+                <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
+            </div>
+        }*@
 
         @*FOOTER*@
         <footer>
@@ -229,8 +258,6 @@
                 </div>
             }
         }
-
-
 
 
     </div>
