@@ -226,7 +226,6 @@
     <Compile Include="Service\ConversationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\avatar_user\avatar-vide.png" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
