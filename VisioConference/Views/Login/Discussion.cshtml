@@ -84,30 +84,30 @@
                 }
             }
         }
-            @*@if (TempData["AnnulerModif"] == null)
+        @*@if (TempData["AnnulerModif"] == null)
             {
 
                 <div class="flex-start">
                     <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
                 </div>
             }*@
-      
-            @*FOOTER*@
-            <footer>
-                <div>
-                    <div id="main-div-footer-1">
-                        <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
-                    </div>
-                    <div id="main-div-footer-2">
-                        YouCom&copy;  est une application développée par :
-                        <br />
-                        Sara - Martin - Remy
-                        <br />
-                        Développeurs .NET - DAWAN - @DateTime.Now.Year
-                    </div>
+
+        @*FOOTER*@
+        <footer>
+            <div>
+                <div id="main-div-footer-1">
+                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
                 </div>
-            </footer>
-        </div>
+                <div id="main-div-footer-2">
+                    YouCom&copy;  est une application développée par :
+                    <br />
+                    Sara - Martin - Remy
+                    <br />
+                    Développeurs .NET - DAWAN - @DateTime.Now.Year
+                </div>
+            </div>
+        </footer>
+    </div>
 
     @*COLONNE 2*@
     <div id="div-main-col-2">
@@ -116,28 +116,48 @@
         <br />
 
         @* CHAT CONTENT *@
-        <h3>
-            Nom de l'ami
-        </h3>
+
+        @if (TempData["Id_ami"] != null)
+        {
+            foreach (UserDTO item in Model)
+            {
+                if (item.Id == (int)TempData["Id_ami"])
+                {
+                    <h3>
+                        @item.Pseudo
+                    </h3>
+                }
+            }
+        }
+        else
+        {
+            <h4>
+                Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
+                Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
+            </h4>
+        }
+
+
         <p>
-           @*<ul id="discussion">
+            @*<ul id="discussion">
                 </ul>*@
-            <ul>
+            <ul id="discussion">
                 @if ((List<string>)ViewBag.Messages != null)
                 {
                     foreach (string message in (List<string>)ViewBag.Messages)
                     {
 
-    <li>
-        <strong> #@message </strong>
-    </li>
-}
-}
-                <li>
-                    <strong id="discussion">
+                        <li>
+                            @Html.Raw(message)
+                        </li>
+                        <br />
+                    }
+                }
+                @*<li id="discussion">
+                        <strong>
 
-                    </strong>
-                </li>
+                        </strong>
+                    </li>*@
             </ul>
         </p>
 
@@ -161,8 +181,8 @@
                     var encodedName = $('<div />').text(name).html();
                     var encodedMsg = $('<div />').text(message).html();
                     // Add the message to the page.
-                    $('#discussion').append(encodedName
-                        + ':&nbsp;&nbsp;' + encodedMsg);
+                    $('#discussion').append('<li><strong>' + encodedName
+                        + ':&nbsp;</strong>' + encodedMsg + '</li><br />');
                 };
                 // Get the user name and store it to prepend to messages.
                 /*$('#displayname').val(prompt('Enter your name:', ''));*/
@@ -192,20 +212,24 @@
                 </div>
             </div>*@
 
-
-        @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
+        @if (TempData["Id_ami"] != null)
         {
-<div class="input-group mb-3" id="input-group-tchat">
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-        </span>
-        <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
-        </span>
-    </div>
-</div>}
+            using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
+            {
+                <div class="input-group mb-3" id="input-group-tchat">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
+                        </span>
+                    </div>
+                </div>
+            }
+        }
+
 
 
 

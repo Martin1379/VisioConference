@@ -22,7 +22,6 @@ namespace VisioConference.Tools
                 int Start, End;
                 Start = strSource.IndexOf(strStart, 0) + strStart.Length;
                 End = strSource.IndexOf(strEnd, Start);
-
                 return strSource.Substring(Start, End - Start);
             }
 
@@ -36,9 +35,7 @@ namespace VisioConference.Tools
                 int Start, End;
                 Start = strSource.IndexOf(strStart, 0) + strStart.Length;
                 End = strSource.IndexOf(strEnd, Start);
-
-                return getBetween(strSource, "<#", ">") + " :" + strSource.Substring(Start, End - Start);
-                //Remy : Salut !
+                return strSource.Substring(Start, End - Start);
             }
 
             return "";
@@ -49,8 +46,7 @@ namespace VisioConference.Tools
             {
                 int Start;
                 Start = strSource.IndexOf(strStart, 0) + strStart.Length;
-
-                return getBetween(strSource, "<#", ">") + " :" + strSource.Substring(Start, strSource.Length - Start);
+                return strSource.Substring(Start, strSource.Length - Start);
             }
 
             return "";
@@ -62,8 +58,8 @@ namespace VisioConference.Tools
                 int Start, End;
                 Start = strSource.IndexOf(strStart, 0) + strStart.Length;
                 End = strSource.IndexOf(strEnd, Start);
-
                 return strSource.Substring(End, strSource.Length - (End));
+
             }
 
             return "";
@@ -71,48 +67,50 @@ namespace VisioConference.Tools
 
         private static string getFirstSender(string strSource)
         {
-            return "<#" + getBetween(strSource, "<#", ">") + ">";
-            //retourne <#Remy>
+            return getBetween(strSource, "<#", ">");
         }
 
         private static string getSecondSender(string strSource)
         {
             try
             {
-                return "<#" + getBetween(strSource.Substring(getFirstSender(strSource).Length, strSource.Length - getFirstSender(strSource).Length), "<#", ">") + ">";
+                return getBetween(strSource.Substring(getFirstSender(strSource).Length, strSource.Length - getFirstSender(strSource).Length), "<#", ">");
             }
             catch (Exception e)
             {
-
                 throw e;
             }
-
-
         }
 
         public static IEnumerable<string> afficherConv(string conversation, UserDTO userDTO, UserDTO amiDTO)
         {
             string login;
             string login2;
+            string pseudo;
             string message;
             do
             {
                 login = getFirstSender(conversation);
                 login2 = getSecondSender(conversation);
-                if (login2 == "<#>") // Si on est arrivé au dernier utilisateur
+                if (int.Parse(login) == userDTO.Id)
+                    pseudo = userDTO.Pseudo;
+                else
+                    pseudo = amiDTO.Pseudo;
+
+                if (login2 == "") // Si on est arrivé au dernier utilisateur
                 {
-                    message = getMessage(conversation, login);
+                    message = "<strong>" + pseudo + ": " + "</strong>" + getMessage(conversation, "<#"+login+">");
 
                 }
                 else
                 {
-                    message = getMessage(conversation, login, login2);
-                    conversation = hashMessage(conversation, login, login2);
+                    message = "<strong>" + pseudo + ": " + "</strong>" + getMessage(conversation, "<#"+login+">", "<#" + login2 + ">");
+                    conversation = hashMessage(conversation, "<#" + login + ">", "<#" + login2 + ">");
                 }
 
                 yield return message;
 
-            } while (login2 != "<#>" || login2 == null);
+            } while ("<#" + login2 + ">" != "<#>" || login2 == null);
 
             yield break;
         }
