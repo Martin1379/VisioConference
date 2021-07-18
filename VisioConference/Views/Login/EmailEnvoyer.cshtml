@@ -1,0 +1,35 @@
+﻿@model VisioConference.DTO.UserDTO
+@{
+    ViewBag.Title = "EmailEnvoyer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using VisioConference.DTO;
+@{ UserDTO dto = (UserDTO)Session["userNormal"]; }
+
+
+<h2>EmailEnvoyer</h2>
+<br />
+<br />
+<div class="container body-content">
+    <div class="jumbotron text-center">
+        <i class="fa fa-chevron-circle-down fa-4x" aria-hidden="true" style="color:forestgreen; text-align:center;"></i>
+        <br />
+        <br />
+        @*LOGO & TITRE*@
+        <h2 id="h2-accueil">E-mail de réinitialisation de mot de passe envoyé</h2>
+
+        @*ACCUEIL*@
+        <p class="lead">
+            Un e-mail a été envoyé à votre adresse-mail.
+            <br />
+            Suivez les instructions fournies pour réinitialiser votre mot de passe.
+        </p>
+        <div class="flex-start">
+            <button type="button"
+                    class="btn btn-outline-primary" style="border: 2px solid #337ab7; font-size: 18px; ">
+                @Html.ActionLink("Terminé", "")
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -41,45 +41,73 @@
         <br />
 
         @*MODIFIER PROFIL*@
-        @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @if (TempData["ModifProfil"] == null)
         {
-            <button class="btn btn-primary" type="button"><i class="fas fa-user-edit"></i> Modifier mon profil</button>
-            <br />
-            <br />
-            <div class="input-group mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
-                    <br />
-                    <br />
-                    <input type="text" class="form-control" placeholder="Password" name="Password">
-                    <br />
-                    <br />
-                    <input type="file" id="myFile" name="Photo">
-                    <br />
-                    <br />
-                    <div class="flex-end">
-                        <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" />
-                    </div>
-                </div>
-            </div>
+            <button type="button"
+                    class="btn btn-primary"
+                    onclick="location.href='@Url.Action("ClickModif", "Login")'">
+                <i class="fas fa-user-edit"></i>Modifier mon profil
+            </button>
         }
 
-        @*FOOTER*@
-        <footer>
-            <div>
-                <div id="main-div-footer-1">
-                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+        @if (TempData["ModifProfil"] != null)
+        {
+            if ((bool)TempData["ModifProfil"] == true)
+            {
+                using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="input-group mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
+                            <br />
+                            <br />
+                            <input type="text" class="form-control" placeholder="Password" name="Password">
+                            <br />
+                            <br />
+                            <input type="file" id="myFile" name="Photo">
+                            <br />
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="flex-end">
+                                    <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" style="" />
+                                </div>
+                                <div class="flex-start">
+                                    <button type="button"
+                                            class="btn btn-success"
+                                            onclick="location.href='@Url.Action("AnnulerModif", "Login")'">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+            @*@if (TempData["AnnulerModif"] == null)
+            {
+
+                <div class="flex-start">
+                    <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
                 </div>
-                <div id="main-div-footer-2">
-                    YouCom&copy;  est une application développée par :
-                    <br />
-                    Sara - Martin - Remy
-                    <br />
-                    Développeurs .NET - DAWAN - @DateTime.Now.Year
+            }*@
+      
+            @*FOOTER*@
+            <footer>
+                <div>
+                    <div id="main-div-footer-1">
+                        <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+                    </div>
+                    <div id="main-div-footer-2">
+                        YouCom&copy;  est une application développée par :
+                        <br />
+                        Sara - Martin - Remy
+                        <br />
+                        Développeurs .NET - DAWAN - @DateTime.Now.Year
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
 
     @*COLONNE 2*@
     <div id="div-main-col-2">
@@ -112,7 +140,7 @@
                 </li>
             </ul>
         </p>
-              
+
         @* INPUT ENVOYER MESSAGE *@
         <!--Script references.
         <!--Reference the jQuery library. -->

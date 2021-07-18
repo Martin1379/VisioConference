@@ -110,7 +110,8 @@ namespace VisioConference.Repository.DAO
                     return userDTO;
                 } else
                 {
-                    throw new NotImplementedException();
+                    //throw new NotImplementedException();
+                    return null;
                 }
             }
         }
