@@ -57,7 +57,7 @@ namespace VisioConference.Repository.DAO
                                  FriendMail = us.Email,
                                  FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
-                                 FriendConnected = us.Connected
+                                 FriendConnected = us.Etat
                              })
                             .Union
                             (from us in context.users
@@ -69,7 +69,7 @@ namespace VisioConference.Repository.DAO
                                  FriendMail = us.Email,
                                  FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
-                                 FriendConnected = us.Connected
+                                 FriendConnected = us.Etat
                              })
                             ;
 
