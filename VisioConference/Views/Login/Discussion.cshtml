@@ -29,85 +29,71 @@
                 #@dto.Id
             </div>
         </div>
-        <br />
 
         @*STATUS SELECTEUR*@
-        <select>
+        <select id="select-state">
             <option value="value">En ligne</option>
             <option value="value">Occupé(e)</option>
             <option value="value">Absent(e)</option>
             <option value="value">Invisible</option>
         </select>
-        <br />
+        <hr />
 
         @*MODIFIER PROFIL*@
-        @if (TempData["ModifProfil"] == null)
-        {
-            <button type="button"
-                    class="btn btn-primary"
-                    onclick="location.href='@Url.Action("ClickModif", "Login")'">
-                <i class="fas fa-user-edit"></i>Modifier mon profil
-            </button>
-        }
+        <button type="button" class="btn btn-primary" onclick="btnModifProfil()" id="btn-modif-profil">
+            <i class="fas fa-user-edit"></i> Modifier mon profil
+        </button>
+        <br />
 
-        @if (TempData["ModifProfil"] != null)
-        {
-            if ((bool)TempData["ModifProfil"] == true)
+        @* MODIFIER MON PROFIL *@
+        <div id="modifier-profil-content">
+            <div id="div-titre-modifier">
+                <i class="fas fa-user-edit iblue"></i>
+                <h3>Modifier mon profil</h3>
+            </div>
+
+            @using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-                using (Html.BeginForm("SaveProfil", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <div class="input-group mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
-                            <br />
-                            <br />
-                            <input type="text" class="form-control" placeholder="Password" name="Password">
-                            <br />
-                            <br />
-                            <input type="file" id="myFile" name="Photo">
-                            <br />
-                            <br />
-                            <div class="form-horizontal">
-                                <div class="flex-end">
-                                    <input type="submit" name="btnSubmit" value="Save" class="btn btn-success" style="" />
-                                </div>
-                                <div class="flex-start">
-                                    <button type="button"
-                                            class="btn btn-success"
-                                            onclick="location.href='@Url.Action("AnnulerModif", "Login")'">
-                                        Annuler
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                <div class="input-group" id="div-modif-profile">
+
+                    @*INPUTS*@
+                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
+                    <br />
+                    <br />
+                    <input type="password" class="form-control" placeholder="Mot de passe" name="Password">
+                    <br />
+                    <br />
+                    <div id="div-modif-avatar">
+                        <i class="fas fa-camera iblue"></i>
+                        <input type="file" id="myFile" name="Photo">
                     </div>
-                }
+                    <br />
+
+                    @*BUTTONS*@
+                    <div>
+                        <button type="button" class="btn btn-danger" onclick="btnAnnulerProfil()"> Annuler</button>
+                        <button type="submit" class="btn btn-success" onclick="" name="btnSubmit" value="Save"> Enregistrer</button>
+                    </div>
+                </div>
             }
-        }
-            @*@if (TempData["AnnulerModif"] == null)
-            {
-
-                <div class="flex-start">
-                    <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
-                </div>
-            }*@
-      
-            @*FOOTER*@
-            <footer>
-                <div>
-                    <div id="main-div-footer-1">
-                        <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
-                    </div>
-                    <div id="main-div-footer-2">
-                        YouCom&copy;  est une application développée par :
-                        <br />
-                        Sara - Martin - Remy
-                        <br />
-                        Développeurs .NET - DAWAN - @DateTime.Now.Year
-                    </div>
-                </div>
-            </footer>
         </div>
+
+        @*FOOTER*@
+        <footer>
+            <div>
+                <div id="main-div-footer-1">
+                    <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+                </div>
+                <div id="main-div-footer-2">
+                    YouCom&copy;  est une application développée par :
+                    <br />
+                    Sara - Martin - Remy
+                    <br />
+                    Développeurs .NET - DAWAN - @DateTime.Now.Year
+                </div>
+            </div>
+        </footer>
+    </div>
 
     @*COLONNE 2*@
     <div id="div-main-col-2">
@@ -120,7 +106,7 @@
             Nom de l'ami
         </h3>
         <p>
-           @*<ul id="discussion">
+            @*<ul id="discussion">
                 </ul>*@
             <ul>
                 @if ((List<string>)ViewBag.Messages != null)
@@ -128,11 +114,11 @@
                     foreach (string message in (List<string>)ViewBag.Messages)
                     {
 
-    <li>
-        <strong> #@message </strong>
-    </li>
-}
-}
+                        <li>
+                            <strong> #@message </strong>
+                        </li>
+                    }
+                }
                 <li>
                     <strong id="discussion">
 
@@ -195,20 +181,18 @@
 
         @using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
         {
-<div class="input-group mb-3" id="input-group-tchat">
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-        </span>
-        <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
-        <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
-        </span>
-    </div>
-</div>}
-
-
-
+            <div class="input-group mb-3" id="input-group-tchat">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
+                    </span>
+                </div>
+            </div>
+        }
     </div>
 
     <input type="text" id="displayname" value="@dto.Pseudo" hidden />
@@ -221,8 +205,8 @@
 
         @* ONGLETS *@
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users"></i> Contacts</a></li>
-            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus"></i> Invitations</a></li>
+            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users iblue" id="iusers"></i> Contacts</a></li>
+            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus" id="iuserplus"></i> Invitations</a></li>
         </ul>
 
         @*NOTIFS*@
