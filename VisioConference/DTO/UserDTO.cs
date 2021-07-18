@@ -28,7 +28,7 @@ namespace VisioConference.DTO
         public string Password { get; set; }
         public string ResetPassewordCode { get; set; }
         public string Photo { get; set; }
-        public bool Connected { get; set; }
+        public int Etat { get; set; }
         public bool IsAdmin { get; set; }
         public virtual ICollection<Conversation> conversations { get; set; }
 

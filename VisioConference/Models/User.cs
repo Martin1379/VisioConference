@@ -30,7 +30,7 @@ namespace VisioConference.Models
         [FileExtensions(Extensions = "png, jpg, jpeg")]
         public string Photo { get; set; } 
 
-        public bool Connected { get; set; }
+        public int Etat { get; set; }
 
         public bool IsAdmin { get; set; }
 
