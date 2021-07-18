@@ -112,11 +112,13 @@ namespace VisioConference.Controllers
         public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
+
             List<UserDTO> friendList = Cvservice.findFriends(userDTO);
 
             if (TempData["Id_ami"] != null)
             {
                 int ami_id = (int)TempData["Id_ami"];
+                UserDTO amiDTO = service.findById(ami_id);
                 if (ami_id != 0)
                 {
                     ConversationDTO CvDto = Cvservice.findByUsers(userDTO, service.findById(ami_id));
@@ -124,7 +126,7 @@ namespace VisioConference.Controllers
                     {
                         if (CvDto.message != null)
                         {
-                            List<string> messages = Strings.afficherConv(CvDto.message).ToList();
+                            List<string> messages = Strings.afficherConv(CvDto.message, userDTO, amiDTO).ToList();
                             ViewBag.Messages = messages;
                         }
 
@@ -151,7 +153,6 @@ namespace VisioConference.Controllers
                 ConversationDTO CvDto = Cvservice.findByUsers(utilisateur, ami);
                 string contenu = CvDto.message + "<#" + utilisateur.Id + '>' + form.Get("message_envoye");
                 Cvservice.modifyMessage(CvDto, contenu);
-
             }
 
 
@@ -162,11 +163,16 @@ namespace VisioConference.Controllers
 
         }
 
+
+
+
         [HttpPost]
         public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
         {
             //Afficher nouvelle conversation
             int ami_id = Convert.ToInt32(form.Get("user_id"));
+            string nom_ami = service.findById(ami_id).Pseudo;
+            TempData["Nom_ami"] = nom_ami;
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
             return RedirectToAction("Discussion");
