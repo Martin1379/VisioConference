@@ -17,7 +17,7 @@ namespace VisioConference.Tools
             dto.ResetPassewordCode = model.ResetPassewordCode;
             dto.Email = model.Email;
             dto.Photo = model.Photo;
-            dto.Connected = model.Connected;
+            dto.Etat = model.Etat;
             dto.IsAdmin = model.IsAdmin;
 
             return dto;
@@ -32,7 +32,7 @@ namespace VisioConference.Tools
             model.ResetPassewordCode = "test";
             model.Email = dto.Email;
             model.Photo = dto.Photo;
-            model.Connected = dto.Connected;
+            model.Etat = dto.Etat;
             model.IsAdmin = dto.IsAdmin;
 
             return model;

@@ -30,11 +30,11 @@ namespace VisioConference.Models
         [FileExtensions(Extensions = "png, jpg, jpeg")]
         public string Photo { get; set; } 
 
-        public bool Connected { get; set; }
+        public int Etat { get; set; }
 
         public bool IsAdmin { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(255)]
         public string ResetPassewordCode { get; set; }
 
@@ -47,18 +47,18 @@ namespace VisioConference.Models
             Pseudo = pseudo;
         }
         //Constructeur pour la méthode de revherche d'ami
-        public User(string email, string pseudo, string photo, bool connected)
+        public User(string email, string pseudo, string photo, int etat)
         {
             Email = email;
             Password = "";
             ResetPassewordCode = "";
             Pseudo = Pseudo;
             Photo = photo;
-            Connected = false;
+            Etat = etat;
         }
 
 
-        public User(string email, string password, string resetPassewordCode, string pseudo, string photo, bool connected, int id)
+        public User(string email, string password, string resetPassewordCode, string pseudo, string photo, int etat, int id)
         {
             Id = id;
             Email = email;
@@ -66,7 +66,7 @@ namespace VisioConference.Models
             ResetPassewordCode = resetPassewordCode;
             Pseudo = pseudo;
             Photo = photo;
-            Connected = connected;
+            Etat = etat;
         }
     }
 }

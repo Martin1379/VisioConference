@@ -26,6 +26,9 @@ a:hover, a:visited, a:link, a:active {
 
 .iblue {
     color: #337ab7;
+
+ul {
+    list-style-type: none;
 }
 
 /*NAVBAR*/

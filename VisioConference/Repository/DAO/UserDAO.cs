@@ -69,7 +69,7 @@ namespace VisioConference.Repository.DAO
                 var query = context.users;
                 foreach (var item in query)
                 {
-                    if (item.Connected == true)
+                    if (item.Etat != 0)
                     {
                         dto = Convertisseur.UserDTOFromUser(dto, item);
                         lst.Add(dto);
