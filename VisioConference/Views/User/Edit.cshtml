@@ -33,7 +33,7 @@
                         <b>@Html.DisplayNameFor(model => model.Password) : </b> *****
                     </div>
                     <div class="form-group">
-                        <b>@Html.DisplayNameFor(model => model.Connected) :</b> @Html.DisplayTextFor(model => model.Connected)
+                        <b>@Html.DisplayNameFor(model => model.Etat) :</b> @Html.DisplayTextFor(model => model.Etat)
                     </div>
                     <div class="form-group">
                         <b>@Html.DisplayNameFor(model => model.IsAdmin) :</b> @Html.DisplayTextFor(model => model.IsAdmin)
@@ -87,15 +87,15 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Connected, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-lg-1">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.Connected)
-                                        @Html.ValidationMessageFor(model => model.Connected, "", new { @class = "text-danger" })
-                                    </div>
+                                @Html.LabelFor(model => model.Etat, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div>
+                                    @Html.EditorFor(model => model.Etat, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Etat, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.IsAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
