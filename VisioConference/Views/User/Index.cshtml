@@ -45,7 +45,7 @@
                 @Html.DisplayNameFor(model => model.First().Photo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().Connected)
+                @Html.DisplayNameFor(model => model.First().Etat)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().IsAdmin)
@@ -75,7 +75,7 @@
             <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Connected)
+            @Html.DisplayFor(modelItem => item.Etat)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsAdmin)
