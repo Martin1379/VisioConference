@@ -8,6 +8,11 @@ a:hover, a:visited, a:link, a:active {
     text-decoration: none;
 }
 
+h3{
+    font-weight:bold;
+    margin-bottom: 0;
+}
+
 .jumbotron {
     margin-top: 46px;
 }
@@ -190,6 +195,11 @@ footer .row {
     font-size: 26px;
 }
 
+#user-id {
+    position: relative;
+    bottom: 2px;
+}
+
 #select-state{
     margin-top: 5px;
 }
@@ -223,6 +233,7 @@ footer .row {
 #main-div-nom-edit {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 #div-modif-profile {
@@ -242,9 +253,19 @@ footer .row {
     display: block;
 }
 
+#label-pseudo {
+    margin-bottom: 1px;
+}
+
+#label-password {
+    margin-top: 7px;
+    margin-bottom: 1px;
+}
+
 #div-modif-avatar {
-    display: flex;
-    margin-top: 6px;
+    display: inline-flex;
+    margin-top: 16px;
+    margin-bottom: 20px;
 }
 
     #div-modif-avatar i {
@@ -256,11 +277,20 @@ footer .row {
         display: inline-block;
     }
 
-
-/*FOOTER*/
-#div-main-col-1 footer img {
-    width: 70px;
+#div-modif-profil-btn {
+    display: flex;
+    justify-content: flex-end;
 }
+
+    #div-modif-profil-btn button {
+        margin-left:7px;
+    }
+
+
+    /*FOOTER*/
+    #div-main-col-1 footer img {
+        width: 70px;
+    }
 
 #div-main-col-1 footer {
     font-size: 11px;
@@ -284,6 +314,40 @@ footer .row {
 }
 
 /*MAIN COL 2*/
+
+#div-user-tchat{
+    margin-bottom: 30px;
+}
+
+#div-user-tchat img {
+    width: 64px;
+    border-radius: 10px;
+    height: 64px;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+#div-tchat-user-name {
+    display: inline-grid;
+    position: relative;
+    bottom: 12px;
+}
+
+#span-tchat-id{
+    position:relative;
+    bottom: 1px;
+}
+
+.label-tchat {
+    display: block;
+    width: 113px;
+    font-size: 100%;
+}
+
+#discussion {
+    margin-left: 57px;
+}
+
 #message {
     min-width: -webkit-fill-available;
 }
@@ -327,21 +391,21 @@ footer .row {
 }
 
 .ami-card-img {
-    width: 64px;
     position: relative;
-    margin-right: 17px;
     margin-left: 20px;
-    border-radius: 40px;
     top: 5px;
+    -webkit-box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 29%);
+    width: 64px;
+    border-radius: 10px;
     height: 64px;
     object-fit: cover;
-    -webkit-box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 29%);
+    margin-right: 10px;
 }
 
 .state-img {
     position: relative;
-    bottom: 16px;
-    left: 25px;
+    bottom: 18px;
+    left: 27px;
     width: 20px;
 }
 
@@ -398,6 +462,14 @@ footer .row {
         width: 113px;
         font-size: 100%;
     }
+
+.friends-id{
+    position: relative;
+    bottom: 2px;
+}
+
+
+
 /*MAIN COL 3*/
 #myTab, #myTab li {
     border-bottom: solid 1px #333333;
