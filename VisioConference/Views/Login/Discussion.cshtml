@@ -17,20 +17,9 @@
 
         @*AVATAR*@
         @if (dto.Photo == null)
-        {
-
-
-            <img src="~/Content/img/avatar-vide.png" id="avatar-main" />
-
-        }
+        {<img src="~/Content/img/avatar-vide.png" id="avatar-main" />}
         else
-        {
-            <img src="~/Content/avatar_user/@dto.Photo" alt="Image not found" id="avatar-main" />
-        }
-
-
-        <br />
-        <br />
+        {<img src="~/Content/avatar_user/@dto.Photo" alt="Image not found" id="avatar-main" />}
         <br />
 
         @*USER INFO*@
@@ -38,7 +27,7 @@
             <div>
                 <strong id="main-col-1-name">@dto.Pseudo</strong>
                 <br />
-                #@dto.Id
+                <span id="user-id">#@dto.Id</span>
             </div>
         </div>
 
@@ -69,10 +58,12 @@
                 <div class="input-group" id="div-modif-profile">
 
                     @*INPUTS*@
-                    <input type="text" class="form-control" placeholder="Pseudo" name="Pseudo">
+                    <label for="Pseudo" id="label-pseudo">Pseudo</label>
+                    <input type="text" class="form-control" placeholder="" name="Pseudo">
                     <br />
                     <br />
-                    <input type="password" class="form-control" placeholder="Mot de passe" name="Password">
+                    <label for="Password" id="label-password">Mot de passe</label>
+                    <input type="password" class="form-control" placeholder="" name="Password">
                     <br />
                     <br />
                     <div id="div-modif-avatar">
@@ -82,20 +73,13 @@
                     <br />
 
                     @*BUTTONS*@
-                    <div>
+                    <div id="div-modif-profil-btn">
                         <button type="button" class="btn btn-danger" onclick="btnAnnulerProfil()"> Annuler</button>
-                        <button type="submit" class="btn btn-success" onclick="" name="btnSubmit" value="Save"> Enregistrer</button>
+                        <button type="submit" class="btn btn-primary" onclick="" name="btnSubmit" value="Save"> Enregistrer</button>
                     </div>
                 </div>
             }
         </div>
-        @*@if (TempData["AnnulerModif"] == null)
-            {
-
-                <div class="flex-start">
-                    <input type="submit" name="btnSubmit" value="Annuler" class="btn btn-success" onclick="location.href='@Url.Action("AnnulerModif", "Login")'" />
-                </div>
-            }*@
 
         @*FOOTER*@
         <footer>
@@ -120,6 +104,7 @@
         <br />
         <br />
 
+
         @* CHAT CONTENT *@
 
         @if (TempData["Id_ami"] != null)
@@ -128,9 +113,39 @@
             {
                 if (item.Id == (int)TempData["Id_ami"])
                 {
-                    <h3>
-                        @item.Pseudo
-                    </h3>
+                    <div id="div-user-tchat">
+                        <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
+                        <div id="div-tchat-user-name">
+                            <h3>@item.Pseudo</h3>
+                            <span id="span-tchat-id">#@item.Id</span>
+                            @*LABEL*@
+                            @switch (item.Etat)
+                            {
+                                case 0:
+                                    <span class="label label-default label-tchat">
+                                        Hors ligne
+                                    </span>
+                                    break;
+                                case 1:
+                                    <span class="label label-success label-tchat">
+                                        En ligne
+                                    </span>
+                                    break;
+                                case 2:
+                                    <span class="label label-danger label-tchat">
+                                        Occupé(e)
+                                    </span>
+                                    break;
+                                case 3:
+                                    <span class="label label-warning label-tchat">
+                                        Inactif
+                                    </span>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        </div>
+                    </div>
                 }
             }
         }
@@ -148,53 +163,13 @@
                 {
                     foreach (string message in (List<string>)ViewBag.Messages)
                     {
-
                         <li>
                             @Html.Raw(message)
                         </li>
-                        <br />
                     }
                 }
             </ul>
         </p>
-
-        @* INPUT ENVOYER MESSAGE *@
-        <!--Script references.
-        <!--Reference the jQuery library. -->
-        <script src="~/Content/js/jquery-3.4.1.min.js"></script>
-        <!--Reference the SignalR library. -->
-        <script src="~/Content/js/jquery.signalR-2.2.2.min.js"></script>
-        <!--Reference the autogenerated SignalR hub script. -->
-        @*<script src="signalr/hubs"></script>*@
-        <!--Add script to update the page and send messages.-->
-        <script type="text/javascript">
-            $(function () {
-                console.log("Passage par signaLR");
-                // Declare a proxy to reference the hub.
-                var chat = $.connection.chatHub;
-                // Create a function that the hub can call to broadcast messages.
-                chat.client.broadcastMessage = function (name, message) {
-                    // Html encode display name and message.
-                    var encodedName = $('<div />').text(name).html();
-                    var encodedMsg = $('<div />').text(message).html();
-                    // Add the message to the page.
-                    $('#discussion').append('<li><strong>' + encodedName
-                        + ':&nbsp;</strong>' + encodedMsg + '</li><br />');
-                };
-                // Get the user name and store it to prepend to messages.
-                /*$('#displayname').val(prompt('Enter your name:', ''));*/
-                // Set initial focus to message input box.
-                $('#message').focus();
-                // Start the connection.
-                $.connection.hub.start().done(function () {
-                    $('#sendmessage').click(function () {
-                        // Call the Send method on the hub.
-                        chat.server.send($('#displayname').val(), $('#message').val());
-                        //// Clear text box and reset focus for next comment.
-                        //$('#message').val('').focus();
-                    });
-                });
-            });</script>
 
         @if (TempData["Id_ami"] != null)
         {
@@ -227,14 +202,12 @@
         </ul>
 
         @*NOTIFS*@
-        <span>
-            <div id="div-notif-nb-disc">
-                <span id="notif-nb-disc">12</span>
-            </div>
-            <div id="div-notif-nb-inv">
-                <span id="notif-nb-inv">14</span>
-            </div>
-        </span>
+        <div id="div-notif-nb-disc">
+            <span id="notif-nb-disc">12</span>
+        </div>
+        <div id="div-notif-nb-inv">
+            <span id="notif-nb-inv">14</span>
+        </div>
 
         <div id="contacts-content">
 
@@ -295,7 +268,7 @@
                                 <div>
                                     <span class="ami-nom">@item.Pseudo</span>
                                 </div>
-                                #@item.Id
+                                <span class="friends-id">#@item.Id</span>
                                 <br />
 
                                 @*LABEL*@
