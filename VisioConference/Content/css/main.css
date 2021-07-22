@@ -550,7 +550,8 @@ footer .row {
     margin-top: 0;
 }
 
-#search-friend {
+#search-friend,
+#search-members{
     display: inline-flex;
     width: -webkit-fill-available;
 }
