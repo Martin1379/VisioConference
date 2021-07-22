@@ -75,7 +75,7 @@ namespace VisioConference.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Connected,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
+        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Etat,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace VisioConference.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Pseudo,Email,Password,Connected,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
+        public ActionResult Edit([Bind(Include = "Id,Pseudo,Email,Password,Etat,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {

@@ -89,16 +89,18 @@ namespace VisioConference.Controllers
 
         public ActionResult Logout()
         {
-            DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-            {
-                Session.Clear();
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                return RedirectToAction("Discussion", "Login");
-            }
+            //DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (dialogResult == DialogResult.Yes)
+            //{
+            //    Session.Clear();
+            //    return RedirectToAction("Index", "Login");
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Discussion", "Login");
+            //}
+            Session.Clear();
+            return RedirectToAction("Index", "Login");
 
         }
 
