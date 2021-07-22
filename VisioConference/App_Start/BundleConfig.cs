@@ -24,8 +24,12 @@ namespace VisioConference
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Content/js/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new ScriptBundle("~/bundles/main").Include(
+                      "~/Content/js/main.js"));
+
+            bundles.Add(new StyleBundle("~/Content/allcss").Include(
                       "~/Content/css/bootstrap.css",
+                      "~/Content/css/main.css",
                       "~/Content/css/site.css"));
         }
     }
