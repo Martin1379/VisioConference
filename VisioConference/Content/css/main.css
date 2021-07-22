@@ -236,6 +236,10 @@ footer .row {
     margin-top: 10px;
 }
 
+.status{
+    padding: 10px 15px;
+}
+
 #div-modif-profile {
     display: block;
 }

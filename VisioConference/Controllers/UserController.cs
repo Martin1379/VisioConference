@@ -75,17 +75,21 @@ namespace VisioConference.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Connected,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
+        public ActionResult Create([Bind(Include = "Id,Pseudo,Email,Password,Etat,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {
-                int currentId = service.findAll().Max(u => u.Id) +1; // max récupère l'id MAX en BD
-                userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
-                Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
+                if(Photo != null)
+                {
+                    int currentId = service.findAll().Max(u => u.Id) + 1; // max récupère l'id MAX en BD
+                    userDTO.Photo = userDTO.Pseudo + '_' + currentId + Path.GetExtension(Photo.FileName);
+                    Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
+
+                }
 
                 service.Add(userDTO);
                 return RedirectToAction("Index");
-            }
+            } 
 
             return View(userDTO);
         }
@@ -112,7 +116,7 @@ namespace VisioConference.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Pseudo,Email,Password,Connected,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
+        public ActionResult Edit([Bind(Include = "Id,Pseudo,Email,Password,Etat,IsAdmin")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
             if (ModelState.IsValid)
             {

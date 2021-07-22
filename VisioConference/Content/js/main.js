@@ -1,4 +1,4 @@
-﻿//BOUTON MODIFIER PROFIL
+﻿/*BOUTON MODIFIER PROFIL*/
 btnModifProfil();
 
 function btnModifProfil() {
@@ -56,7 +56,7 @@ $(function () {
         var encodedMsg = $('<div />').text(message).html();
         // Add the message to the page.
         $('#discussion').append('<li><strong>' + encodedName
-            + ':&nbsp;</strong>' + encodedMsg + '</li><br />');
+            + ':&nbsp;</strong>' + encodedMsg + '</li>');
     };
     // Get the user name and store it to prepend to messages.
     /*$('#displayname').val(prompt('Enter your name:', ''));*/

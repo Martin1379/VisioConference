@@ -32,12 +32,17 @@
         </div>
 
         @*STATUS SELECTEUR*@
-        <select id="select-state">
-            <option value="value">En ligne</option>
-            <option value="value">Occupé(e)</option>
-            <option value="value">Absent(e)</option>
-            <option value="value">Invisible</option>
-        </select>
+    <select id="select-state">
+
+                <option class="status label-success" >En ligne</option>
+
+                <option class="label-danger" >Occupé(e)</option>
+
+                <option class="label-warning" >Absent(e)</option>
+
+                <option class="label-default" >Hors ligne</option>
+
+    </select>
         <hr />
 
         @*MODIFIER PROFIL*@
@@ -169,24 +174,26 @@
         </ul>
     </p>
 
-    @if (TempData["Id_ami"] != null)
-    {
-        using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
-        {
-            <div class="input-group mb-3" id="input-group-tchat">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
-                    </span>
-                </div>
-            </div>}
-    }
+        @* INPUT ENVOYER MESSAGE *@
 
-</div>
+
+        @if (TempData["Id_ami"] != null)
+        {
+            using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
+            {
+                <div class="input-group mb-3" id="input-group-tchat">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-paperclip"></i> Joindre</button>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Ecrire un message à Martin" id="message" name="message_envoye">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
+                        </span>
+                    </div>
+                </div>}
+        }
+    </div>
 
     <input type="text" id="displayname" value="@dto.Pseudo" hidden />
 
