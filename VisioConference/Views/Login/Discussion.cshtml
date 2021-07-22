@@ -99,79 +99,79 @@
     </div>
 
     @*COLONNE 2*@
-    <div id="div-main-col-2">
-        <br />
-        <br />
-        <br />
+<div id="div-main-col-2">
+    <br />
+    <br />
+    <br />
 
-
-        @* CHAT CONTENT *@
-
-        @if (TempData["Id_ami"] != null)
+    @* CHAT CONTENT *@
+    @if (TempData["Id_ami"] != null)
+    {
+        foreach (UserDTO item in Model)
         {
-            foreach (UserDTO item in Model)
+            if (item.Id == (int)TempData["Id_ami"])
             {
-                if (item.Id == (int)TempData["Id_ami"])
-                {
-                    <div id="div-user-tchat">
-                        <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
-                        <div id="div-tchat-user-name">
-                            <h3>@item.Pseudo</h3>
-                            <span id="span-tchat-id">#@item.Id</span>
-                            @*LABEL*@
-                            @switch (item.Etat)
-                            {
-                                case 0:
-                                    <span class="label label-default label-tchat">
-                                        Hors ligne
-                                    </span>
-                                    break;
-                                case 1:
-                                    <span class="label label-success label-tchat">
-                                        En ligne
-                                    </span>
-                                    break;
-                                case 2:
-                                    <span class="label label-danger label-tchat">
-                                        Occupé(e)
-                                    </span>
-                                    break;
-                                case 3:
-                                    <span class="label label-warning label-tchat">
-                                        Inactif
-                                    </span>
-                                    break;
-                                default:
-                                    break;
-                            }
-                        </div>
+                <div id="div-user-tchat">
+                    <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
+                    <div id="div-tchat-user-name">
+                        <h3>@item.Pseudo</h3>
+                        <span id="span-tchat-id">#@item.Id</span>
+                        @*LABEL*@
+                        @switch (item.Etat)
+                        {
+                            case 0:
+                                <span class="label label-default label-tchat">
+                                    Hors ligne
+                                </span>
+                                break;
+                            case 1:
+                                <span class="label label-success label-tchat">
+                                    En ligne
+                                </span>
+                                break;
+                            case 2:
+                                <span class="label label-danger label-tchat">
+                                    Occupé(e)
+                                </span>
+                                break;
+                            case 3:
+                                <span class="label label-warning label-tchat">
+                                    Inactif
+                                </span>
+                                break;
+                            default:
+                                break;
+                        }
                     </div>
-                }
+                </div>
             }
         }
-        else
-        {
-            <h4>
-                Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
-                Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
-            </h4>
-        }
+    }
+    else
+    {
+        <h4>
+            Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
+            Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
+        </h4>
+    }
 
-        <p>
-            <ul id="discussion">
-                @if ((List<string>)ViewBag.Messages != null)
+    <p>
+        <ul id="discussion">
+            @if ((List<string>)ViewBag.Messages != null)
+            {
+                foreach (string message in (List<string>)ViewBag.Messages)
                 {
-                    foreach (string message in (List<string>)ViewBag.Messages)
-                    {
-                        <li>
-                            @Html.Raw(message)
-                        </li>
-                    }
+                    <li>
+                        @Html.Raw(message)
+                    </li>
                 }
-            </ul>
-        </p>
+            }
+        </ul>
+    </p>
 
-        @if (TempData["Id_ami"] != null)
+    @if (TempData["Id_ami"] != null)
+    {
+        using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
         {
             <div class="input-group mb-3" id="input-group-tchat">
                 <div class="input-group">
@@ -183,9 +183,10 @@
                         <button class="btn btn-primary" type="submit" id="sendmessage"><i class="fas fa-reply"></i> Envoyer</button>
                     </span>
                 </div>
-            </div>
-        }
-    </div>
+            </div>}
+    }
+
+</div>
 
     <input type="text" id="displayname" value="@dto.Pseudo" hidden />
 
@@ -303,80 +304,6 @@
                         <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
                     }
                 }
-
-                @* AMI CARD *@
-                <!--<hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                        <img src="~/Content/img/state-offline.png" class="state-img" />
-                    </div>
-                    <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">Paul</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        #24
-                        <br />
-                        <span class="label label-default">Hors ligne</span>
-                        <br />
-                    </div>
-
-                </div>-->
-                @* AMI CARD *@
-                <!--<hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-                        <img src="~/content/img/state-online.png" class="state-img" />
-                    </div>                <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">sara</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        #1
-                        <br />
-                        <span class="label label-success">en ligne</span>
-                        <br />
-                    </div>
-                </div>-->
-                @* AMI CARD *@
-                <!--<hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-                        <img src="~/content/img/state-online.png" class="state-img" />
-                    </div>                <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">martin</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        #3
-                        <br />
-                        <span class="label label-success">en ligne</span>
-                        <br />
-                    </div>
-                </div>-->
-                @* AMI CARD *@
-                <!--<hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/content/img/avatar-vide.png" alt="alternate text" class="ami-card-img" />
-                        <img src="~/content/img/state-afk.png" class="state-img" />
-                    </div>                <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">nico</span>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        #98
-                        <br />
-                        <div class="label label-warning">-->
-                @*<span class="label label-warning">inactif</span>*@
-                <!--inactif
-                        </div>
-                        <br />
-                    </div>
-                </div>-->
             </div>
         </div>
 
@@ -444,7 +371,7 @@
 
 
             @* RECHERCHE AMI *@
-            <form id="search-friend">
+            <form id="search-members">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
                 <input class="form-control me-2" type="search" placeholder="Rechercher un utilisateur" aria-label="Search">
             </form>
