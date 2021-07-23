@@ -315,7 +315,12 @@ namespace VisioConference.Controllers
             }
             ViewBag.Message = message;
             return View(model);
-        }  
+        }
+
+        public ActionResult Search()
+        {
+            return RedirectToAction("Discussion");
+        }
     }
 }
 
