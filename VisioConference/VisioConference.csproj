@@ -238,6 +238,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\user.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\img\avatar-vide.png" />
     <Content Include="Content\img\dawan-logo.png" />
