@@ -44,13 +44,10 @@ namespace VisioConference.Tools
             dto.message = model.message;
             dto.userFriendID = model.userFriendID;
             dto.userID = model.userID;
-
+            dto.invitation = model.invitation;
 
             return dto;
         }
-
-
-
 
         public static Conversation ConvFromConvDTO(ConversationDTO dto, Conversation model)
         {
@@ -58,9 +55,9 @@ namespace VisioConference.Tools
             model.message = dto.message;
             model.userFriendID = dto.userFriendID;
             model.userID = dto.userID;
+            model.invitation = dto.invitation;
 
             return model;
         }
     }
-
 }

@@ -13,19 +13,21 @@ namespace VisioConference.DTO
         public int userID { get; set; }
         public int userFriendID { get; set; }
         public string message { get; set; }
+        public bool invitation { get; set; }
         public virtual User user { get; set; }
 
         public ConversationDTO()
         {
         }
 
-        public ConversationDTO(int convID, int userID, int userFriendID, string message, User user)
+        public ConversationDTO(int convID, int userID, int userFriendID, string message, User user, bool invitation)
         {
             this.convID = convID;
             this.userID = userID;
             this.userFriendID = userFriendID;
             this.message = message;
             this.user = user;
+            this.invitation = invitation;
         }
     }
 }

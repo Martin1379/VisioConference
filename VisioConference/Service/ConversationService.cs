@@ -17,7 +17,6 @@ namespace VisioConference.Service
             return repo.findAll();
         }
 
-
         public ConversationDTO findByUsers(UserDTO user1, UserDTO user2)
         {
             ConversationDTO conv = new ConversationDTO();
@@ -25,7 +24,7 @@ namespace VisioConference.Service
             return conv;
         }
 
-        public List<UserDTO> findFriends(UserDTO user)
+        public List<JointureDTO> findFriends(UserDTO user)
         {
             return repo.findFriends(user);
         }
@@ -45,5 +44,4 @@ namespace VisioConference.Service
             repo.Update(u);
         }
     }
-
 }

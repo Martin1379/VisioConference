@@ -1,6 +1,4 @@
-﻿@model List<VisioConference.DTO.UserDTO>
-
-
+﻿@model List<VisioConference.DTO.JointureDTO>
 @{ ViewBag.Title = "Accueil"; }
 @using VisioConference.DTO;
 @{ UserDTO dto = (UserDTO)Session["userNormal"]; }
@@ -32,17 +30,17 @@
         </div>
 
         @*STATUS SELECTEUR*@
-    <select id="select-state">
+        <select id="select-state">
 
-                <option class="status label-success" >En ligne</option>
+            <option class="status label-success">En ligne</option>
 
-                <option class="label-danger" >Occupé(e)</option>
+            <option class="label-danger">Occupé(e)</option>
 
-                <option class="label-warning" >Absent(e)</option>
+            <option class="label-warning">Absent(e)</option>
 
-                <option class="label-default" >Hors ligne</option>
+            <option class="label-default">Hors ligne</option>
 
-    </select>
+        </select>
         <hr />
 
         @*MODIFIER PROFIL*@
@@ -104,79 +102,77 @@
     </div>
 
     @*COLONNE 2*@
-<div id="div-main-col-2">
-    <br />
-    <br />
-    <br />
+    <div id="div-main-col-2">
+        <br />
+        <br />
+        <br />
 
-    @* CHAT CONTENT *@
-    @if (TempData["Id_ami"] != null)
-    {
-        foreach (UserDTO item in Model)
+        @* CHAT CONTENT *@
+        @if (TempData["Id_ami"] != null)
         {
-            if (item.Id == (int)TempData["Id_ami"])
+            foreach (JointureDTO item in Model)
             {
-                <div id="div-user-tchat">
-                    <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
-                    <div id="div-tchat-user-name">
-                        <h3>@item.Pseudo</h3>
-                        <span id="span-tchat-id">#@item.Id</span>
-                        @*LABEL*@
-                        @switch (item.Etat)
-                        {
-                            case 0:
-                                <span class="label label-default label-tchat">
-                                    Hors ligne
-                                </span>
-                                break;
-                            case 1:
-                                <span class="label label-success label-tchat">
-                                    En ligne
-                                </span>
-                                break;
-                            case 2:
-                                <span class="label label-danger label-tchat">
-                                    Occupé(e)
-                                </span>
-                                break;
-                            case 3:
-                                <span class="label label-warning label-tchat">
-                                    Inactif
-                                </span>
-                                break;
-                            default:
-                                break;
-                        }
-                    </div>
-                </div>
-            }
-        }
-    }
-    else
-    {
-        <h4>
-            Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
-            Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
-        </h4>
-    }
-
-    <p>
-        <ul id="discussion">
-            @if ((List<string>)ViewBag.Messages != null)
-            {
-                foreach (string message in (List<string>)ViewBag.Messages)
+                if (item.Id == (int)TempData["Id_ami"])
                 {
-                    <li>
-                        @Html.Raw(message)
-                    </li>
+                    <div id="div-user-tchat">
+                        <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
+                        <div id="div-tchat-user-name">
+                            <h3>@item.Pseudo</h3>
+                            <span id="span-tchat-id">#@item.Id</span>
+                            @*LABEL*@
+                            @switch (item.Etat)
+                            {
+                                case 0:
+                                    <span class="label label-default label-tchat">
+                                        Hors ligne
+                                    </span>
+                                    break;
+                                case 1:
+                                    <span class="label label-success label-tchat">
+                                        En ligne
+                                    </span>
+                                    break;
+                                case 2:
+                                    <span class="label label-danger label-tchat">
+                                        Occupé(e)
+                                    </span>
+                                    break;
+                                case 3:
+                                    <span class="label label-warning label-tchat">
+                                        Inactif
+                                    </span>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        </div>
+                    </div>
                 }
             }
-        </ul>
-    </p>
+        }
+        else
+        {
+            <h4>
+                Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
+                Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
+            </h4>
+        }
+
+        <p>
+            <ul id="discussion">
+                @if ((List<string>)ViewBag.Messages != null)
+                {
+                    foreach (string message in (List<string>)ViewBag.Messages)
+                    {
+                        <li>
+                            @Html.Raw(message)
+                        </li>
+                    }
+                }
+            </ul>
+        </p>
 
         @* INPUT ENVOYER MESSAGE *@
-
-
         @if (TempData["Id_ami"] != null)
         {
             using (Html.BeginForm("EnvoyerMessage", "Login", FormMethod.Post))
@@ -210,9 +206,6 @@
         </ul>
 
         @*NOTIFS*@
-        <div id="div-notif-nb-disc">
-            <span id="notif-nb-disc">12</span>
-        </div>
         <div id="div-notif-nb-inv">
             <span id="notif-nb-inv">14</span>
         </div>
@@ -240,75 +233,78 @@
             <div id="div-list-amis">
 
                 @*AMI CARD*@
-                @foreach (UserDTO item in Model)
+                @foreach (JointureDTO item in Model)
                 {
-                    <hr />
-                    using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                    if (item.invitation)
                     {
-                        <input type="text" name="user_id" hidden value="@item.Id" />
-                        <button>
-                            <div>
-                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-
-                                @*POINTS*@
-                                @switch (item.Etat)
-                                {
-                                    case 0:
-                                        <img src="~/Content/img/state-offline.png" class="state-img" />
-                                        break;
-                                    case 1:
-                                        <img src="~/Content/img/state-online.png" class="state-img" />
-                                        break;
-
-                                    case 2:
-                                        <img src="~/Content/img/state-busy.png" class="state-img" />
-                                        break;
-                                    case 3:
-                                        <img src="~/Content/img/state-afk.png" class="state-img" />
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            </div>
-
-                            @*AMI TEXT*@
-                            <div class="div-ami-card-text">
+                        <hr />
+                        using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                        {
+                            <input type="text" name="user_id" hidden value="@item.Id" />
+                            <button>
                                 <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                </div>
-                                <span class="friends-id">#@item.Id</span>
-                                <br />
+                                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
 
-                                @*LABEL*@
-                                @switch (item.Etat)
-                                {
-                                    case 0:
-                                        <span class="label label-default">
-                                            Hors ligne
-                                        </span>
-                                        break;
-                                    case 1:
-                                        <span class="label label-success">
-                                            En ligne
-                                        </span>
-                                        break;
-                                    case 2:
-                                        <span class="label label-danger">
-                                            Occupé(e)
-                                        </span>
-                                        break;
-                                    case 3:
-                                        <span class="label label-warning">
-                                            Inactif
-                                        </span>
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                <br />
-                            </div>
-                        </button>
-                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                                    @*POINTS*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <img src="~/Content/img/state-offline.png" class="state-img" />
+                                            break;
+                                        case 1:
+                                            <img src="~/Content/img/state-online.png" class="state-img" />
+                                            break;
+
+                                        case 2:
+                                            <img src="~/Content/img/state-busy.png" class="state-img" />
+                                            break;
+                                        case 3:
+                                            <img src="~/Content/img/state-afk.png" class="state-img" />
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                </div>
+
+                                @*AMI TEXT*@
+                                <div class="div-ami-card-text">
+                                    <div>
+                                        <span class="ami-nom">@item.Pseudo</span>
+                                    </div>
+                                    <span class="friends-id">#@item.Id</span>
+                                    <br />
+
+                                    @*LABEL*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <span class="label label-default">
+                                                Hors ligne
+                                            </span>
+                                            break;
+                                        case 1:
+                                            <span class="label label-success">
+                                                En ligne
+                                            </span>
+                                            break;
+                                        case 2:
+                                            <span class="label label-danger">
+                                                Occupé(e)
+                                            </span>
+                                            break;
+                                        case 3:
+                                            <span class="label label-warning">
+                                                Inactif
+                                            </span>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    <br />
+                                </div>
+                            </button>
+                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        }
                     }
                 }
             </div>
@@ -323,49 +319,82 @@
             <hr class="hr-subcat" />
 
             <div id="div-list-invit-in">
+        
+                @foreach (JointureDTO item in Model)
+                {
+                    if (item.invitation == false && dto.Id == item.userID)
+                    {
+                        //CARD
+                        <hr />
+                        using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
+                        {
+                            <input type="text" name="user_id" hidden value="@item.Id" />
+                            <button>
+                                <div>
+                                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
 
-                @*EXEMPLE USER*@
-                <hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    </div>
+                                    @*POINTS*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <img src="~/Content/img/state-offline.png" class="state-img" />
+                                            break;
+                                        case 1:
+                                            <img src="~/Content/img/state-online.png" class="state-img" />
+                                            break;
 
-                    @*AMI TEXT*@
-                    <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">Nom</span>
-                        </div>
-                        #ID
-                        <br />
-                        <span class="label label-default">
-                            Offline
-                        </span>
-                        <br />
-                    </div>
-                </div>
+                                        case 2:
+                                            <img src="~/Content/img/state-busy.png" class="state-img" />
+                                            break;
+                                        case 3:
+                                            <img src="~/Content/img/state-afk.png" class="state-img" />
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                </div>
 
-                @*EXEMPLE USER*@
-                <hr />
-                <div classe="div-ami-card" style=" display:inline-flex">
-                    <div>
-                        <img src="~/Content/img/avatar-vide.png" alt="Alternate Text" class="ami-card-img" />
-                    </div>
+                                @*AMI TEXT*@
+                                <div class="div-ami-card-text">
+                                    <div>
+                                        <span class="ami-nom">@item.Pseudo</span>
+                                    </div>
+                                    <span class="friends-id">#@item.Id</span>
+                                    <br />
 
-                    @*AMI TEXT*@
-                    <div class="div-ami-card-text">
-                        <div>
-                            <span class="ami-nom">Nom</span>
-                        </div>
-                        #ID
-                        <br />
-                        <span class="label label-default">
-                            Offline
-                        </span>
-                        <br />
-                    </div>
-                </div>
-
+                                    @*LABEL*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <span class="label label-default">
+                                                Hors ligne
+                                            </span>
+                                            break;
+                                        case 1:
+                                            <span class="label label-success">
+                                                En ligne
+                                            </span>
+                                            break;
+                                        case 2:
+                                            <span class="label label-danger">
+                                                Occupé(e)
+                                            </span>
+                                            break;
+                                        case 3:
+                                            <span class="label label-warning">
+                                                Inactif
+                                            </span>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    <br />
+                                </div>
+                            </button>
+                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        }
+                    }
+                }
             </div>
 
             @* RECHERCHE UTILISATEUR *@

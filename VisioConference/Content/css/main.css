@@ -438,7 +438,8 @@ footer .row {
     text-shadow: none;
 }
 
-#div-list-amis button:nth-child(2) {
+#div-list-amis button:nth-child(2),
+#div-list-invit-in button:nth-child(2) {
     display: inline-flex;
     width: -webkit-fill-available;
     border: none;
@@ -500,8 +501,8 @@ footer .row {
 #div-notif-nb-disc {
     background-color: #dc3545;
     position: relative;
-    bottom: 53px;
-    left: 83px;
+    bottom: 55px;
+    left: 199px;
     border-radius: 20px;
     padding: 1px;
     width: 22px;
@@ -519,7 +520,7 @@ footer .row {
 #div-notif-nb-inv {
     background-color: #dc3545;
     position: relative;
-    bottom: 75px;
+    bottom: 54px;
     left: 198px;
     border-radius: 20px;
     padding: 1px;
@@ -537,7 +538,14 @@ footer .row {
 
 #contacts-content, #invitations-content {
     position: relative;
-    bottom: 34px;
+    bottom: 12px;
+}
+
+#invitations-content {
+    overflow: auto;
+    height: 757px;
+    width: 104%;
+    padding: 0 11px;
 }
 
 .subcat {

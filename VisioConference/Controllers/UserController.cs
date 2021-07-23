@@ -183,7 +183,7 @@ namespace VisioConference.Controllers
             else
             {
                 ConversationService Cvservice = new ConversationService();
-                List<UserDTO> friendList= Cvservice.findFriends(userDTO);
+                List<JointureDTO> friendList= Cvservice.findFriends(userDTO);
                 //friendList = Cvservice.findFriends(userDTO);
                 //Tri
                 switch (sortBy)

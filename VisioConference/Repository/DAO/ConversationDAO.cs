@@ -44,7 +44,7 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public List<UserDTO> findFriends(UserDTO user)
+        public List<JointureDTO> findFriends(UserDTO user)
         {
             using (MyContext context = new MyContext())
             {
@@ -57,7 +57,10 @@ namespace VisioConference.Repository.DAO
                                  FriendMail = us.Email,
                                  FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
-                                 FriendConnected = us.Etat
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
                              })
                             .Union
                             (from us in context.users
@@ -69,14 +72,26 @@ namespace VisioConference.Repository.DAO
                                  FriendMail = us.Email,
                                  FriendPseudo = us.Pseudo,
                                  FriendPhoto = us.Photo,
-                                 FriendConnected = us.Etat
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
                              })
                             ;
 
-                List<UserDTO> lst = new List<UserDTO>();
+                List<JointureDTO> lst = new List<JointureDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new UserDTO(item.FriendMail,item.FriendPseudo, item.FriendPhoto, item.FriendConnected, item.FriendId));
+                    lst.Add(new JointureDTO() {
+                        Email = item.FriendMail,
+                        Pseudo = item.FriendPseudo,
+                        Photo = item.FriendPhoto,
+                        Etat = item.FriendConnected,
+                        Id = item.FriendId,
+                        invitation = item.FriendInvitation,
+                        userID = item.ConversationUser1,
+                        userFriendID = item.ConversationUser2
+                    });
                 }
                 return lst;
             }
