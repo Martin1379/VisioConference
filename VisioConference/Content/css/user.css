@@ -1,0 +1,85 @@
+﻿/*GENERAL*/
+.block {
+    border-radius: 60px;
+    background: #fff;
+    padding: 28px 50px;
+    position: relative;
+    margin: 0 70px;
+    border-radius: 20px;
+}
+
+.chercher {
+    text-align: end;
+    margin: 20px 7%;
+}
+
+.fa-user-plus {
+    font-size: 20px;
+    padding: 7px;
+    color: #21b384;
+}
+
+.newUser {
+    padding-bottom: 14px;
+}
+
+    .newUser a {
+        color: #21b384;
+        text-decoration: none;
+    }
+
+.inputCherche {
+    border: none;
+    margin-bottom: 1.5rem !important;
+    padding: 8px 29px !important;
+    outline: none;
+    border-radius: 30px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.form-control {
+    /* display:block;*/
+}
+
+.form-control-underlined {
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+.form-control::placeholder {
+    font-size: 0.95rem;
+    color: #aaa;
+    font-style: italic;
+}
+
+.table {
+    margin: auto;
+    border: 1px solid #aaa;
+}
+
+    .table > tbody > tr > th {
+        padding: 10px 10px;
+        text-align: center;
+        font-weight: 600;
+        background-color: #d5edfa;
+    }
+
+    .table > tbody > tr > td {
+        padding: 10px 10px;
+        text-align: center;
+        font-weight: 500;
+    }
+
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-radius: 14px;
+}
