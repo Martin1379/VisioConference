@@ -1,7 +1,5 @@
 ﻿@model VisioConference.DTO.UserDTO
 
-
-
 @{ 
     ViewBag.Title = "Home Page";
  }
@@ -21,7 +19,10 @@
             qui vous permet de discuter avec vos contacts.
             <br />
             Pour commencer à l'utiliser, vous devez créer un compte, ou vous connecter.
-        </p>
+        </p>      
+        <div class="center-block label label-danger">
+            @Html.ValidationSummary()
+        </div>
     </div>
 
     @*FORMULAIRE DE CONNEXION*@
@@ -85,9 +86,9 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="center-block">
+            @*<div class="center-block">
                 @Html.ValidationSummary()
-            </div>
+            </div>*@
                 }
             </div>
 

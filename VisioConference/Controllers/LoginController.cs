@@ -52,6 +52,8 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
+                    ModelState["Password"].Errors.Clear();
+                    ModelState["Email"].Errors.Clear();
                     ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
                     //ViewBag.Erreur = "Echec connexion.....";
                     return View();
@@ -59,7 +61,9 @@ namespace VisioConference.Controllers
             }
             else
             {
-
+                ModelState["Password"].Errors.Clear();
+                ModelState["Email"].Errors.Clear();
+                ModelState.AddModelError("Login", "Model non valide!");
                 return View(dto);
             }
         }
@@ -81,7 +85,11 @@ namespace VisioConference.Controllers
                 userDTO.Id = currentId;
                 return RedirectToAction("Discussion");
             }
-            return View(userDTO);
+            ModelState["Password"].Errors.Clear();
+            ModelState["Email"].Errors.Clear();
+            ModelState["Pseudo"].Errors.Clear();
+            ModelState.AddModelError("Création", "Model non valide!");
+            return View("Index",userDTO);
         }
 
 
