@@ -23,6 +23,10 @@ namespace VisioConference.Service
             conv = repo.findByUsers(user1, user2);
             return conv;
         }
+        public List<UserDTO> findFriendAdmin(UserDTO user)
+        {
+            return repo.findFriendAdmin(user);
+        }
 
         public List<JointureDTO> findFriends(UserDTO user)
         {
