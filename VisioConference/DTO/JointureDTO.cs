@@ -21,5 +21,17 @@ namespace VisioConference.DTO
         public JointureDTO()
         {
         }
+
+        public JointureDTO(int id, string pseudo, string email, string photo, int etat, int userID, int userFriendID, bool invitation)
+        {
+            Id = id;
+            Pseudo = pseudo;
+            Email = email;
+            Photo = photo;
+            Etat = etat;
+            this.userID = userID;
+            this.userFriendID = userFriendID;
+            this.invitation = invitation;
+        }
     }
 }

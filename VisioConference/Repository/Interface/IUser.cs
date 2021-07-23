@@ -13,9 +13,11 @@ namespace VisioConference.Repository.Interface
         List<UserDTO> findAll();
         List<UserDTO> findAll(string search);
         UserDTO findById(int? Id);
-        List<UserDTO> findAllConnected();
-        void Update(UserDTO dto);
         UserDTO findByEmailAndPassword(UserDTO dto);
+        void Add(UserDTO userDTO);
+        void DeleteUserDTO(int id);
+        void Update(UserDTO dto);
+        
     }
 }
 //Camel case (méthodes): nom composés : commencer par une minuscule
