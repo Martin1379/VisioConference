@@ -14,7 +14,6 @@ namespace VisioConference.DTO
         {
             conversations = new HashSet<Conversation>();
         }
-
         public int Id { get; set; }
         public string Pseudo { get; set; }
 
@@ -48,7 +47,6 @@ namespace VisioConference.DTO
             Photo = photo;
             Etat = etat;
         }
-
 
         public UserDTO(string email, string password, string resetPassewordCode, string pseudo, string photo, int etat, int id)
         {
