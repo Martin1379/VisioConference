@@ -144,6 +144,60 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        public List<JointureDTO> findFriends(UserDTO user, string search)
+        {
+            using (MyContext context = new MyContext())
+            {
+                var query = (from us in context.users
+                             join co in context.conversations on us.Id equals co.userID
+                             where co.userFriendID == user.Id && us.Pseudo.Contains(search)
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
+                            .Union
+                            (from us in context.users
+                             join co in context.conversations on us.Id equals co.userFriendID
+                             where co.userID == user.Id && us.Pseudo.Contains(search)
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
+                            ;
+
+                List<JointureDTO> lst = new List<JointureDTO>();
+                foreach (var item in query)
+                {
+                    lst.Add(new JointureDTO()
+                    {
+                        Email = item.FriendMail,
+                        Pseudo = item.FriendPseudo,
+                        Photo = item.FriendPhoto,
+                        Etat = item.FriendConnected,
+                        Id = item.FriendId,
+                        invitation = item.FriendInvitation,
+                        userID = item.ConversationUser1,
+                        userFriendID = item.ConversationUser2
+                    });
+                }
+                return lst;
+            }
+        }
+
         /// <summary>
         /// Modifie la conversation (suite à envoi de message), si dépasse une certaine taille, on supprime les messages les plus anciens jusqu'à avoir la taille désirée
         /// </summary>
