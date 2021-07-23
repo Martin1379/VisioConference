@@ -20,7 +20,7 @@
     @using (Html.BeginForm("Index", "User", FormMethod.Get))
     {
 
-    <input class="inputCherche" type="text" name="search" placeholder="Mot clé........." />
+    <input class="inputCherche" type="text" name="search" placeholder="Recherche" />
     <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="border:none;outline:none;"></i></button>
     }
 
@@ -29,7 +29,7 @@
 
 <div class="block">
     <p class="newUser pb-2">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>  @Html.ActionLink("ajouter un nouveau utilisateur", "Create")
+        <i class="fa fa-user-plus" aria-hidden="true"></i>  @Html.ActionLink("Ajouter un nouvel utilisateur", "Create")
     </p>
     <div>
         <table class="table">
@@ -39,7 +39,7 @@
                         @Html.DisplayNameFor(model => model.First().Id)
                     </th>*@
                 <th>
-                    @*@Html.DisplayNameFor(model => model.First().Photo)*@
+                    <strong>Avatar</strong>
                 </th>
                 <th>
                     @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })

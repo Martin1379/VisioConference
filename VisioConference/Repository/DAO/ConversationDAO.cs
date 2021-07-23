@@ -44,6 +44,53 @@ namespace VisioConference.Repository.DAO
             }
         }
 
+        public List<UserDTO> findFriendAdmin(UserDTO user)
+        {
+            using (MyContext context = new MyContext())
+            {
+                var query = (from us in context.users
+                             join co in context.conversations on us.Id equals co.userID
+                             where co.userFriendID == user.Id
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPw = us.Password,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                             })
+                            .Union
+                            (from us in context.users
+                             join co in context.conversations on us.Id equals co.userFriendID
+                             where co.userID == user.Id
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPw = us.Password,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                             })
+                            ;
+
+                List<UserDTO> lst = new List<UserDTO>();
+                foreach (var item in query)
+                {
+                    lst.Add(new UserDTO()
+                    {
+                        Email = item.FriendMail,
+                        Pseudo = item.FriendPseudo,
+                        Password = item.FriendPw,
+                        Photo = item.FriendPhoto,
+                        Etat = item.FriendConnected,
+                        Id = item.FriendId,
+                    });
+                }
+                return lst;
+            }
+        }
         public List<JointureDTO> findFriends(UserDTO user)
         {
             using (MyContext context = new MyContext())

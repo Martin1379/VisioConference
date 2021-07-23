@@ -13,6 +13,7 @@ namespace VisioConference.Repository.Interface
         List<ConversationDTO> findAll();
         ConversationDTO findByUsers(UserDTO user1, UserDTO user2);
         //List<ConversationDTO> findFriends(string search);
+        List<UserDTO> findFriendAdmin(UserDTO user);
         List<JointureDTO> findFriends(UserDTO user);
         void modifyMessage(ConversationDTO u, string message);
         void removeConversation(int convId);

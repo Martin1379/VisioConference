@@ -22,8 +22,8 @@ namespace VisioConference.DTO
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Votre adresse eMail n'est pas valide.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
-        [DataType(DataType.Password)]
+        //[Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
+        //[DataType(DataType.Password)]
         public string Password { get; set; }
         public string ResetPassewordCode { get; set; }
         public string Photo { get; set; }
