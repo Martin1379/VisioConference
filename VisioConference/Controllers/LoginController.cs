@@ -15,13 +15,13 @@ using VisioConference.Models;
 using VisioConference.Repository.DAO;
 using VisioConference.Service;
 using VisioConference.Tools;
-
 namespace VisioConference.Controllers
 {
     public class LoginController : Controller
     {
         private UsersService service = new UsersService();
         private ConversationService Cvservice = new ConversationService();
+
 
         // GET: Login
         public ActionResult Index()
@@ -125,10 +125,12 @@ namespace VisioConference.Controllers
                             List<string> messages = Strings.afficherConv(CvDto.message, userDTO, amiDTO).ToList();
                             ViewBag.Messages = messages;
                         }
+
                     }
                     TempData.Keep();
                 }
             }
+
             return View(friendList);
         }
 
@@ -148,10 +150,16 @@ namespace VisioConference.Controllers
                 string contenu = CvDto.message + "<#" + utilisateur.Id + '>' + form.Get("message_envoye");
                 Cvservice.modifyMessage(CvDto, contenu);
             }
+
+
+
             //TempData["message"]= contenu;
             //TempData.Keep();
             return RedirectToAction("Discussion");
+
         }
+
+
 
 
         [HttpPost]
@@ -164,6 +172,7 @@ namespace VisioConference.Controllers
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
             return RedirectToAction("Discussion");
+
         }
         [HttpPost]
         public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
@@ -196,15 +205,17 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
 
         }      
-
         public ActionResult TerminerModif()
         {
             return View();
+
         }
         public ActionResult ForgotPassword()
         {
             return View();
+
         }
+
 
         [HttpPost]
         public ActionResult Password(string EmailID)
@@ -241,6 +252,8 @@ namespace VisioConference.Controllers
                     return View("ForgotPassword");
                 }
             }
+
+            return View("ForgotPassword");
         }
 
         private void SendEmail(string emailAddress, string body, string subject)
@@ -321,10 +334,10 @@ namespace VisioConference.Controllers
         {
             return RedirectToAction("Discussion");
         }
+
     }
 }
-
-/* MOURAD
+/*
  * ViewResult - View()
  * RedirectToRouteResult - RedirectToAction(), RedirectToRoute()...
  * ContentResult - Content()

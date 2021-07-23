@@ -473,10 +473,46 @@ footer .row {
     bottom: 2px;
 }
 
+.button-inv-amis {
+    padding-bottom: 22px;
+    display: inline-flex;
+    width: -webkit-fill-available;
+    border: none;
+    border-radius: 10px;
+    padding-top: 13px;
+    -webkit-box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 29%);
+}
 
+.div-cheat {
+    padding-bottom: 18px !important;
+    background-color: #eeeeee;
+    max-width: 326px!important;
+    position:relative;
+}
+
+    .div-cheat:hover {
+        cursor: default;
+    }
+
+    .div-cheat .button-inv-amis {
+        display: contents;
+    }
+
+.div-choix-inv {
+    position: absolute;
+    right: 20px;
+    top: 55px;
+    display: flex;
+    box-shadow: none !important;
+}
+
+    .div-choix-inv button {
+        margin-right: 7px;
+        padding: 1px 10px;
+    }
 
 /*MAIN COL 3*/
-#myTab, #myTab li {
+    #myTab, #myTab li {
     border-bottom: solid 1px #333333;
 }
 
@@ -533,7 +569,7 @@ footer .row {
     font-weight: bold;
     color: #DADADA;
     position: relative;
-    left: 2px;
+    left: 6px;
 }
 
 #contacts-content, #invitations-content {
