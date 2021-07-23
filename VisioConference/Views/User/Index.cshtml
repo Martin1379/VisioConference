@@ -10,88 +10,101 @@
 <br>
 <br>
 
+<header>
+    <link rel="stylesheet" href="~/Content/css/user.css">
+    <link href="https://bootstrapious.com/snippets">
 
-<div class="container">
-    <p>
-        @using (Html.BeginForm("Index", "User", FormMethod.Get))
-        {
-            <input type="text" name="search" placeholder="Mot clé........." />
-            <input type="submit" value="Rechercher" name="submit" class="btn btn-dark" />}
 
-    </p>
+</header>
+<div class="chercher">
+    @using (Html.BeginForm("Index", "User", FormMethod.Get))
+    {
+
+    <input class="inputCherche" type="text" name="search" placeholder="Mot clé........." />
+    <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="border:none;outline:none;"></i></button>
+    }
+
 </div>
 
-<div class="container">
-    <p>
-        @Html.ActionLink("Create New", "Create")
+
+<div class="block">
+    <p class="newUser pb-2">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>  @Html.ActionLink("ajouter un nouveau utilisateur", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Id)
-            </th>
-            <th>
-                @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
-                @Html.DisplayNameFor(model => model.First().Pseudo)
-                @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Etat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().IsAdmin)
-            </th>
-            <th>
-                Afficher les amis
-            </th>
-            <th></th>
-        </tr>
+    <div>
+        <table class="table">
+            <tr>
 
-        @foreach (var item in Model)
-        {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pseudo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Etat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAdmin)
-        </td>
-        <td>
-            @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-        }
+                @*<th>
+                        @Html.DisplayNameFor(model => model.First().Id)
+                    </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.First().Photo)*@
+                </th>
+                <th>
+                    @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
+                    @Html.DisplayNameFor(model => model.First().Pseudo)
+                    @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Email)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.First().Password)
+                    </th>*@
 
-    </table>
-    <br />
-    @Html.PagedListPager(Model, i => Url.Action("Index", "User", new { i, search = Request.QueryString["search"] }))
+                @*<th>
+                        @Html.DisplayNameFor(model => model.First().Connected)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.First().IsAdmin)
+                </th>
+                <th>
+                    Afficher les amis
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pseudo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>*@
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Connected)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>
+                <td>
+                    @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+            }
+
+        </table>
+
+    </div>
+    <div style="text-align:center;">
+        @Html.PagedListPager(Model, i => Url.Action("Index", "User", new { i, search = Request.QueryString["search"] }))
+    </div>
 </div>
