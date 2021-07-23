@@ -20,7 +20,7 @@ namespace VisioConference.DTO
 
         [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
         [EmailAddress(ErrorMessage = "Adresse eMail incorrecte.")]
-        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Votre adresse eMail n'est pas valide.")]
+        //[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail id is not valid")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
