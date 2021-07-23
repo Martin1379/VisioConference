@@ -260,8 +260,6 @@ namespace VisioConference.Controllers
                     return View("ForgotPassword");
                 }
             }
-
-            return View("ForgotPassword");
         }
 
         private void SendEmail(string emailAddress, string body, string subject)

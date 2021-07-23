@@ -20,8 +20,6 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 List<UserDTO> lst = new List<UserDTO>();
-                
-                // <=> SELECT * FROM utilisateur
                 var query = context.users;
                 foreach (var item in query)
                 {
@@ -36,8 +34,6 @@ namespace VisioConference.Repository.DAO
             using (MyContext context = new MyContext())
             {
                 List<UserDTO> lst = new List<UserDTO>();
-
-                // <=> SELECT * FROM utilisateur
                 var query = from us in context.users
                             where (us.Pseudo.Contains(search) || us.Email.Contains(search))
                             select us;
@@ -46,6 +42,40 @@ namespace VisioConference.Repository.DAO
                     lst.Add(Convertisseur.UserDTOFromUser(new UserDTO(), item));
                 }
                 return lst;
+            }
+        }
+
+        public UserDTO findById(int? Id)
+        {
+            if (Id != null)
+            {
+                using (MyContext context = new MyContext())
+                {
+                    UserDTO dto = Convertisseur.UserDTOFromUser(new UserDTO(), context.users.Find(Id));
+                    return dto;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public UserDTO findByEmailAndPassword(UserDTO dto)
+        {
+            UserDTO userDTO = new UserDTO();
+            using (MyContext context = new MyContext())
+            {
+                List<User> lst = context.users.ToList();
+                User user = context.users.Where(u => u.Email.Equals(dto.Email) && u.Password.Equals(dto.Password)).FirstOrDefault();
+                if (user != null && user.Id != 0)
+                {
+                    userDTO = Convertisseur.UserDTOFromUser(userDTO, user);
+                    return userDTO;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -59,60 +89,13 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public List<UserDTO> findAllConnected()
-        {
-            using (MyContext context = new MyContext())
-            {
-                List<UserDTO> lst = new List<UserDTO>();
-                UserDTO dto = new UserDTO();
-                //List<Utilisateur> utilisateurs = context.utilisateurs.Include(u => u.login).ToList();
-                var query = context.users;
-                foreach (var item in query)
-                {
-                    if (item.Etat != 0)
-                    {
-                        dto = Convertisseur.UserDTOFromUser(dto, item);
-                        lst.Add(dto);
-                    }
-                }
-                return lst;
-            }
-        }
-
-        internal void DeleteUserDTO(int id)
+        public void DeleteUserDTO(int id)
         {
             using (MyContext context = new MyContext())
             {
                 User u = context.users.Find(id);
                 context.users.Remove(u);
                 context.SaveChanges();
-            }
-        }
-
-        public UserDTO findByEmailAndPassword(UserDTO dto)
-        {
-            UserDTO userDTO = new UserDTO();
-            using (MyContext context = new MyContext())
-            {
-                //à modifier, findby id actuellement
-                /*User user = new User();*/
-                /* var query = from u in context.users
-                             where ((u.Email == dto.Email) && (u.Password == dto.Password))
-                             select u;
-
-
-                 user = query.FirstOrDefault();*/
-                List<User> lst = context.users.ToList();
-                User user = context.users.Where(u => u.Email.Equals(dto.Email) && u.Password.Equals(dto.Password)).FirstOrDefault();
-                if (user != null && user.Id != 0)
-                {
-                    userDTO = Convertisseur.UserDTOFromUser(userDTO, user);
-                    return userDTO;
-                } else
-                {
-                    //throw new NotImplementedException();
-                    return null;
-                }
             }
         }
 
@@ -126,17 +109,6 @@ namespace VisioConference.Repository.DAO
             }
         }
 
-        public UserDTO findById(int? Id)
-        {
-            if (Id != null) 
-            { 
-                using (MyContext context = new MyContext())
-                {
-                    UserDTO dto = Convertisseur.UserDTOFromUser(new UserDTO(),context.users.Find(Id));
-                    return dto;
-                }
-            }
-            throw new NotImplementedException();
-        }
+       
     }
 }

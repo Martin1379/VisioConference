@@ -37,11 +37,6 @@ namespace VisioConference.Service
             repo.Add(userDTO);
         }
 
-        public List<UserDTO> findAllConnected()
-        {
-            return repo.findAllConnected();
-        }
-
         public void Update(UserDTO dto)
         {
             repo.Update(dto);
