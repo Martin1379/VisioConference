@@ -14,16 +14,17 @@ namespace VisioConference.DTO
         {
             conversations = new HashSet<Conversation>();
         }
+
         public int Id { get; set; }
         public string Pseudo { get; set; }
 
         [Required(ErrorMessage = "Veuillez indiquer votre adresse eMail.")]
         [EmailAddress(ErrorMessage = "Adresse eMail incorrecte.")]
-        //[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail id is not valid")]
+        //[RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Votre adresse eMail n'est pas valide.")]
         public string Email { get; set; }
 
-        //[Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
-        //[DataType(DataType.Password)]
+        [Required(ErrorMessage = "Veuillez indiquer votre mot de passe.")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         public string ResetPassewordCode { get; set; }
         public string Photo { get; set; }
@@ -47,6 +48,7 @@ namespace VisioConference.DTO
             Photo = photo;
             Etat = etat;
         }
+
 
         public UserDTO(string email, string password, string resetPassewordCode, string pseudo, string photo, int etat, int id)
         {

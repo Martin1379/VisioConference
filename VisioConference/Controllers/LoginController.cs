@@ -15,8 +15,6 @@ using VisioConference.Models;
 using VisioConference.Repository.DAO;
 using VisioConference.Service;
 using VisioConference.Tools;
-
-
 namespace VisioConference.Controllers
 {
     public class LoginController : Controller
@@ -24,20 +22,19 @@ namespace VisioConference.Controllers
         private UsersService service = new UsersService();
         private ConversationService Cvservice = new ConversationService();
 
+
         // GET: Login
         public ActionResult Index()
         {
-            //CreateLoginViewModel viewModel = new CreateLoginViewModel();
-            //viewModel.loginDTO = new LoginDTO();
-            //viewModel.userDTO = new UserDTO();
-            return View(new UserDTO());
+            UserDTO dto = new UserDTO();
+            return View(dto);
         }
 
         [HttpPost]
         public ActionResult Index(UserDTO dto)
         {
             if (ModelState.IsValidField("Email") && ModelState.IsValidField("Password"))
-            { 
+            {
                 UserDTO user = service.findByEmailAndPassword(dto);
                 if (user != null && user.Id != 0)
                 {
@@ -55,31 +52,20 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
-                    ModelState["Password"].Errors.Clear();
-                    ModelState["Email"].Errors.Clear();
                     ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
-                   
                     //ViewBag.Erreur = "Echec connexion.....";
-                    
-                        
-                   
-                    return View(dto);
+                    return View();
                 }
             }
             else
             {
-                ModelState["Password"].Errors.Clear();
-                ModelState["Email"].Errors.Clear();
-                ModelState.AddModelError("Login", "Model non valide");
-                
+
                 return View(dto);
             }
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public ActionResult Create([Bind(Include = "Pseudo,Password,Email")] UserDTO userDTO, HttpPostedFileBase Photo)
         {
-
             if (ModelState.IsValid)
             {
                 int currentId = service.findAll().Max(u => u.Id) + 1; // max récupère l'id MAX en BD
@@ -95,28 +81,25 @@ namespace VisioConference.Controllers
                 userDTO.Id = currentId;
                 return RedirectToAction("Discussion");
             }
-            ModelState["Password"].Errors.Clear();
-            ModelState["Email"].Errors.Clear();
-            ModelState["Pseudo"].Errors.Clear();
-            ModelState.AddModelError("Création","Model non valide");
-
-            return View("Index", userDTO);
+            return View(userDTO);
         }
 
 
 
         public ActionResult Logout()
         {
-            DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.Yes)
-            {
-                Session.Clear();
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                return RedirectToAction("Discussion", "Login");
-            }
+            //DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (dialogResult == DialogResult.Yes)
+            //{
+            //    Session.Clear();
+            //    return RedirectToAction("Index", "Login");
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Discussion", "Login");
+            //}
+            Session.Clear();
+            return RedirectToAction("Index", "Login");
 
         }
 
@@ -142,10 +125,12 @@ namespace VisioConference.Controllers
                             List<string> messages = Strings.afficherConv(CvDto.message, userDTO, amiDTO).ToList();
                             ViewBag.Messages = messages;
                         }
+
                     }
                     TempData.Keep();
                 }
             }
+
             return View(friendList);
         }
 
@@ -165,10 +150,16 @@ namespace VisioConference.Controllers
                 string contenu = CvDto.message + "<#" + utilisateur.Id + '>' + form.Get("message_envoye");
                 Cvservice.modifyMessage(CvDto, contenu);
             }
+
+
+
             //TempData["message"]= contenu;
             //TempData.Keep();
             return RedirectToAction("Discussion");
+
         }
+
+
 
 
         [HttpPost]
@@ -181,6 +172,7 @@ namespace VisioConference.Controllers
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
             return RedirectToAction("Discussion");
+
         }
         [HttpPost]
         public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
@@ -213,15 +205,17 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
 
         }      
-
         public ActionResult TerminerModif()
         {
             return View();
+
         }
         public ActionResult ForgotPassword()
         {
             return View();
+
         }
+
 
         [HttpPost]
         public ActionResult Password(string EmailID)
@@ -258,6 +252,8 @@ namespace VisioConference.Controllers
                     return View("ForgotPassword");
                 }
             }
+
+            return View("ForgotPassword");
         }
 
         private void SendEmail(string emailAddress, string body, string subject)
@@ -332,11 +328,10 @@ namespace VisioConference.Controllers
             }
             ViewBag.Message = message;
             return View(model);
-        }  
+        }
     }
 }
-
-/* MOURAD
+/*
  * ViewResult - View()
  * RedirectToRouteResult - RedirectToAction(), RedirectToRoute()...
  * ContentResult - Content()
