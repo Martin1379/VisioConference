@@ -129,12 +129,51 @@ namespace VisioConference.Repository.DAO
                 return lst;
             }
         }
-        public List<JointureDTO> findFriends(UserDTO user, string search)
+        public List<JointureDTO> findFriendsAndOthers(UserDTO user, string search)
         {
+
+            //using (MyContext context = new MyContext())
+            //{
+            //    var query = 
+            //                 from us in context.users
+            //                 join co in context.conversations 
+            //                 on us.Id equals co.userID into joinGroup
+            //                 from j in joinGroup.DefaultIfEmpty()
+            //                 //where us.Pseudo.Contains(search)
+            //                 select new
+            //                 {
+            //                     FriendId = us.Id,
+            //                     FriendMail = us.Email,
+            //                     FriendPseudo = us.Pseudo,
+            //                     FriendPhoto = us.Photo,
+            //                     FriendConnected = us.Etat,
+            //                     FriendInvitation = (bool?)j.invitation,
+            //                     ConversationUser1 = (int?)j.userID,
+            //                     ConversationUser2 = (int?)j.userFriendID
+            //                 };
+
+            //    List<JointureDTO> lst = new List<JointureDTO>();
+            //    foreach (var item in query)
+            //    {
+            //        if (user.Id != item.FriendId)
+            //        {
+            //            int a = item.FriendId;
+            //            string b = item.FriendPseudo;
+            //            string c = item.FriendMail;
+            //            string d = item.FriendPhoto;
+            //            int e = item.FriendConnected;
+            //            //int f = (int)item.ConversationUser1;
+            //            //int g = (int)item.ConversationUser2;
+            //            //bool h = (bool)item.FriendInvitation;
+
+            //            lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
+            //        }  
+            //    }
+            //    return lst;
+
             using (MyContext context = new MyContext())
             {
-                var query = (
-                             from us in context.users
+                var query = (from us in context.users
                              join co in context.conversations on us.Id equals co.userID
                              where co.userFriendID == user.Id && us.Pseudo.Contains(search)
                              select new
@@ -149,8 +188,7 @@ namespace VisioConference.Repository.DAO
                                  ConversationUser2 = co.userFriendID
                              })
                             .Union
-                            (
-                             from us in context.users
+                            (from us in context.users
                              join co in context.conversations on us.Id equals co.userFriendID
                              where co.userID == user.Id && us.Pseudo.Contains(search)
                              select new
@@ -171,7 +209,19 @@ namespace VisioConference.Repository.DAO
                 {
                     lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
                 }
+
+                var query2 = from us in context.users
+                            where us.Pseudo.Contains(search) && us.Id != user.Id
+                            select us;
+
+                foreach (var item in query2)
+                {
+                    if (lst.Where(i => i.Id == item.Id).FirstOrDefault() == null)
+                    lst.Add(new JointureDTO(item.Id, item.Pseudo, item.Email, item.Photo, item.Etat));
+                }
+
                 return lst;
+
             }
         }
         public void modifyMessage(ConversationDTO u, string message)

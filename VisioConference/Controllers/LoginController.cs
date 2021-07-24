@@ -116,8 +116,16 @@ namespace VisioConference.Controllers
         public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
+            List<JointureDTO> friendList;
+            if (TempData["search"] == null)
+            {
+                 friendList = Cvservice.findFriends(userDTO);
+            }
+            else
+            {
+                friendList = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+            }
 
-            List<JointureDTO> friendList = Cvservice.findFriends(userDTO);
 
             if (TempData["Id_ami"] != null)
             {
@@ -166,22 +174,36 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
 
         }
-
-
-
-
         [HttpPost]
         public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
         {
             //Afficher nouvelle conversation
             int ami_id = Convert.ToInt32(form.Get("user_id"));
             string nom_ami = service.findById(ami_id).Pseudo;
-            TempData["Nom_ami"] = nom_ami;
-            TempData["Id_ami"] = ami_id;
-            TempData.Keep();
+
             return RedirectToAction("Discussion");
 
         }
+        [HttpPost]
+        public ActionResult AcceptInvite(System.Web.Mvc.FormCollection form)
+        {
+            //Afficher nouvelle conversation
+            int ami_id = Convert.ToInt32(form.Get("acceptInviteUser_id"));
+            ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
+            cv.invitation = true;
+            Cvservice.Update(cv);
+            return RedirectToAction("Discussion");
+        }
+        [HttpPost]
+        public ActionResult RejectInvite(System.Web.Mvc.FormCollection form)
+        {
+            //Afficher nouvelle conversation
+            int ami_id = Convert.ToInt32(form.Get("rejectInviteUser_id"));
+            ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
+            Cvservice.removeConversation(cv.convID);
+            return RedirectToAction("Discussion");
+        }
+
         [HttpPost]
         public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
         {
@@ -336,8 +358,11 @@ namespace VisioConference.Controllers
             return View(model);
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult Search(System.Web.Mvc.FormCollection form)
         {
+            TempData["search"] = form.Get("search");
+            TempData.Keep();
             return RedirectToAction("Discussion");
         }
 
