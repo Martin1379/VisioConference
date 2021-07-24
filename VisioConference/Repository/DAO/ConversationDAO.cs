@@ -46,27 +46,41 @@ namespace VisioConference.Repository.DAO
                 var query = (from us in context.users
                              join co in context.conversations on us.Id equals co.userID
                              where co.userFriendID == user.Id
-                             select new UserDTO(us.Email, us.Password, us.ResetPassewordCode, us.Pseudo, us.Photo, us.Etat, us.Id)
-                            )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPw = us.Password,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                             })
                             .Union
                             (from us in context.users
                              join co in context.conversations on us.Id equals co.userFriendID
                              where co.userID == user.Id
-                             select new UserDTO(us.Email, us.Password, us.ResetPassewordCode, us.Pseudo, us.Photo, us.Etat, us.Id)
-                             )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPw = us.Password,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                             })
                             ;
 
                 List<UserDTO> lst = new List<UserDTO>();
-                foreach (UserDTO item in query)
+                foreach (var item in query)
                 {
                     lst.Add(new UserDTO()
                     {
-                        Email = item.Email,
-                        Pseudo = item.Pseudo,
-                        Password = item.Password,
-                        Photo = item.Photo,
-                        Etat = item.Etat,
-                        Id = item.Id,
+                        Email = item.FriendMail,
+                        Pseudo = item.FriendPseudo,
+                        Password = item.FriendPw,
+                        Photo = item.FriendPhoto,
+                        Etat = item.FriendConnected,
+                        Id = item.FriendId,
                     });
                 }
                 return lst;
@@ -79,29 +93,38 @@ namespace VisioConference.Repository.DAO
                 var query = (from us in context.users
                              join co in context.conversations on us.Id equals co.userID
                              where co.userFriendID == user.Id
-                             select new JointureDTO(us.Id, us.Pseudo, us.Email, us.Photo, us.Etat, co.userID, co.userFriendID, co.invitation)
-                             )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
                             .Union
                             (from us in context.users
                              join co in context.conversations on us.Id equals co.userFriendID
                              where co.userID == user.Id
-                             select new JointureDTO(us.Id, us.Pseudo, us.Email, us.Photo, us.Etat, co.userID, co.userFriendID, co.invitation)
-                             )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
                             ;
 
                 List<JointureDTO> lst = new List<JointureDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new JointureDTO() {
-                        Email = item.Email,
-                        Pseudo = item.Pseudo,
-                        Photo = item.Photo,
-                        Etat = item.Etat,
-                        Id = item.Id,
-                        invitation = item.invitation,
-                        userID = item.userID,
-                        userFriendID = item.userFriendID
-                    });
+                    lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
                 }
                 return lst;
             }
@@ -114,31 +137,39 @@ namespace VisioConference.Repository.DAO
                              from us in context.users
                              join co in context.conversations on us.Id equals co.userID
                              where co.userFriendID == user.Id && us.Pseudo.Contains(search)
-                             select new JointureDTO(us.Id, us.Pseudo, us.Email, us.Photo, us.Etat, co.userID, co.userFriendID, co.invitation )
-                             )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
                             .Union
                             (
                              from us in context.users
                              join co in context.conversations on us.Id equals co.userFriendID
                              where co.userID == user.Id && us.Pseudo.Contains(search)
-                             select new JointureDTO(us.Id, us.Pseudo, us.Email, us.Photo, us.Etat, co.userID, co.userFriendID, co.invitation)
-                             )
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
                             ;
 
                 List<JointureDTO> lst = new List<JointureDTO>();
-                foreach (JointureDTO item in query)
+                foreach (var item in query)
                 {
-                    lst.Add(new JointureDTO()
-                    {
-                        Email = item.Email,
-                        Pseudo = item.Pseudo,
-                        Photo = item.Photo,
-                        Etat = item.Etat,
-                        Id = item.Id,
-                        invitation = item.invitation,
-                        userID = item.userID,
-                        userFriendID = item.userFriendID
-                    });
+                    lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
                 }
                 return lst;
             }
