@@ -169,6 +169,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -180,6 +181,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ChatHub.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DTO\JointureDTO.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Service\ConversationService.cs" />
+    <Compile Include="DTO\ContactDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\avatar_user\Admin_1.jpg" />
@@ -238,6 +241,9 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\Contact.css" />
+    <Content Include="Content\css\deletUser.css" />
+    <Content Include="Content\css\editUser.css" />
     <Content Include="Content\css\user.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\img\avatar-vide.png" />
@@ -251,6 +257,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\css\PagedList.css" />
     <Content Include="Content\img\Martin.png" />
+    <Content Include="Content\img\MsgEnvoyer.png" />
     <Content Include="Content\img\power-button.png" />
     <Content Include="Content\img\remy.jpg" />
     <Content Include="Content\img\state-afk.png" />
@@ -297,11 +304,12 @@
     <Content Include="Views\User\DisplayFriends.cshtml" />
     <Content Include="Views\User\Remove.cshtml" />
     <Content Include="Views\Login\About.cshtml" />
-    <Content Include="Views\Login\Contact.cshtml" />
     <Content Include="Views\Login\ResetPassword.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Login\EmailEnvoyer.cshtml" />
     <None Include="Properties\PublishProfiles\YouCom - Web Deploy.pubxml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\SuccessMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -312,7 +320,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\Conversation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
