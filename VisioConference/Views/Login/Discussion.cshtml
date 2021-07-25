@@ -31,15 +31,10 @@
 
         @*STATUS SELECTEUR*@
         <select id="select-state">
-
-            <option class="status label-success">En ligne</option>
-
-            <option class="label-danger">Occupé(e)</option>
-
-            <option class="label-warning">Absent(e)</option>
-
-            <option class="label-default">Hors ligne</option>
-
+            <option>En ligne</option>
+            <option>Occupé(e)</option>
+            <option>Absent(e)</option>
+            <option>Hors ligne</option>
         </select>
         <hr />
 
@@ -158,12 +153,21 @@
         }
         else
         {
-            <h4>
-                Bienvenue ! Pour envoyer des messages, cliquez d'abord sur un ami. <br />
-                Vous n'avez pas d'ami ? Vous pouvez envoyer des invitations ou vérifier que vous n'en ayez pas déjà reçu.
-            </h4>
+            //MESSAGE ACCUEIL NO DISCUSSION
+            <div class="jumbotron jumbo-infos">
+                <h2 class="">
+                <i class="fas fa-info-circle"></i>
+                Informations
+                </h2>
+                <p>
+                    Pour commencer, vous pouvez recherchez un membre dans l'onglet <strong>Invitations</strong> dans la colonne de droite.<br />
+                    Ensuite, envoyez lui une invitation.<br />
+                    Lorsque votre ami l'aura accepté, il apparaitra dans l'onglet <strong>Contacts</strong>.<br />
+                    Vous pourrez communiquer avec lui en cliquant sur la carte correspondant à son nom.<br />
+                </p>
+            </div>
+            <img src="~/Content/img/astro2.png" id="img-astro" />
         }
-
         <p>
             <ul id="discussion">
                 @if ((List<string>)ViewBag.Messages != null)
