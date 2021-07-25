@@ -1,0 +1,35 @@
+﻿.pageTitre {
+    margin: 40px 0 20px;
+    border-bottom: 2px solid #eeeeee;
+}
+
+    .pageTitre p {
+        font-size: 21px;
+    }
+
+    .pageTitre span {
+        text-align: end;
+    }
+
+        .pageTitre span i {
+            color: #337ab7;
+        }
+
+.boxTable {
+    margin: 30px auto !important;
+    border: solid 1px #1476e5;
+    border-radius: 6px;
+    padding: 16px;
+    width: 50%;
+}
+
+    .boxTable p {
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+.form-control {
+    display: flex;
+    justify-content: flex-end;
+}

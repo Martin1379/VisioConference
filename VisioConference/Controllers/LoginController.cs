@@ -343,6 +343,17 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
         }
 
+        
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
     }
 }
 /*
