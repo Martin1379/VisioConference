@@ -174,11 +174,14 @@ footer .row {
     background-color: #eeeeee;
     padding: 20px 30px;
     max-height: 900px;
+    position: relative;
 }
 
 #div-main-col-3 {
     display: inline-block;
     padding: 20px 30px;
+    min-width: 372px;
+    max-width: 372px;
 }
 
 
@@ -318,6 +321,21 @@ footer .row {
 }
 
 /*MAIN COL 2*/
+.jumbo-infos{
+    position:relative;
+    bottom:110px;
+}
+
+.jumbo-infos h2 {
+    display: inline-block;
+    font-size: 36px;
+}
+
+#img-astro {
+    position: absolute;
+    bottom: 13px;
+    right: 20px;
+}
 
 #div-user-tchat{
     margin-bottom: 30px;
@@ -486,8 +504,10 @@ footer .row {
 .div-cheat {
     padding-bottom: 18px !important;
     background-color: #eeeeee;
-    max-width: 326px!important;
-    position:relative;
+    max-width: 326px !important;
+    position: relative;
+    min-height: 104px;
+    padding-top: 14px;
 }
 
     .div-cheat:hover {
@@ -500,15 +520,15 @@ footer .row {
 
 .div-choix-inv {
     position: absolute;
-    right: 20px;
-    top: 55px;
+    right: 18px;
+    top: 59px;
     display: flex;
     box-shadow: none !important;
 }
 
     .div-choix-inv button {
-        margin-right: 7px;
-        padding: 1px 10px;
+        margin-right: 5px;
+        padding: 1px 8px;
     }
 
 /*MAIN COL 3*/
@@ -532,6 +552,14 @@ footer .row {
 .nav-tabs > li > a {
     background-color: #7A7A7A;
     color: #DADADA;
+}
+
+.nav-tabs a:hover {
+    background-color: #454545 !important;
+}
+
+.nav-tabs > .active a:hover {
+    background-color: #DADADA !important;
 }
 
 #div-notif-nb-disc {
@@ -580,8 +608,11 @@ footer .row {
 #invitations-content {
     overflow: auto;
     height: 757px;
-    width: 104%;
+    width: 111%;
     padding: 0 11px;
+    position: relative;
+    right: 12px;
+
 }
 
 .subcat {
