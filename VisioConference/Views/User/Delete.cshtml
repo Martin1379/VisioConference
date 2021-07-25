@@ -4,70 +4,84 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<br />
+<header>
+    <link rel="stylesheet" href="~/Content/css/deletUser.css">
+</header>
 
-<h2>Delete</h2>
+<div class="container">
+    <br><br>
+    <div class="pageTitre row">
+        <p class="col-lg-6">
+            Supprimer l'utilisateur
+        </p>
+        <span class="col-lg-6 text-align-end">
+            @Html.ActionLink("Revenir à la liste", "Index") &nbsp;
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </span>
+    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>UserDTO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Pseudo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pseudo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Etat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Etat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAdmin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAdmin)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+    <div class="row col boxTable align-self-center">
+        <div class="col-lg-4">
+            <img src="~/Content/avatar_user/@Model.Photo" class="img-responsive" style="height:80px" />
         </div>
-    }
+        <div class="col" style="text-align:left;">
+            <p>
+                @Html.DisplayFor(model => model.Pseudo)
+            </p>
+            <span>
+                @Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)
+            </span>
+            <span>
+                <br>
+                @Html.DisplayNameFor(model => model.IsAdmin) :  @Html.DisplayTextFor(model => model.IsAdmin)
+            </span>
+            <span>
+                <br>
+                @Html.DisplayNameFor(model => model.Etat) :  @Html.DisplayTextFor(model => model.Etat)
+            </span>
+        </div>
+    </div><br><br>
+
+    <div class="form-group flex-center" style="margin-left: 35%; display: flex; align-items: center;">
+        <p style="margin-bottom:0px; margin-right:30px">êtes vous sûr de vouloir supprimer cet utilisateur?</p>
+        <div>
+            <input type="submit" value="Non" onclick="location.href='@Url.Action("DeleteAnnuler","User")'" class="btn btn-secondary" />
+        </div>&nbsp;&nbsp;
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <input type="submit" value="Oui" class="btn btn-danger" />
+            </div>
+        }
+
+    </div>
+
+
+    @*<div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.Pseudo) :</b> @Html.DisplayFor(model => model.Pseudo)
+        <div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.Email) :</b> @Html.DisplayFor(model => model.Email)
+        </div>
+        <div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.Password) : </b> *****
+        </div>
+        <div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.Etat) :</b> @Html.DisplayTextFor(model => model.Etat)
+        </div>
+        <div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.IsAdmin) :</b> @Html.DisplayTextFor(model => model.IsAdmin)
+        </div>
+        <div class="form-group">
+            <b>@Html.DisplayNameFor(model => model.Photo) :</b> @Html.DisplayFor(model => model.Photo)
+        </div>*@
+
+
+
+
+
+
 </div>
+

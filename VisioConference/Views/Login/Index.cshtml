@@ -1,7 +1,5 @@
 ﻿@model VisioConference.DTO.UserDTO
 
-
-
 @{ 
     ViewBag.Title = "Home Page";
  }
@@ -22,6 +20,14 @@
             <br />
             Pour commencer à l'utiliser, vous devez créer un compte, ou vous connecter.
         </p>
+        @if(ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+        {
+         <div class="alert alert-danger alert-error">
+         <a class="close" data-dismiss="alert">&times;</a>
+            @Html.ValidationSummary()
+        </div>
+         }
+       
     </div>
 
     @*FORMULAIRE DE CONNEXION*@
@@ -85,9 +91,9 @@
                     </div>
                 </fieldset>
             </div>
-            <div class="center-block">
+            @*<div class="center-block">
                 @Html.ValidationSummary()
-            </div>
+            </div>*@
                 }
             </div>
 

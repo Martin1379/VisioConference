@@ -52,6 +52,8 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
+                    ModelState["Password"].Errors.Clear();
+                    ModelState["Email"].Errors.Clear();
                     ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
                     //ViewBag.Erreur = "Echec connexion.....";
                     return View();
@@ -59,7 +61,9 @@ namespace VisioConference.Controllers
             }
             else
             {
-
+                ModelState["Password"].Errors.Clear();
+                ModelState["Email"].Errors.Clear();
+                ModelState.AddModelError("Login", "Model non valide!");
                 return View(dto);
             }
         }
@@ -81,7 +85,11 @@ namespace VisioConference.Controllers
                 userDTO.Id = currentId;
                 return RedirectToAction("Discussion");
             }
-            return View(userDTO);
+            ModelState["Password"].Errors.Clear();
+            ModelState["Email"].Errors.Clear();
+            ModelState["Pseudo"].Errors.Clear();
+            ModelState.AddModelError("Création", "Model non valide!");
+            return View("Index",userDTO);
         }
 
 
@@ -108,8 +116,22 @@ namespace VisioConference.Controllers
         public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
+            List<JointureDTO> friendList;
+            if (true/*TempData["search"] == null*/)
+            {
+                 friendList = Cvservice.findFriends(userDTO);
+            }
+            else
+            {
+                //Fonction de recherche d'amis
+                //friendList = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+            }
 
-            List<JointureDTO> friendList = Cvservice.findFriends(userDTO);
+            if (TempData["search"] != null)
+            {
+                TempData["resultatFriendAndOthers"] = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+            }
+            
 
             if (TempData["Id_ami"] != null)
             {
@@ -151,17 +173,11 @@ namespace VisioConference.Controllers
                 Cvservice.modifyMessage(CvDto, contenu);
             }
 
-
-
             //TempData["message"]= contenu;
             //TempData.Keep();
             return RedirectToAction("Discussion");
 
         }
-
-
-
-
         [HttpPost]
         public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
         {
@@ -174,6 +190,26 @@ namespace VisioConference.Controllers
             return RedirectToAction("Discussion");
 
         }
+        [HttpPost]
+        public ActionResult AcceptInvite(System.Web.Mvc.FormCollection form)
+        {
+            //Afficher nouvelle conversation
+            int ami_id = Convert.ToInt32(form.Get("acceptInviteUser_id"));
+            ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
+            cv.invitation = true;
+            Cvservice.Update(cv);
+            return RedirectToAction("Discussion");
+        }
+        [HttpPost]
+        public ActionResult RejectInvite(System.Web.Mvc.FormCollection form)
+        {
+            //Afficher nouvelle conversation
+            int ami_id = Convert.ToInt32(form.Get("rejectInviteUser_id"));
+            ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
+            Cvservice.removeConversation(cv.convID);
+            return RedirectToAction("Discussion");
+        }
+
         [HttpPost]
         public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
         {
@@ -252,8 +288,6 @@ namespace VisioConference.Controllers
                     return View("ForgotPassword");
                 }
             }
-
-            return View("ForgotPassword");
         }
 
         private void SendEmail(string emailAddress, string body, string subject)
@@ -330,9 +364,23 @@ namespace VisioConference.Controllers
             return View(model);
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult Search(System.Web.Mvc.FormCollection form)
         {
+            TempData["search"] = form.Get("search");
+            TempData.Keep();
             return RedirectToAction("Discussion");
+        }
+
+        
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
 
     }

@@ -167,6 +167,11 @@ namespace VisioConference.Controllers
             //db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult DeleteAnnuler()
+        {
+            return RedirectToAction("Index");
+
+        }
 
         public ActionResult DisplayFriends(int? id, int? i, string sortBy)
         {
