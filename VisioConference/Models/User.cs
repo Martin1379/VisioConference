@@ -11,6 +11,7 @@ namespace VisioConference.Models
     {
         public User()
         {
+            //Assure que l'objet ICollection<Conversation> est bien initialisé
             conversations = new HashSet<Conversation>();
         }
 
@@ -41,32 +42,5 @@ namespace VisioConference.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Conversation> conversations { get; set; }
 
-        public User(int id, string pseudo)
-        {
-            Id = id;
-            Pseudo = pseudo;
-        }
-        //Constructeur pour la méthode de revherche d'ami
-        public User(string email, string pseudo, string photo, int etat)
-        {
-            Email = email;
-            Password = "";
-            ResetPassewordCode = "";
-            Pseudo = Pseudo;
-            Photo = photo;
-            Etat = etat;
-        }
-
-
-        public User(string email, string password, string resetPassewordCode, string pseudo, string photo, int etat, int id)
-        {
-            Id = id;
-            Email = email;
-            Password = password;
-            ResetPassewordCode = resetPassewordCode;
-            Pseudo = pseudo;
-            Photo = photo;
-            Etat = etat;
-        }
     }
 }

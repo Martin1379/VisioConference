@@ -11,8 +11,6 @@ namespace VisioConference.Repository.DAO
 {
     public class ConversationDAO : IConversation
     {
-        // Accès en ligne, il faut que les méthodes soient async et utiliser HasNotracking pour les histoire de cache
-        // => OU utiliser le using Mycontext dans les méthodes
         public List<ConversationDTO> findAll()
         {
             using (MyContext context = new MyContext())
@@ -21,7 +19,7 @@ namespace VisioConference.Repository.DAO
                 ConversationDTO dto = new ConversationDTO();
 
                 var query = context.conversations; // <=> SELECT * FROM conversation
-                foreach (var item in query)
+                foreach (Conversation item in query)
                 {
                     dto = Convertisseur.ConvDTOFromConv(dto, item);
                     lst.Add(dto);
@@ -29,8 +27,6 @@ namespace VisioConference.Repository.DAO
                 return lst;
             }
         }
-
-
         public ConversationDTO findByUsers(UserDTO user1, UserDTO user2)
         {
             using (MyContext context = new MyContext())
@@ -39,11 +35,10 @@ namespace VisioConference.Repository.DAO
                             where (co.userFriendID == user1.Id && co.userID == user2.Id) || (co.userFriendID == user2.Id && co.userID == user1.Id)
                             select co;
                 ConversationDTO dto = new ConversationDTO();
-                dto = Convertisseur.ConvDTOFromConv(dto, query.FirstOrDefault()); //TODO try catch
+                dto = Convertisseur.ConvDTOFromConv(dto, query.FirstOrDefault());
                 return dto;
             }
         }
-
         public List<UserDTO> findFriendAdmin(UserDTO user)
         {
             using (MyContext context = new MyContext())
@@ -129,23 +124,53 @@ namespace VisioConference.Repository.DAO
                 List<JointureDTO> lst = new List<JointureDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new JointureDTO() {
-                        Email = item.FriendMail,
-                        Pseudo = item.FriendPseudo,
-                        Photo = item.FriendPhoto,
-                        Etat = item.FriendConnected,
-                        Id = item.FriendId,
-                        invitation = item.FriendInvitation,
-                        userID = item.ConversationUser1,
-                        userFriendID = item.ConversationUser2
-                    });
+                    lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
                 }
                 return lst;
             }
         }
-
-        public List<JointureDTO> findFriends(UserDTO user, string search)
+        public List<JointureDTO> findFriendsAndOthers(UserDTO user, string search)
         {
+
+            //using (MyContext context = new MyContext())
+            //{
+            //    var query = 
+            //                 from us in context.users
+            //                 join co in context.conversations 
+            //                 on us.Id equals co.userID into joinGroup
+            //                 from j in joinGroup.DefaultIfEmpty()
+            //                 //where us.Pseudo.Contains(search)
+            //                 select new
+            //                 {
+            //                     FriendId = us.Id,
+            //                     FriendMail = us.Email,
+            //                     FriendPseudo = us.Pseudo,
+            //                     FriendPhoto = us.Photo,
+            //                     FriendConnected = us.Etat,
+            //                     FriendInvitation = (bool?)j.invitation,
+            //                     ConversationUser1 = (int?)j.userID,
+            //                     ConversationUser2 = (int?)j.userFriendID
+            //                 };
+
+            //    List<JointureDTO> lst = new List<JointureDTO>();
+            //    foreach (var item in query)
+            //    {
+            //        if (user.Id != item.FriendId)
+            //        {
+            //            int a = item.FriendId;
+            //            string b = item.FriendPseudo;
+            //            string c = item.FriendMail;
+            //            string d = item.FriendPhoto;
+            //            int e = item.FriendConnected;
+            //            //int f = (int)item.ConversationUser1;
+            //            //int g = (int)item.ConversationUser2;
+            //            //bool h = (bool)item.FriendInvitation;
+
+            //            lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
+            //        }  
+            //    }
+            //    return lst;
+
             using (MyContext context = new MyContext())
             {
                 var query = (from us in context.users
@@ -182,27 +207,23 @@ namespace VisioConference.Repository.DAO
                 List<JointureDTO> lst = new List<JointureDTO>();
                 foreach (var item in query)
                 {
-                    lst.Add(new JointureDTO()
-                    {
-                        Email = item.FriendMail,
-                        Pseudo = item.FriendPseudo,
-                        Photo = item.FriendPhoto,
-                        Etat = item.FriendConnected,
-                        Id = item.FriendId,
-                        invitation = item.FriendInvitation,
-                        userID = item.ConversationUser1,
-                        userFriendID = item.ConversationUser2
-                    });
+                    lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
                 }
+
+                var query2 = from us in context.users
+                            where us.Pseudo.Contains(search) && us.Id != user.Id
+                            select us;
+
+                foreach (var item in query2)
+                {
+                    if (lst.Where(i => i.Id == item.Id).FirstOrDefault() == null)
+                    lst.Add(new JointureDTO(item.Id, item.Pseudo, item.Email, item.Photo, item.Etat));
+                }
+
                 return lst;
+
             }
         }
-
-        /// <summary>
-        /// Modifie la conversation (suite à envoi de message), si dépasse une certaine taille, on supprime les messages les plus anciens jusqu'à avoir la taille désirée
-        /// </summary>
-        /// <param name="u"></param>
-        /// <param name="message"></param>
         public void modifyMessage(ConversationDTO u, string message)
         {
             using (MyContext context = new MyContext())
@@ -214,7 +235,6 @@ namespace VisioConference.Repository.DAO
                 context.SaveChanges();            
             }
         }
-
         public void removeConversation(int convId)
         {
             using (MyContext context = new MyContext())
@@ -231,7 +251,6 @@ namespace VisioConference.Repository.DAO
                 context.SaveChanges();
             }
         }
-
         public void Update(ConversationDTO u)
         {
             using (MyContext context = new MyContext())
@@ -242,10 +261,10 @@ namespace VisioConference.Repository.DAO
                 query.message = u.message;
                 query.userFriendID = u.userFriendID;
                 query.userID = u.userID;
+                query.invitation = u.invitation;
 
                 context.SaveChanges();
             }
         }
-
     }
 }

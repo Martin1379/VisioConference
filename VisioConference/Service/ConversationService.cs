@@ -30,11 +30,10 @@ namespace VisioConference.Service
         {
             return repo.findFriends(user);
         }
-        public List<JointureDTO> findFriends(UserDTO user, string search)
+        public List<JointureDTO> findFriendsAndOthers(UserDTO user, string search)
         {
-            return repo.findFriends(user, search);
+            return repo.findFriendsAndOthers(user, search);
         }
-
         public void removeConversation(int convId)
         {
             repo.removeConversation(convId);

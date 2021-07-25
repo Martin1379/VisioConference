@@ -13,13 +13,37 @@ namespace VisioConference.DTO
         public string Photo { get; set; }
         public int Etat { get; set; }
         public bool IsAdmin { get; set; }
-        public int convID { get; set; }
-        public int userID { get; set; }
-        public int userFriendID { get; set; }
+        public int convId { get; set; }
+        public int userId { get; set; }
+        public int userFriendId { get; set; }
         public string message { get; set; }
         public bool invitation { get; set; }
         public JointureDTO()
         {
+        }
+
+        public JointureDTO(int id, string pseudo, string email, string photo, int etat, int userId, int userFriendId, bool invitation)
+        {
+            Id = id;
+            Pseudo = pseudo;
+            Email = email;
+            Photo = photo;
+            Etat = etat;
+            this.userId = userId;
+            this.userFriendId = userFriendId;
+            this.invitation = invitation;
+        }
+
+        public JointureDTO(int id, string pseudo, string email, string photo, int etat)
+        {
+            Id = id;
+            Pseudo = pseudo;
+            Email = email;
+            Photo = photo;
+            Etat = etat;
+            userId = 0;
+            userFriendId = 0;
+            invitation = false;
         }
     }
 }
