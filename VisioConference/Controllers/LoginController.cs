@@ -117,15 +117,21 @@ namespace VisioConference.Controllers
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
             List<JointureDTO> friendList;
-            if (TempData["search"] == null)
+            if (true/*TempData["search"] == null*/)
             {
                  friendList = Cvservice.findFriends(userDTO);
             }
             else
             {
-                friendList = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+                //Fonction de recherche d'amis
+                //friendList = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
             }
 
+            if (TempData["search"] != null)
+            {
+                TempData["resultatFriendAndOthers"] = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+            }
+            
 
             if (TempData["Id_ami"] != null)
             {
@@ -167,8 +173,6 @@ namespace VisioConference.Controllers
                 Cvservice.modifyMessage(CvDto, contenu);
             }
 
-
-
             //TempData["message"]= contenu;
             //TempData.Keep();
             return RedirectToAction("Discussion");
@@ -180,7 +184,9 @@ namespace VisioConference.Controllers
             //Afficher nouvelle conversation
             int ami_id = Convert.ToInt32(form.Get("user_id"));
             string nom_ami = service.findById(ami_id).Pseudo;
-
+            TempData["Nom_ami"] = nom_ami;
+            TempData["Id_ami"] = ami_id;
+            TempData.Keep();
             return RedirectToAction("Discussion");
 
         }
