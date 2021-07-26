@@ -215,14 +215,22 @@
         <br />
 
         @* ONGLETS *@
-        @if (TempData["resultatFriendAndOthers"] != null)
-        {
-            //fonction js activer 2eme onglet
-        }
         <ul class="nav nav-tabs">
             <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users iblue" id="iusers"></i> Contacts</a></li>
             <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus" id="iuserplus"></i> Invitations</a></li>
         </ul>
+
+        @*Script pour rendre l'onblet invitation actif après recherche, au chargement de la page*@
+        @if (TempData["search"] != null)
+        {
+            <script src="~/Content/js/jquery-3.4.1.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    console.log("Passage par ma fonction");
+                    document.getElementById("invitations-tab").click();
+                });
+            </script>
+        }
 
         @*NOTIFS*@
         @if (Model != null)
@@ -466,14 +474,12 @@
                                 <hr />
                                 <div classe="div-ami-card" style=" display:inline-flex">
                                     <div>
-
                                         @*AVATAR*@
                                         @if (item.Photo == null)
                                         {<img src="~/Content/img/avatar-vide.png" class="ami-card-img" />}
                                         else
                                         {<img src="~/Content/avatar_user/@item.Photo" alt="Image not found" class="ami-card-img" />}
                                         <br />
-
                                     </div>
 
                                     @*AMI TEXT*@
@@ -497,14 +503,12 @@
                                 <hr />
                                 <div classe="div-ami-card" style=" display:inline-flex">
                                     <div>
-
                                         @*AVATAR*@
                                         @if (item.Photo == null)
                                         {<img src="~/Content/img/avatar-vide.png" class="ami-card-img" />}
                                         else
                                         {<img src="~/Content/avatar_user/@item.Photo" alt="Image not found" class="ami-card-img" />}
                                         <br />
-
                                     </div>
 
                                     @*AMI TEXT*@
@@ -529,14 +533,12 @@
                                 <hr />
                                 <div classe="div-ami-card" style=" display:inline-flex">
                                     <div>
-
                                         @*AVATAR*@
                                         @if (item.Photo == null)
                                         {<img src="~/Content/img/avatar-vide.png" class="ami-card-img" />}
                                         else
                                         {<img src="~/Content/avatar_user/@item.Photo" alt="Image not found" class="ami-card-img" />}
                                         <br />
-
                                     </div>
 
                                     @*AMI TEXT*@
@@ -544,12 +546,25 @@
                                         <div>
                                             <span class="ami-nom">@item.Pseudo</span>
                                         </div>
+
                                         #@item.Id
+                                        <br />
+                                        @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
+                                        {
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-check-circle"></i>
+                                                <span>Envoyer une invitation</span>
+                                            </button>
+                                            <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
+                                        }
+@*REMY A MERGER*@
+                                        @*#@item.Id
                                         <br />
                                         <span class="label label-primary">
                                             <i class="fas fa-user-plus"></i>
                                             Ajouter
-                                        </span>
+                                        </span>*@
+
                                         <br />
                                     </div>
                                 </div>

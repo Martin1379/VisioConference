@@ -20,7 +20,6 @@ namespace VisioConference.Controllers
     {
         private UsersService service = new UsersService();
 
-            // GET: User
             public ActionResult Index(string search, int? i, string sortBy)
         {
             List<UserDTO> lst = new List<UserDTO>();
@@ -46,25 +45,8 @@ namespace VisioConference.Controllers
                 default:
                     break;
             }
-
             return View(lst.ToPagedList(i ?? 1, 10));
         }
-
-        /*GET: User/Details/5*/
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserDTO userDTO = service.findById(id);
-            if (userDTO == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userDTO);
-        }
-
         
         public ActionResult Create()
         {
@@ -126,8 +108,6 @@ namespace VisioConference.Controllers
                     userDTO.Photo = userDTO.Pseudo + '_' + userDTO.Id + Path.GetExtension(Photo.FileName);
                     Photo.SaveAs(Server.MapPath("~/Content/avatar_user/") + userDTO.Photo);
 
-                    //service.Add(userDTO);
-                    //return RedirectToAction("Index");
                 }
                 else
                 {
@@ -175,7 +155,10 @@ namespace VisioConference.Controllers
 
         public ActionResult DisplayFriends(int? id, int? i, string sortBy)
         {
-            
+            if (TempData["userami"] != null)
+            {
+                id = (int)TempData["userami"];
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -226,8 +209,8 @@ namespace VisioConference.Controllers
             }
             else
             {
-                //ConversationService Cvservice = new ConversationService();
-                //ConversationDTO Cv = Cvservice.findByUsers(userDTO, friendDTO);
+                TempData["userami"] = friendId;
+                TempData.Keep();
                 return View(friendDTO);
             }
 
