@@ -406,15 +406,6 @@
 
                             @*CHOIX DEMANDE AMI*@
                             <div class="div-choix-inv">
-                                @*BOUTON ACCPTER AMI*@
-                                @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
-                                {
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-check-circle"></i>
-                                        <span>Accepter</span>
-                                    </button>
-                                    <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
-                                }
 
                                 @*BOUTON REFUSER AMI*@
                                 @using (Html.BeginForm("RejectInvite", "Login", FormMethod.Post))
@@ -424,6 +415,16 @@
                                         <span>Refuser</span>
                                     </button>
                                     <input type="text" name="rejectInviteUser_id" hidden value="@item.Id" />
+                                }
+
+                                @*BOUTON ACCPTER AMI*@
+                                @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Accepter</span>
+                                    </button>
+                                    <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
                                 }
                             </div>
                         </div>
@@ -489,7 +490,7 @@
                                         </div>
                                         #@item.Id
                                         <br />
-                                        <span class="label label-primary">
+                                        <span class="label label-envoye">
                                             <i class="fas fa-user-plus"></i>
                                             Envoyée
                                         </span>
@@ -551,20 +552,12 @@
                                         <br />
                                         @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
                                         {
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="fas fa-check-circle"></i>
-                                                <span>Envoyer une invitation</span>
+                                            <button type="submit" class="btn btn-primary btn-ajouter-amis">
+                                                <i class="fas fa-user-plus"></i>
+                                                <span>Ajouter</span>
                                             </button>
                                             <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
                                         }
-@*REMY A MERGER*@
-                                        @*#@item.Id
-                                        <br />
-                                        <span class="label label-primary">
-                                            <i class="fas fa-user-plus"></i>
-                                            Ajouter
-                                        </span>*@
-
                                         <br />
                                     </div>
                                 </div>
