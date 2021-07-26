@@ -476,17 +476,15 @@
                                 </div>
 
                                 @*AMI TEXT*@
-                                <div class="div-ami-card-text">
-                                    <div>
-                                        <span class="ami-nom">@item.Pseudo</span>
-                                    </div>
-                                    @item.Id
-                                    <br />
-                                    <span class="label label-default">
-                                        UN AMI A MOI
-                                    </span>
-                                    <br />
+                            <div class="div-ami-card-text">
+                                <div>
+                                    <span class="ami-nom">@item.Pseudo</span>
                                 </div>
+                                @item.Id
+                                <br />
+
+                                <br />
+                            </div>
                             </div>
 
                         }
@@ -500,17 +498,22 @@
                                 </div>
 
                                 @*AMI TEXT*@
-                                <div class="div-ami-card-text">
-                                    <div>
-                                        <span class="ami-nom">@item.Pseudo</span>
-                                    </div>
-                                    @item.Id
-                                    <br />
-                                    <span class="label label-default">
-                                        JE NE LE CONNAIS PAS
-                                    </span>
-                                    <br />
+                            <div class="div-ami-card-text">
+                                <div>
+                                    <span class="ami-nom">@item.Pseudo</span>
                                 </div>
+                                @item.Id
+                                <br />
+                                @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Envoyer une invitation</span>
+                                    </button>
+                                    <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
+                                }
+                                <br />
+                            </div>
                             </div>
                         }
                     }
