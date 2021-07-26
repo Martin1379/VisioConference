@@ -7,54 +7,56 @@
     ViewBag.Title = "Remove";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<header>
+    <link rel="stylesheet" href="~/Content/css/editUser.css">
+</header>
+<div class="container">
+    <br><br>
+    <div class="pageTitre row">
+        <p class="col-lg-6">
+            Remove
+        </p>
+        <span class="col-lg-6 text-align-end">
+            @Html.ActionLink("Revenir à la liste", "DisplayFriends") &nbsp;
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </span>
+    </div>
 
-<h2>Remove</h2>
 
-<h3>Êtes vous sûr de vouloir retirer l'amitié de @Html.DisplayFor(model => model.Pseudo) ? Cela supprimera toute conversation entre ces deux personnes </h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Pseudo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pseudo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Etat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Etat)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Remove" class="btn btn-default" />
-            @*<input type="hidden" name="auctionEventId" value="@idUser" />*@|
-            @Html.ActionLink("Back to List", "Index")
+    <div class="row col boxTable align-self-center">
+        <div class="col-lg-4">
+            <img src="~/Content/avatar_user/@Model.Photo" class="img-responsive" style="height:80px" />
         </div>
-    }
+        <div class="col" style="text-align:left;">
+            <p>
+                @Html.DisplayFor(model => model.Pseudo)
+            </p>
+            <span>
+                @Html.DisplayNameFor(model => model.Email) : @Html.DisplayFor(model => model.Email)
+            </span>
+            <span>
+                <br>
+                @Html.DisplayNameFor(model => model.IsAdmin) :  @Html.DisplayTextFor(model => model.IsAdmin)
+            </span>
+            <span>
+                <br>
+                @Html.DisplayNameFor(model => model.Etat) :  @Html.DisplayTextFor(model => model.Etat)
+            </span>
+        </div>
+    </div><br><br>
+
+    <div class="form-group flex-center" style="margin-left: 35%; display: flex; align-items: center;">
+        <p style="margin-bottom:0px; margin-right:30px">Êtes vous sûr de vouloir retirer l'amitié de @Html.DisplayFor(model => model.Pseudo) ? Cela supprimera toute conversation entre ces deux personnes</p>
+        <div>
+            <input type="submit" value="Non" onclick="location.href='@Url.Action("RemoveAnnuler","User")'" class="btn btn-secondary" />
+        </div>&nbsp;&nbsp;
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <input type="submit" value="Oui" class="btn btn-danger" />
+            </div>
+        }
+
+    </div>
 </div>

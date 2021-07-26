@@ -29,16 +29,28 @@
                     </div>
 
                     @*NAV BUTTONS*@
+                <div class="list-group">
                     <ul class="nav navbar-nav" id="navbar-edit">
-                        <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Login")</li>
-                        <li><img src="~/Content/img/discussion.png" id="icone-tchat" />@Html.ActionLink("Discussion", "Discussion", "Login")</li>
-                        <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Login")</li>
-                        <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Index", "Contact")</li>
+                        @if (Session["userAdmin"] == null && Session["userNormal"] == null)
+                        {
+                            <li><img src="~/Content/img/home.png" id="icone-home" />@Html.ActionLink("Accueil", "Index", "Login")</li>
+                        }
+                        @if (Session["userNormal"] != null)
+                        {
+                            <li><img src="~/Content/img/discussion.png" id="icone-tchat" />@Html.ActionLink("Discussion", "Discussion", "Login")</li>
+                        }
+
+                        @if (Session["userAdmin"] == null)
+                        {
+                            <li><img src="~/Content/img/info.png" id="icone-infos" />@Html.ActionLink("À propos", "About", "Login")</li>
+                            <li><img src="~/Content/img/letter.png" id="icone-contact" />@Html.ActionLink("Contact", "Index", "Contact")</li>
+                        }
                         @if (Session["userAdmin"] != null || Session["userNormal"] != null)
                         {
                             <li><img src="~/Content/img/power-button.png" id="icone-logout" />@Html.ActionLink("Deconnexion", "Logout", "Login")</li>
                         }
                     </ul>
+                </div>
                 </div>
             </div>
         </div>

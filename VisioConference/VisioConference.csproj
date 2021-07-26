@@ -296,10 +296,8 @@
     <Content Include="Views\Login\Discussion.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Login\AccessDenied.cshtml" />
     <Content Include="Views\User\Conversation.cshtml" />
     <Content Include="Views\User\DisplayFriends.cshtml" />
     <Content Include="Views\User\Remove.cshtml" />

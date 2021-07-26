@@ -19,7 +19,7 @@ namespace VisioConference.Filters
                     new RouteValueDictionary
                     {
                         {"controller", "Login"},
-                        {"action", "AccessDenied"}
+                        {"action", "Index"}
                     }
                 );
             }
