@@ -29,6 +29,10 @@ h3{
     display: none;
 }
 
+.d-flex{
+    display:flex;
+}
+
 .iblue {
     color: #337ab7;
 }
@@ -165,19 +169,21 @@ footer .row {
 #div-main-col-1 {
     display: inline-block;
     width: 20%;
-    padding: 20px 30px;
+    padding: 20px 30px 20px 20px;
     min-height: 93vh;
+    position: relative;
 }
 
 #div-main-col-2 {
     width: 60%;
     background-color: #eeeeee;
-    padding: 20px 30px;
-    max-height: 900px;
+    padding: 20px 0 20px 30px;
     position: relative;
+    max-height: 92vh;
 }
 
 #div-main-col-3 {
+    position: relative;
     display: inline-block;
     padding: 20px 30px;
     min-width: 372px;
@@ -300,9 +306,12 @@ footer .row {
     }
 
 #div-main-col-1 footer {
-    font-size: 11px;
     bottom: 3vh;
-    position: absolute;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    max-width: 16vw;
+    position: fixed;
 }
 
 #main-div-footer-1,
@@ -317,7 +326,9 @@ footer .row {
 
 #main-div-footer-2 {
     position: relative;
-    bottom: -30px;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    padding-top: 25px;
 }
 
 /*MAIN COL 2*/
@@ -326,10 +337,14 @@ footer .row {
     bottom:110px;
 }
 
-.jumbo-infos h2 {
-    display: inline-block;
-    font-size: 36px;
-}
+    .jumbo-infos hr{
+        margin-top:0;
+    }
+
+    .jumbo-infos h2 {
+        display: inline-block;
+        font-size: 36px;
+    }
 
 #img-astro {
     position: absolute;
@@ -367,7 +382,13 @@ footer .row {
 }
 
 #discussion {
+    min-height: 50vh;
+    max-height: 62vh;
     margin-left: 57px;
+    overflow-wrap: anywhere;
+    overflow: auto;
+    max-width: 1063px;
+    padding-right: 117px;
 }
 
 #message {
@@ -375,26 +396,27 @@ footer .row {
 }
 
 #input-group-tchat {
-    min-width: 1090px;
     position: absolute;
     bottom: 29px;
+    min-width: 94.5%;
 }
 
 #div-list-amis {
     position: relative;
     bottom: 16px;
-    padding:  0 10px 10px 10px;
+    padding: 0 10px 5px 10px;
     width: 111%;
     position: relative;
     right: 10px;
     overflow: auto;
-    height: 688px;
-}
+    max-height: 69.8vh;
+    min-height: 69.8vh;
+}}
 
     #div-list-amis > div,
     #div-list-invit-in > div {
         display: inline-flex;
-        padding: 10px;
+        padding: 15px 5px;
         border-radius: 10px;
         -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.29);
         width: -webkit-fill-available;
@@ -427,8 +449,8 @@ footer .row {
 .state-img {
     position: relative;
     bottom: 18px;
-    left: 27px;
-    width: 20px;
+    left: 25px;
+    width: 16px;
 }
 
 .ami-nom {
@@ -486,9 +508,9 @@ footer .row {
         font-size: 100%;
     }
 
-.friends-id{
+.friends-id {
     position: relative;
-    bottom: 2px;
+    bottom: 1px;
 }
 
 .button-inv-amis {
@@ -507,21 +529,17 @@ footer .row {
     max-width: 326px !important;
     position: relative;
     min-height: 104px;
-    padding-top: 14px;
+    max-height: 104px;
 }
 
     .div-cheat:hover {
         cursor: default;
     }
 
-    .div-cheat .button-inv-amis {
-        display: contents;
-    }
-
 .div-choix-inv {
     position: absolute;
-    right: 18px;
-    top: 59px;
+    left: 99px;
+    top: 61px;
     display: flex;
     box-shadow: none !important;
 }
@@ -600,19 +618,21 @@ footer .row {
     left: 6px;
 }
 
-#contacts-content, #invitations-content {
-    position: relative;
-    bottom: 12px;
+#contacts-content {
+    position: absolute;
+    top: 133px;
 }
 
 #invitations-content {
     overflow: auto;
-    height: 757px;
-    width: 111%;
+    height: 751px;
+    width: 93.7%;
     padding: 0 11px;
-    position: relative;
-    right: 12px;
-
+    position: absolute;
+    right: 4px;
+    top: 133px;
+    max-height: 78.3vh;
+    min-height: 78.3vh;
 }
 
 .subcat {
@@ -623,25 +643,55 @@ footer .row {
 .hr-subcat {
     border-top: #7A7A7A 1px solid;
     margin-top: 0;
+    margin-bottom:15px;
 }
 
 #search-friend,
-#search-members{
+#search-members {
     display: inline-flex;
     width: -webkit-fill-available;
 }
 
-#select-trier {
-    min-width: 197px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #7A7A7A;
-    color: #DADADA;
+#invitations-content > form {
+    display:flex;
 }
+
+    #select-trier {
+        min-width: 197px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #7A7A7A;
+        color: #DADADA;
+    }
 
 #div-select-trier {
     display: flex;
     justify-content: flex-end;
     margin-top: 11px;
     margin-bottom: 7px;
+}
+
+#div-list-search {
+    padding-bottom: 5px;
+}
+
+#div-list-search > div {
+    display: inline-flex;
+    padding-bottom: 18px !important;
+    background-color: #eeeeee;
+    max-width: 326px !important;
+    position: relative;
+    min-height: 104px;
+    max-height: 104px;
+    display: inline-flex;
+    padding: 15px 5px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 29%);
+    width: -webkit-fill-available;
+}
+
+#div-list-search hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #454545;
 }
