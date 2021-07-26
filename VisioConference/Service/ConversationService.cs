@@ -34,6 +34,10 @@ namespace VisioConference.Service
         {
             return repo.findFriendsAndOthers(user, search);
         }
+        public void AddConversation(int user, int receiver)
+        {
+            repo.AddConversation(user, receiver);
+        }
         public void removeConversation(int convId)
         {
             repo.removeConversation(convId);
