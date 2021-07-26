@@ -4,7 +4,6 @@
 @{ UserDTO dto = (UserDTO)Session["userNormal"]; }
 
 <br />
-
 <div id="main-container">
 
     @*COLONNE 1*@
@@ -491,7 +490,6 @@
                                         <br />
                                     </div>
                                 </div>
-
                             }
                             // MEMBRE AMI
                             else if ((item.invitation == true) && dto.Id == item.userId || dto.Id == item.userFriendId)

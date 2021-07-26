@@ -211,6 +211,15 @@ namespace VisioConference.Controllers
         }
 
         [HttpPost]
+        public ActionResult EnvoyerInvite(System.Web.Mvc.FormCollection form)
+        {
+            int ami_id = Convert.ToInt32(form.Get("EnvoyerInvite_id"));
+            UserDTO user = (UserDTO)Session["userNormal"];
+            Cvservice.AddConversation(user.Id, ami_id);
+            return RedirectToAction("Discussion");
+        }
+
+        [HttpPost]
         public ActionResult SaveProfil(System.Web.Mvc.FormCollection form, HttpPostedFileBase Photo)
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
