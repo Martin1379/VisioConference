@@ -221,7 +221,7 @@
         </ul>
 
         @*Script pour rendre l'onblet invitation actif après recherche, au chargement de la page*@
-        @if (TempData["search"] != null)
+        @if (TempData["search"] != null || TempData["inviteEnvoyee"] != null || TempData["inviteRefusee"] != null)
         {
             <script src="~/Content/js/jquery-3.4.1.js" type="text/javascript"></script>
             <script type="text/javascript">
