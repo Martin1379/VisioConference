@@ -175,7 +175,10 @@ namespace VisioConference.Controllers
 
         public ActionResult DisplayFriends(int? id, int? i, string sortBy)
         {
-            
+            if (TempData["userami"] != null)
+            {
+                id = (int)TempData["userami"];
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -187,6 +190,7 @@ namespace VisioConference.Controllers
             }
             else
             {
+
                 ConversationService Cvservice = new ConversationService();
                 List<UserDTO> friendList= Cvservice.findFriendAdmin(userDTO);
                 //friendList = Cvservice.findFriends(userDTO);
@@ -204,10 +208,10 @@ namespace VisioConference.Controllers
                     default:
                         break;
                 }
-
+                
                 Session["edituser"] = userDTO.Id;
                 return View(friendList.ToPagedList(i ?? 1, 10));
-                
+
             }
         }
 
@@ -228,6 +232,8 @@ namespace VisioConference.Controllers
             {
                 //ConversationService Cvservice = new ConversationService();
                 //ConversationDTO Cv = Cvservice.findByUsers(userDTO, friendDTO);
+                TempData["userami"] = friendId;
+                TempData.Keep();
                 return View(friendDTO);
             }
 
@@ -256,6 +262,12 @@ namespace VisioConference.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult RemoveAnnuler()
+        {
+            return RedirectToAction("DisplayFriends");
+
         }
 
         //protected override void Dispose(bool disposing)

@@ -12,100 +12,106 @@
 <br>
 <br>
 
+<header>
+    <link rel="stylesheet" href="~/Content/css/user.css">
+    <link href="https://bootstrapious.com/snippets">
 
-<div class="container">
-    <p>
-        @using (Html.BeginForm("Index", "User", FormMethod.Get))
-        {
-            <input type="text" name="search" placeholder="Recherche" />
-            <input type="submit" value="Rechercher" name="submit" class="btn btn-dark" />}
 
-    </p>
+</header>
+
+<div class="chercher">
+    @using (Html.BeginForm("Index", "User", FormMethod.Get))
+    {
+        <input class="inputCherche" type="text" name="search" placeholder="Recherche" />
+        <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="border:none;outline:none;"></i></button>
+    }
 </div>
 
-<div class="container">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Id)
-            </th>
-            <th>
-                @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
-                @Html.DisplayNameFor(model => model.First().Pseudo)
-                @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Etat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().IsAdmin)
-            </th>
-            <th>
-                Afficher la conversation
-            </th>
-            <th>
-                Afficher les amis
-            </th>
-            <th>
-                Retirer de la liste amis
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pseudo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Etat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsAdmin)
-                </td>
-                <th>
-                    @Html.ActionLink("Conversation", "DisplayConversation", new { id = item.Id })
-                </th>
-                <td>
-                    @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
-                </td>
-                <td>
-                    @Html.ActionLink("Remove", "Remove", new { friendId = item.Id }, new { id = idUser })
-                </td>  
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-
-    </table>
+<div class="block">
+    <div class="pageTitre row">
+            <p class="col-lg-12  text-right">
+                @Html.ActionLink("Revenir à la liste", "Index") &nbsp;
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </p>
+    </div>
     <br />
-    @Html.PagedListPager(Model, i => Url.Action("Index", "User", new { i, search = Request.QueryString["search"] }))
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Id)
+                </th>
+                <th>
+                    @Html.ActionLink("↓", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameDesc" })
+                    @Html.DisplayNameFor(model => model.First().Pseudo)
+                    @Html.ActionLink("↑", "Index", new { search = Request.QueryString["search"], i = Request.QueryString["i"], sortBy = "nameAsc" })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Password)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Photo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Etat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().IsAdmin)
+                </th>
+                <th>
+                    Afficher les amis
+                </th>
+                <th>
+                    Retirer de la liste amis
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pseudo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Etat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remove", "Remove", new { friendId = item.Id }, new { id = idUser })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        <div style="text-align:center;">
+            @Html.PagedListPager(Model, i => Url.Action("Index", "User", new { i, search = Request.QueryString["search"] }))
+        </div>
+    </div>
 </div>
