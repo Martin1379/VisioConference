@@ -207,6 +207,8 @@ namespace VisioConference.Controllers
             int ami_id = Convert.ToInt32(form.Get("rejectInviteUser_id"));
             ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
             Cvservice.removeConversation(cv.convID);
+            TempData["inviteRefusee"] = true;
+            TempData.Keep();
             return RedirectToAction("Discussion");
         }
 
@@ -216,6 +218,8 @@ namespace VisioConference.Controllers
             int ami_id = Convert.ToInt32(form.Get("EnvoyerInvite_id"));
             UserDTO user = (UserDTO)Session["userNormal"];
             Cvservice.AddConversation(user.Id, ami_id);
+            TempData["inviteEnvoyee"] = true;
+            TempData.Keep();
             return RedirectToAction("Discussion");
         }
 
