@@ -156,8 +156,8 @@
             //MESSAGE ACCUEIL NO DISCUSSION
             <div class="jumbotron jumbo-infos">
                 <h2 class="">
-                <i class="fas fa-info-circle"></i>
-                Informations
+                    <i class="fas fa-info-circle"></i>
+                    Informations
                 </h2>
                 <p>
                     Pour commencer, vous pouvez recherchez un membre dans l'onglet <strong>Invitations</strong> dans la colonne de droite.<br />
@@ -205,218 +205,63 @@
     <input type="text" id="displayname" value="@dto.Pseudo" hidden />
 
     @*COLONNE 3*@
-<div id="div-main-col-3">
-    <br />
-    <br />
-    <br />
-
-    @* ONGLETS *@
-    @if (TempData["resultatFriendAndOthers"] != null)
-    {
-        //fonction js activer 2eme onglet
-    }
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users iblue" id="iusers"></i> Contacts</a></li>
-        <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus" id="iuserplus"></i> Invitations</a></li>
-    </ul>
-
-    @*NOTIFS*@
-    @if (Model != null)
-    {
-        int cmpt = 0;
-        foreach (JointureDTO item in Model)
-        {
-            if (!item.invitation && item.userFriendId == dto.Id)
-            {
-                cmpt++;
-            }
-        }
-        if (cmpt > 0)
-        {
-            <div id="div-notif-nb-inv">
-                <span id="notif-nb-inv">@cmpt</span>
-            </div>
-        }
-    }
-
-
-    <div id="contacts-content">
-
-        @* RECHERCHE AMI *@
-        <form id="search-friend">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-            <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
-        </form>
-
-        @* TRIER PAR *@
-        <div id="div-select-trier">
-            <select id="select-trier">
-                <option value="value">Trier par</option>
-                <option value="value">Nouveaux messages</option>
-                <option value="value">Ordre alphabétique</option>
-                <option value="value">Présence</option>
-            </select>
-        </div>
+    <div id="div-main-col-3">
+        <br />
+        <br />
         <br />
 
-        @* LISTE AMIS *@
-        <div id="div-list-amis">
+        @* ONGLETS *@
 
-            @*AMI CARD*@
-            @foreach (JointureDTO item in Model)
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active nav-tabs" id="contacts-tab"><a href="#"><i class="fas fa-users iblue" id="iusers"></i> Contacts</a></li>
+            <li role="presentation" class="nav-tabs" id="invitations-tab"><a href="#"><i class="fas fa-user-plus" id="iuserplus"></i> Invitations</a></li>
+        </ul>
+
+
+        @*Script pour rendre l'onblet invitation actif après recherche, au chargement de la page*@
+        @if (TempData["search"] != null)
+        {
+            <script src="~/Content/js/jquery-3.4.1.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    console.log("Passage par ma fonction");
+                    document.getElementById("invitations-tab").click();
+                });
+            </script>
+        }
+
+
+
+
+
+
+
+        @*NOTIFS*@
+        @if (Model != null)
+        {
+            int cmpt = 0;
+            foreach (JointureDTO item in Model)
             {
-                if (item.invitation)
+                if (!item.invitation && item.userFriendId == dto.Id)
                 {
-                    <hr />
-                    using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
-                    {
-                        <input type="text" name="user_id" hidden value="@item.Id" />
-                        <button>
-                            <div>
-                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-
-                                @*POINTS*@
-                                @switch (item.Etat)
-                                {
-                                    case 0:
-                                        <img src="~/Content/img/state-offline.png" class="state-img" />
-                                        break;
-                                    case 1:
-                                        <img src="~/Content/img/state-online.png" class="state-img" />
-                                        break;
-
-                                    case 2:
-                                        <img src="~/Content/img/state-busy.png" class="state-img" />
-                                        break;
-                                    case 3:
-                                        <img src="~/Content/img/state-afk.png" class="state-img" />
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            </div>
-
-                            @*AMI TEXT*@
-                            <div class="div-ami-card-text">
-                                <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                </div>
-                                <span class="friends-id">#@item.Id</span>
-                                <br />
-
-                                @*LABEL*@
-                                @switch (item.Etat)
-                                {
-                                    case 0:
-                                        <span class="label label-default">
-                                            Hors ligne
-                                        </span>
-                                        break;
-                                    case 1:
-                                        <span class="label label-success">
-                                            En ligne
-                                        </span>
-                                        break;
-                                    case 2:
-                                        <span class="label label-danger">
-                                            Occupé(e)
-                                        </span>
-                                        break;
-                                    case 3:
-                                        <span class="label label-warning">
-                                            Inactif
-                                        </span>
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                <br />
-                            </div>
-                        </button>
-                        <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
-                    }
+                    cmpt++;
                 }
             }
-        </div>
-    </div>
-
-    <div id="invitations-content" class="d-no">
-
-        @*INVITATIONS RECUES*@
-        <span class="subcat">
-            Invitations reçues
-        </span>
-        <hr class="hr-subcat" />
-
-        <div id="div-list-invit-in">
-
-            @foreach (JointureDTO item in Model)
+            if (cmpt > 0)
             {
-                if (item.invitation == false && dto.Id == item.userFriendId)
-                {
-                    <hr />
-                    //CARD
-                    <div class="div-cheat">
-                        <button class="button-inv-amis">
-                            <div>
-                                <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                            </div>
-
-                            @*AMI TEXT*@
-                            <div class="div-ami-card-text">
-                                <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                </div>
-                                <span class="friends-id">#@item.Id</span>
-                                <br />
-                                <br />
-                            </div>
-                        </button>
-
-                        @*CHOIX DEMANDE AMI*@
-                        <div class="div-choix-inv">
-                            @*BOUTON ACCPTER AMI*@
-                            @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
-                            {
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Accepter</span>
-                                </button>
-                                <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
-                            }
-
-                            @*BOUTON REFUSER AMI*@
-                            @using (Html.BeginForm("RejectInvite", "Login", FormMethod.Post))
-                            {
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fas fa-times-circle"></i>
-                                    <span>Refuser</span>
-                                </button>
-                                <input type="text" name="rejectInviteUser_id" hidden value="@item.Id" />
-                            }
-                        </div>
-                    </div>
-
-                }
+                <div id="div-notif-nb-inv">
+                    <span id="notif-nb-inv">@cmpt</span>
+                </div>
             }
-        </div>
-
-        @* RECHERCHE UTILISATEUR *@
-        <br />
-        <br />
-        <span class="subcat">
-            Recherche d'utilisateur
-        </span>
-        <hr class="hr-subcat" />
+        }
 
 
-        @* RECHERCHE AMI *@
-        @using (Html.BeginForm("Search", "Login", FormMethod.Post))
-        {
+        <div id="contacts-content">
 
-            <form id="search-members">
+            @* RECHERCHE AMI *@
+            <form id="search-friend">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-                <input class="form-control me-2" type="search" placeholder="Rechercher un utilisateur" aria-label="Search" name="search">
+                <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
             </form>
 
             @* TRIER PAR *@
@@ -430,23 +275,105 @@
             </div>
             <br />
 
-        }
+            @* LISTE AMIS *@
+            <div id="div-list-amis">
 
-
-        @* LISTE DE LA RECHERCHE *@
-        <div id="div-list-invit-in">
-            @if (TempData["resultatFriendAndOthers"] != null)
-            {
-                foreach (JointureDTO item in (List<JointureDTO>)TempData["resultatFriendAndOthers"])
+                @*AMI CARD*@
+                @foreach (JointureDTO item in Model)
                 {
-                    //Si ce n'est pas une invitation reçue
-                    if (!(item.invitation == false && dto.Id == item.userFriendId))
+                    if (item.invitation)
                     {
-                        //Si c'est une invitation envoyée
-                        if (item.invitation == false && dto.Id == item.userId)
+                        <hr />
+                        using (Html.BeginForm("ClickAmi", "Login", FormMethod.Post))
                         {
-                            <hr />
-                            <div classe="div-ami-card" style=" display:inline-flex">
+                            <input type="text" name="user_id" hidden value="@item.Id" />
+                            <button>
+                                <div>
+                                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+
+                                    @*POINTS*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <img src="~/Content/img/state-offline.png" class="state-img" />
+                                            break;
+                                        case 1:
+                                            <img src="~/Content/img/state-online.png" class="state-img" />
+                                            break;
+
+                                        case 2:
+                                            <img src="~/Content/img/state-busy.png" class="state-img" />
+                                            break;
+                                        case 3:
+                                            <img src="~/Content/img/state-afk.png" class="state-img" />
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                </div>
+
+                                @*AMI TEXT*@
+                                <div class="div-ami-card-text">
+                                    <div>
+                                        <span class="ami-nom">@item.Pseudo</span>
+                                    </div>
+                                    <span class="friends-id">#@item.Id</span>
+                                    <br />
+
+                                    @*LABEL*@
+                                    @switch (item.Etat)
+                                    {
+                                        case 0:
+                                            <span class="label label-default">
+                                                Hors ligne
+                                            </span>
+                                            break;
+                                        case 1:
+                                            <span class="label label-success">
+                                                En ligne
+                                            </span>
+                                            break;
+                                        case 2:
+                                            <span class="label label-danger">
+                                                Occupé(e)
+                                            </span>
+                                            break;
+                                        case 3:
+                                            <span class="label label-warning">
+                                                Inactif
+                                            </span>
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    <br />
+                                </div>
+                            </button>
+                            <button type="button" class="close edit-btn-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="edit-span-close">&times;</span></button>
+                        }
+                    }
+                }
+            </div>
+        </div>
+
+        <div id="invitations-content" class="d-no">
+
+            @*INVITATIONS RECUES*@
+            <span class="subcat">
+                Invitations reçues
+            </span>
+            <hr class="hr-subcat" />
+
+            <div id="div-list-invit-in">
+
+                @foreach (JointureDTO item in Model)
+                {
+                    if (item.invitation == false && dto.Id == item.userFriendId)
+                    {
+                        <hr />
+                        //CARD
+                        <div class="div-cheat">
+                            <button class="button-inv-amis">
                                 <div>
                                     <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
                                 </div>
@@ -456,74 +383,163 @@
                                     <div>
                                         <span class="ami-nom">@item.Pseudo</span>
                                     </div>
-                                    @item.Id
+                                    <span class="friends-id">#@item.Id</span>
                                     <br />
-                                    <span class="label label-default">
-                                        INVITATION ENVOYEE
-                                    </span>
                                     <br />
                                 </div>
-                            </div>
+                            </button>
 
-                        }
-                        //Si c'est un ami
-                        else if ((item.invitation == true) && dto.Id == item.userId || dto.Id == item.userFriendId)
-                        {
-                            <hr />
-                            <div classe="div-ami-card" style=" display:inline-flex">
-                                <div>
-                                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                                </div>
-
-                                @*AMI TEXT*@
-                            <div class="div-ami-card-text">
-                                <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                </div>
-                                @item.Id
-                                <br />
-
-                                <br />
-                            </div>
-                            </div>
-
-                        }
-                        // Si c'est un inconnu
-                        else if (item.userId == 0)
-                        {
-                            <hr />
-                            <div classe="div-ami-card" style=" display:inline-flex">
-                                <div>
-                                    <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
-                                </div>
-
-                                @*AMI TEXT*@
-                            <div class="div-ami-card-text">
-                                <div>
-                                    <span class="ami-nom">@item.Pseudo</span>
-                                </div>
-                                @item.Id
-                                <br />
-                                @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
+                            @*CHOIX DEMANDE AMI*@
+                            <div class="div-choix-inv">
+                                @*BOUTON ACCPTER AMI*@
+                                @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
                                 {
                                     <button type="submit" class="btn btn-success">
                                         <i class="fas fa-check-circle"></i>
-                                        <span>Envoyer une invitation</span>
+                                        <span>Accepter</span>
                                     </button>
-                                    <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
+                                    <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
                                 }
-                                <br />
+
+                                @*BOUTON REFUSER AMI*@
+                                @using (Html.BeginForm("RejectInvite", "Login", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-times-circle"></i>
+                                        <span>Refuser</span>
+                                    </button>
+                                    <input type="text" name="rejectInviteUser_id" hidden value="@item.Id" />
+                                }
                             </div>
-                            </div>
-                        }
+                        </div>
+
                     }
                 }
+            </div>
+
+            @* RECHERCHE UTILISATEUR *@
+            <br />
+            <br />
+            <span class="subcat">
+                Recherche d'utilisateur
+            </span>
+            <hr class="hr-subcat" />
+
+
+            @* RECHERCHE AMI *@
+            @using (Html.BeginForm("Search", "Login", FormMethod.Post))
+            {
+
+                <form id="search-members">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+                    <input class="form-control me-2" type="search" placeholder="Rechercher un utilisateur" aria-label="Search" name="search">
+                </form>
+
+                @* TRIER PAR *@
+                <div id="div-select-trier">
+                    <select id="select-trier">
+                        <option value="value">Trier par</option>
+                        <option value="value">Nouveaux messages</option>
+                        <option value="value">Ordre alphabétique</option>
+                        <option value="value">Présence</option>
+                    </select>
+                </div>
+                <br />
+
             }
 
 
+            @* LISTE DE LA RECHERCHE *@
+            <div id="div-list-invit-in">
+                @if (TempData["resultatFriendAndOthers"] != null)
+                {
+                    foreach (JointureDTO item in (List<JointureDTO>)TempData["resultatFriendAndOthers"])
+                    {
+                        //Si ce n'est pas une invitation reçue
+                        if (!(item.invitation == false && dto.Id == item.userFriendId))
+                        {
+                            //Si c'est une invitation envoyée
+                            if (item.invitation == false && dto.Id == item.userId)
+                            {
+                                <hr />
+                                <div classe="div-ami-card" style=" display:inline-flex">
+                                    <div>
+                                        <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                    </div>
+
+                                    @*AMI TEXT*@
+                                    <div class="div-ami-card-text">
+                                        <div>
+                                            <span class="ami-nom">@item.Pseudo</span>
+                                        </div>
+                                        @item.Id
+                                        <br />
+                                        <span class="label label-default">
+                                            INVITATION ENVOYEE
+                                        </span>
+                                        <br />
+                                    </div>
+                                </div>
+
+                            }
+                            //Si c'est un ami
+                            else if ((item.invitation == true) && dto.Id == item.userId || dto.Id == item.userFriendId)
+                            {
+                                <hr />
+                                <div classe="div-ami-card" style=" display:inline-flex">
+                                    <div>
+                                        <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                    </div>
+
+                                    @*AMI TEXT*@
+                                    <div class="div-ami-card-text">
+                                        <div>
+                                            <span class="ami-nom">@item.Pseudo</span>
+                                        </div>
+                                        @item.Id
+                                        <br />
+
+                                        <br />
+                                    </div>
+                                </div>
+
+                            }
+                            // Si c'est un inconnu
+                            else if (item.userId == 0)
+                            {
+                                <hr />
+                                <div classe="div-ami-card" style=" display:inline-flex">
+                                    <div>
+                                        <img src="~/Content/avatar_user/@item.Photo" alt="Alternate Text" class="ami-card-img" />
+                                    </div>
+
+                                    @*AMI TEXT*@
+                                    <div class="div-ami-card-text">
+                                        <div>
+                                            <span class="ami-nom">@item.Pseudo</span>
+                                        </div>
+                                        @item.Id
+                                        <br />
+                                        @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
+                                        {
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fas fa-check-circle"></i>
+                                                <span>Envoyer une invitation</span>
+                                            </button>
+                                            <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
+                                        }
+                                        <br />
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                }
+
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 @section scripts{
