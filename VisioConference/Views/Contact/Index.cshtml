@@ -6,10 +6,11 @@
 }
 <br />
 <div class="container body-content">
+
     <div class="jumbotron">
-       
-        <h2 id="h2-accueil">Send your comments.</h2>
+        <h2 id="h2-accueil">Ecrivez nous !</h2>
     </div>
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -20,7 +21,6 @@
                     </div>
                     <div class="rox col-lg-8" style="margin:auto; padding-left:10%;">
                         <div class="form-group">
-                            -->
                             @*@Html.Label("Votre Nom", htmlAttributes: new { @class = "control-label col-md-3" })*@
                             <div class="col-md-9">
                                 @Html.TextBoxFor(m => m.SenderName, new { @class = "form-control", @placeholder = "Votre Nom" })
@@ -53,11 +53,3 @@
         </div>
     }
  </div>
-
-
-
-
-
-
-
-
