@@ -131,46 +131,6 @@ namespace VisioConference.Repository.DAO
         }
         public List<JointureDTO> findFriendsAndOthers(UserDTO user, string search)
         {
-
-            //using (MyContext context = new MyContext())
-            //{
-            //    var query = 
-            //                 from us in context.users
-            //                 join co in context.conversations 
-            //                 on us.Id equals co.userID into joinGroup
-            //                 from j in joinGroup.DefaultIfEmpty()
-            //                 //where us.Pseudo.Contains(search)
-            //                 select new
-            //                 {
-            //                     FriendId = us.Id,
-            //                     FriendMail = us.Email,
-            //                     FriendPseudo = us.Pseudo,
-            //                     FriendPhoto = us.Photo,
-            //                     FriendConnected = us.Etat,
-            //                     FriendInvitation = (bool?)j.invitation,
-            //                     ConversationUser1 = (int?)j.userID,
-            //                     ConversationUser2 = (int?)j.userFriendID
-            //                 };
-
-            //    List<JointureDTO> lst = new List<JointureDTO>();
-            //    foreach (var item in query)
-            //    {
-            //        if (user.Id != item.FriendId)
-            //        {
-            //            int a = item.FriendId;
-            //            string b = item.FriendPseudo;
-            //            string c = item.FriendMail;
-            //            string d = item.FriendPhoto;
-            //            int e = item.FriendConnected;
-            //            //int f = (int)item.ConversationUser1;
-            //            //int g = (int)item.ConversationUser2;
-            //            //bool h = (bool)item.FriendInvitation;
-
-            //            lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
-            //        }  
-            //    }
-            //    return lst;
-
             using (MyContext context = new MyContext())
             {
                 var query = (from us in context.users
@@ -222,6 +182,19 @@ namespace VisioConference.Repository.DAO
 
                 return lst;
 
+            }
+        }
+        public void AddConversation(int user, int receiver)
+        {
+            using (MyContext context = new MyContext())
+            {
+                Conversation cv = new Conversation()
+                {
+                    userID = user,
+                    userFriendID = receiver
+                };
+                context.conversations.Add(cv);
+                context.SaveChanges();
             }
         }
         public void modifyMessage(ConversationDTO u, string message)
