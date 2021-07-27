@@ -21,6 +21,7 @@
 
 .newUser {
     padding-bottom: 14px;
+    margin-left: 71px;
 }
 
     .newUser a {
@@ -28,12 +29,12 @@
         text-decoration: none;
     }
 
-.inputCherche {
+.input-recherche {
     border: none;
     margin-bottom: 1.5rem !important;
-    padding: 8px 29px !important;
+    padding: 8px 15px !important;
     outline: none;
-    border-radius: 30px;
+    border-radius: 5px;
 }
 
 .btn {
@@ -64,7 +65,6 @@
 
 .table {
     margin: auto;
-    border: 1px solid #aaa;
 }
 
     .table > tbody > tr > th {

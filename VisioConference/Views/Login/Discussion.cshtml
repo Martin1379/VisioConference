@@ -115,7 +115,11 @@
                 if (item.Id == (int)TempData["Id_ami"])
                 {
                     <div id="div-user-tchat">
-                        <img src="~/Content/avatar_user/@item.Photo" class="ami-card-img" />
+                        @*AVATAR*@
+                        @if (item.Photo == null)
+                        {<img src="~/Content/img/avatar-vide.png" class="ami-card-img" />}
+                        else
+                        {<img src="~/Content/avatar_user/@item.Photo" alt="Image not found" class="ami-card-img" />}
                         <div id="div-tchat-user-name">
                             <h3>@item.Pseudo</h3>
                             <span id="span-tchat-id">#@item.Id</span>
@@ -221,7 +225,7 @@
         </ul>
 
         @*Script pour rendre l'onblet invitation actif après recherche, au chargement de la page*@
-        @if (TempData["search"] != null)
+        @if (TempData["search"] != null || TempData["inviteEnvoyee"] != null || TempData["inviteRefusee"] != null)
         {
             <script src="~/Content/js/jquery-3.4.1.js" type="text/javascript"></script>
             <script type="text/javascript">
@@ -252,30 +256,46 @@
         }
 
 
-        <div id="contacts-content">
+    <div id="contacts-content">
 
-            @* RECHERCHE AMI *@
+        @* RECHERCHE AMI *@
+        @using (Html.BeginForm("SearchFriend", "Login", FormMethod.Post))
+        {
             <form id="search-friend">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Rechercher</button>
-                <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search">
+                <button class="btn btn-primary" type="submit" id="btn-search-friend"><i class="fas fa-search"></i> Rechercher</button>
+                <input class="form-control me-2" type="search" placeholder="Rechercher un ami" aria-label="Search" name="search-friend">
             </form>
+        }
 
-            @* TRIER PAR *@
-            <div id="div-select-trier">
-                <select id="select-trier">
-                    <option value="value">Trier par</option>
-                    <option value="value">Nouveaux messages</option>
-                    <option value="value">Ordre alphabétique</option>
-                    <option value="value">Présence</option>
-                </select>
-            </div>
-            <br />
+        @* TRIER PAR *@
+        @*<div id="div-select-trier">
+            <select id="select-trier">
+                <option value="value">Trier par</option>
+                <option value="value">Nouveaux messages</option>
+                <option value="value">Ordre alphabétique</option>
+                <option value="value">Présence</option>
+            </select>
+        </div>*@
+        <br />
 
-            @* LISTE AMIS *@
+        @* LISTE AMIS *@
         <div id="div-list-amis">
 
+
             @*AMI CARD*@
-            @foreach (JointureDTO item in Model)
+            @{List<JointureDTO> temp = new List<JointureDTO>();}
+
+            @if (ViewBag.ListFriend != null)
+            {
+                temp = (List<JointureDTO>)ViewBag.ListFriend;
+            }
+            else
+            {
+                temp = Model;
+            }
+
+            @*AFFICHAGE LIST AMIS*@
+            @foreach (JointureDTO item in temp)
             {
                 if (item.invitation)
                 {
@@ -355,19 +375,18 @@
                                 <br />
                             </div>
                         </button>
-
                     }
                     using (Html.BeginForm("SupprimerAmi", "Login", FormMethod.Post))
                     {
-                    <input type="text" name="ami_id" hidden value="@item.Id" />
-                    <button @*type="button"*@ class="close edit-btn-close" id="sup_ami" style="padding-top: 0px;width: 22px;top: -85;padding-right: 0px;margin-right: 5px;bottom: 90px;">
-                        <span aria-hidden="true" class="edit-span-close" style="width: 22px;">&times;</span>
-                    </button>
+                        <input type="text" name="ami_id" hidden value="@item.Id" />
+                        <button class="close edit-btn-close cross">
+                            <span aria-hidden="true" class="edit-span-close">&times;</span>
+                        </button>
                     }
                 }
             }
         </div>
-        </div>
+    </div>
 
         <div id="invitations-content" class="d-no">
 
@@ -411,15 +430,6 @@
 
                             @*CHOIX DEMANDE AMI*@
                             <div class="div-choix-inv">
-                                @*BOUTON ACCPTER AMI*@
-                                @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
-                                {
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-check-circle"></i>
-                                        <span>Accepter</span>
-                                    </button>
-                                    <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
-                                }
 
                                 @*BOUTON REFUSER AMI*@
                                 @using (Html.BeginForm("RejectInvite", "Login", FormMethod.Post))
@@ -429,6 +439,16 @@
                                         <span>Refuser</span>
                                     </button>
                                     <input type="text" name="rejectInviteUser_id" hidden value="@item.Id" />
+                                }
+
+                                @*BOUTON ACCPTER AMI*@
+                                @using (Html.BeginForm("AcceptInvite", "Login", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Accepter</span>
+                                    </button>
+                                    <input type="text" name="acceptInviteUser_id" hidden value="@item.Id" />
                                 }
                             </div>
                         </div>
@@ -453,14 +473,14 @@
                 </form>
 
                 @* TRIER PAR *@
-                <div id="div-select-trier">
-                    <select id="select-trier">
-                        <option value="value">Trier par</option>
-                        <option value="value">Nouveaux messages</option>
-                        <option value="value">Ordre alphabétique</option>
-                        <option value="value">Présence</option>
-                    </select>
-                </div>
+                @*<div id="div-select-trier">
+                        <select id="select-trier">
+                            <option value="value">Trier par</option>
+                            <option value="value">Nouveaux messages</option>
+                            <option value="value">Ordre alphabétique</option>
+                            <option value="value">Présence</option>
+                        </select>
+                    </div>*@
             }
 
 
@@ -494,7 +514,7 @@
                                         </div>
                                         #@item.Id
                                         <br />
-                                        <span class="label label-primary">
+                                        <span class="label label-envoye">
                                             <i class="fas fa-user-plus"></i>
                                             Envoyée
                                         </span>
@@ -556,20 +576,12 @@
                                         <br />
                                         @using (Html.BeginForm("EnvoyerInvite", "Login", FormMethod.Post))
                                         {
-                                            <button type="submit" class="btn btn-success">
-                                                <i class="fas fa-check-circle"></i>
-                                                <span>Envoyer une invitation</span>
+                                            <button type="submit" class="btn btn-primary btn-ajouter-amis">
+                                                <i class="fas fa-user-plus"></i>
+                                                <span>Ajouter</span>
                                             </button>
                                             <input type="text" name="EnvoyerInvite_id" hidden value="@item.Id" />
                                         }
-@*REMY A MERGER*@
-                                        @*#@item.Id
-                                        <br />
-                                        <span class="label label-primary">
-                                            <i class="fas fa-user-plus"></i>
-                                            Ajouter
-                                        </span>*@
-
                                         <br />
                                     </div>
                                 </div>

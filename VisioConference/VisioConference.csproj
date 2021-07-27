@@ -258,6 +258,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\css\PagedList.css" />
     <Content Include="Content\img\Martin.png" />
+    <Content Include="Content\img\MartinProfil.JPG" />
     <Content Include="Content\img\MsgEnvoyer.png" />
     <Content Include="Content\img\power-button.png" />
     <Content Include="Content\img\remy.jpg" />

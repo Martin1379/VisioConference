@@ -54,7 +54,7 @@ namespace VisioConference.Controllers
                 {
                     ModelState["Password"].Errors.Clear();
                     ModelState["Email"].Errors.Clear();
-                    ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte !");
+                    ModelState.AddModelError("Password", "Combinaison nom d'utilisateur et mot de passe incorrecte.");
                     //ViewBag.Erreur = "Echec connexion.....";
                     return View();
                 }
@@ -63,7 +63,7 @@ namespace VisioConference.Controllers
             {
                 ModelState["Password"].Errors.Clear();
                 ModelState["Email"].Errors.Clear();
-                ModelState.AddModelError("Login", "Model non valide!");
+                ModelState.AddModelError("Login", "Veuillez saisir tous les champs.");
                 return View(dto);
             }
         }
@@ -88,7 +88,7 @@ namespace VisioConference.Controllers
             ModelState["Password"].Errors.Clear();
             ModelState["Email"].Errors.Clear();
             ModelState["Pseudo"].Errors.Clear();
-            ModelState.AddModelError("Création", "Model non valide!");
+            ModelState.AddModelError("Création", "Veuillez saisir tous les champs");
             return View("Index",userDTO);
         }
 
@@ -96,43 +96,32 @@ namespace VisioConference.Controllers
 
         public ActionResult Logout()
         {
-            //DialogResult dialogResult = MessageBox.Show("Voulez-vous réellement déconnecter ?", "Déconnextion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (dialogResult == DialogResult.Yes)
-            //{
-            //    Session.Clear();
-            //    return RedirectToAction("Index", "Login");
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Discussion", "Login");
-            //}
             Session.Clear();
+            TempData.Remove("Nom_ami");
+            TempData.Remove("Id_ami");
             return RedirectToAction("Index", "Login");
-
         }
-
 
         [LoginFilter] //Empeche l'accès si on n'est pas connecté avec une session "userNormal"
         public ActionResult Discussion()
         {
             UserDTO userDTO = (UserDTO)Session["userNormal"];
             List<JointureDTO> friendList;
-            if (true/*TempData["search"] == null*/)
+
+            //SEARCH FRIEND
+            if (TempData["search-friend"] != null)
             {
-                 friendList = Cvservice.findFriends(userDTO);
-            }
-            else
-            {
-                //Fonction de recherche d'amis
-                //friendList = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
+                ViewBag.ListFriend = Cvservice.findFriends(userDTO, (string)TempData["search-friend"]);
             }
 
+            friendList = Cvservice.findFriends(userDTO);
+
+            //SEARCH MEMBER
             if (TempData["search"] != null)
             {
                 TempData["resultatFriendAndOthers"] = Cvservice.findFriendsAndOthers(userDTO, (string)TempData["search"]);
             }
             
-
             if (TempData["Id_ami"] != null)
             {
                 int ami_id = (int)TempData["Id_ami"];
@@ -147,12 +136,10 @@ namespace VisioConference.Controllers
                             List<string> messages = Strings.afficherConv(CvDto.message, userDTO, amiDTO).ToList();
                             ViewBag.Messages = messages;
                         }
-
                     }
                     TempData.Keep();
                 }
             }
-
             return View(friendList);
         }
 
@@ -175,6 +162,7 @@ namespace VisioConference.Controllers
 
             //TempData["message"]= contenu;
             //TempData.Keep();
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
 
         }
@@ -188,9 +176,10 @@ namespace VisioConference.Controllers
             TempData["Nom_ami"] = nom_ami;
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
-
         }
+
         [HttpPost]
         public ActionResult SupprimerAmi(System.Web.Mvc.FormCollection form)
         {
@@ -199,6 +188,7 @@ namespace VisioConference.Controllers
             UserDTO user = (UserDTO)Session["userNormal"];
             int ConvId = Cvservice.findByUsers(user, amidto).convID;
             Cvservice.removeConversation(ConvId);
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
         }
 
@@ -221,6 +211,8 @@ namespace VisioConference.Controllers
             int ami_id = Convert.ToInt32(form.Get("rejectInviteUser_id"));
             ConversationDTO cv = Cvservice.findByUsers(service.findById(ami_id), (UserDTO)Session["userNormal"]);
             Cvservice.removeConversation(cv.convID);
+            TempData["inviteRefusee"] = true;
+            TempData.Keep();
             return RedirectToAction("Discussion");
         }
 
@@ -230,6 +222,8 @@ namespace VisioConference.Controllers
             int ami_id = Convert.ToInt32(form.Get("EnvoyerInvite_id"));
             UserDTO user = (UserDTO)Session["userNormal"];
             Cvservice.AddConversation(user.Id, ami_id);
+            TempData["inviteEnvoyee"] = true;
+            TempData.Keep();
             return RedirectToAction("Discussion");
         }
 
@@ -272,9 +266,7 @@ namespace VisioConference.Controllers
         public ActionResult ForgotPassword()
         {
             return View();
-
         }
-
 
         [HttpPost]
         public ActionResult Password(string EmailID)
@@ -295,10 +287,10 @@ namespace VisioConference.Controllers
                     context.SaveChanges();
 
                     var subject = "Password Reset Request";
-                    var body = "Hi " + getUser.Pseudo + ", <br/> You recently requested to reset your password for your account. Click the link below to reset it. " +
+                    var body = "Bonjour " + getUser.Pseudo + ", <br/> Vous avez demander de modifier votre mot de passe sur YouCom. Veuillez cliquer sur le lien ci dessous pour le réinitialiser. " +
 
                          " <br/><br/><a href='" + link + "'>" + link + "</a> <br/><br/>" +
-                         "If you did not request a password reset, please ignore this email or reply to let us know.<br/><br/> Thank you";
+                         "Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet eMail.<br/><br/> Merci";
 
                     SendEmail(getUser.Email, body, subject);
 
@@ -307,7 +299,7 @@ namespace VisioConference.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "User doesn't exists.";
+                    ViewBag.Message = "L'utilisateur n'existe pas.";
                     return View("ForgotPassword");
                 }
             }
@@ -356,6 +348,7 @@ namespace VisioConference.Controllers
                 }
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordModel model)
@@ -375,13 +368,13 @@ namespace VisioConference.Controllers
                         //to avoid validation issues, disable it
                         context.Configuration.ValidateOnSaveEnabled = false;
                         context.SaveChanges();
-                        message = "New password updated successfully";
+                        message = "Nouveau mot de passe mis à jour avec succès.";
                     }
                 }
             }
             else
             {
-                message = "Something invalid";
+                message = "Echec de la mis à jour du mot de passe.";
             }
             ViewBag.Message = message;
             return View(model);
@@ -394,7 +387,15 @@ namespace VisioConference.Controllers
             TempData.Keep();
             return RedirectToAction("Discussion");
         }
-
+        
+        [HttpPost]
+        public ActionResult SearchFriend(System.Web.Mvc.FormCollection form)
+        {
+            TempData["search-friend"] = form.Get("search-friend");
+            TempData.Remove("search");
+            TempData.Keep();
+            return RedirectToAction("Discussion");
+        }
         
         public ActionResult Contact()
         {
@@ -405,7 +406,6 @@ namespace VisioConference.Controllers
         {
             return View();
         }
-
     }
 }
 /*
