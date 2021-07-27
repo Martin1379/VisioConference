@@ -1,17 +1,58 @@
 ﻿@{
     ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<header>
+    <link href="~/Content/css/About.css" rel="stylesheet" />
+</header>
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<div class="container">
-    Contenu de About
-    <br />
-    <br />
-    <br />
-    <br />
-</div>
+<div class="container body-content">
+    <div class="jumbotron">
+        @*LOGO & TITRE*@
+        <h2 id="h2-accueil">Mode passe oublié !</h2>
+
+        @*ACCUEIL*@
+        <p class="lead">
+            Veuillez entrer votre adresse e-mail enregistrée ci-dessous pour recevoir un e-mail
+            <br />
+            contenant un lien, pour réinitialiser votre mot de passe.
+        </p>
+    </div>
+
+    <div class="row col-lg-4" style="margin-left:50px;">
+        <div class="grayscale div img ">
+            <div class="grayscale div:hover img">
+                @*<img src="~/Content/img/avatar-vide.png" class="img-circle" alt="Blueprint Wire illustration" />*@
+                <img src="~/Content/img/remy.jpg" style="width: 180px; height: 180px; border-radius: 50%; " alt="Blueprint Wire illustration" />
+            </div>
+        </div>
+        <div class="basicBox">
+            Hover
+            <svg width="130" height="65" viewBox="0 0 130 65" xmlns="http://www.w3.org/2000/svg">
+                <rect x='0' y='0' fill='none' width='130' height='65' />
+            </svg>
+        </div>
+        <div class="row col-lg-6 boxTable ">
+            <hr size=4 width=30% align=center tyle="margin-left: 200px;margin-right: 100px; margin-bottom: 0px; margin-top: 0px; width: 600px;">
+        </div>
+    </div>
+
+        @*FOOTER*@
+        <!--<footer>
+        <div class="d-flex">
+            <div id="main-div-footer-1">
+                <img src="~/Content/img/dawan-logo.png" alt="Alternate Text" />
+            </div>
+            <div id="main-div-footer-2">
+                YouCom&copy;  est une application développée par :
+                <br />
+                Sara - Martin - Remy
+                <br />
+                Développeurs .NET - DAWAN - @DateTime.Now.Year
+            </div>
+        </div>
+    </footer>-->
+    </div>
+
+
