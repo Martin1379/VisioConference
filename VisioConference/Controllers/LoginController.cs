@@ -97,6 +97,8 @@ namespace VisioConference.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
+            TempData.Remove("Nom_ami");
+            TempData.Remove("Id_ami");
             return RedirectToAction("Index", "Login");
         }
 
@@ -176,6 +178,7 @@ namespace VisioConference.Controllers
             TempData["Nom_ami"] = nom_ami;
             TempData["Id_ami"] = ami_id;
             TempData.Keep();
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
 
         }
@@ -187,6 +190,7 @@ namespace VisioConference.Controllers
             UserDTO user = (UserDTO)Session["userNormal"];
             int ConvId = Cvservice.findByUsers(user, amidto).convID;
             Cvservice.removeConversation(ConvId);
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
         }
 
