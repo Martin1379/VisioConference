@@ -470,6 +470,7 @@ footer .row {
     color: #DADADA;
     opacity: 1.0;
     text-shadow: none;
+    width: 22px;
 }
 
 #div-list-amis button:nth-child(2),
@@ -485,6 +486,16 @@ footer .row {
     #div-list-amis button:nth-child(2):hover {
         background-color: #DADADA;
     }
+
+.cross {
+    background-color: #dc3545 !important;
+    padding-top: 0px !important;
+    width: 22px !important;
+    top: -85 !important;
+    padding-right: 0px !important;
+    margin-right: 5px !important;
+    bottom: 90px !important;
+}
 
 .div-ami-card-text {
     width: -webkit-fill-available;

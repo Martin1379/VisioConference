@@ -355,13 +355,12 @@
                                 <br />
                             </div>
                         </button>
-
                     }
                     using (Html.BeginForm("SupprimerAmi", "Login", FormMethod.Post))
                     {
                     <input type="text" name="ami_id" hidden value="@item.Id" />
-                    <button @*type="button"*@ class="close edit-btn-close" id="sup_ami" style="padding-top: 0px;width: 22px;top: -85;padding-right: 0px;margin-right: 5px;bottom: 90px;">
-                        <span aria-hidden="true" class="edit-span-close" style="width: 22px;">&times;</span>
+                    <button class="close edit-btn-close cross">
+                        <span aria-hidden="true" class="edit-span-close">&times;</span>
                     </button>
                     }
                 }
