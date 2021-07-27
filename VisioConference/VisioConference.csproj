@@ -244,6 +244,7 @@
     <Content Include="Content\css\Contact.css" />
     <Content Include="Content\css\deletUser.css" />
     <Content Include="Content\css\editUser.css" />
+    <Content Include="Content\css\About.css" />
     <Content Include="Content\css\user.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\img\avatar-vide.png" />

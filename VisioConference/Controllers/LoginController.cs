@@ -181,6 +181,7 @@ namespace VisioConference.Controllers
         [HttpPost]
         public ActionResult ClickAmi(System.Web.Mvc.FormCollection form)
         {
+
             //Afficher nouvelle conversation
             int ami_id = Convert.ToInt32(form.Get("user_id"));
             string nom_ami = service.findById(ami_id).Pseudo;
@@ -191,6 +192,19 @@ namespace VisioConference.Controllers
 
         }
         [HttpPost]
+        public ActionResult SupprimerAmi(System.Web.Mvc.FormCollection form)
+        {
+            int ami_id = Convert.ToInt32(form.Get("ami_id"));
+            UserDTO amidto = service.findById(ami_id);
+            UserDTO user = (UserDTO)Session["userNormal"];
+            int ConvId = Cvservice.findByUsers(user, amidto).convID;
+            Cvservice.removeConversation(ConvId);
+            return RedirectToAction("Discussion");
+        }
+
+
+
+            [HttpPost]
         public ActionResult AcceptInvite(System.Web.Mvc.FormCollection form)
         {
             //Afficher nouvelle conversation
