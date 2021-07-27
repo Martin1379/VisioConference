@@ -247,6 +247,9 @@
     <Content Include="Content\css\About.css" />
     <Content Include="Content\css\user.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\img\astro.png" />
+    <Content Include="Content\img\astro2.png" />
+    <Content Include="Content\img\astrono.jpg" />
     <Content Include="Content\img\avatar-vide.png" />
     <Content Include="Content\img\dawan-logo.png" />
     <Content Include="Content\img\discussion.png" />
