@@ -408,7 +408,7 @@ footer .row {
 
 #div-list-amis {
     position: relative;
-    top: 12px;
+    bottom: 7px;
     padding: 0 10px 5px 10px;
     width: 111%;
     right: 10px;
@@ -627,6 +627,10 @@ footer .row {
     position: absolute;
     top: 133px;
 }
+
+    #contacts-content form:first-child {
+        display:flex;
+    }
 
 #invitations-content {
     overflow: auto;
