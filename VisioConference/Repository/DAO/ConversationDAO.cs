@@ -129,6 +129,55 @@ namespace VisioConference.Repository.DAO
                 return lst;
             }
         }
+        
+        //FIND FRIENDS SURCHARGE
+        public List<JointureDTO> findFriends(UserDTO user, string search)
+        {
+            using (MyContext context = new MyContext())
+            {
+                var query = (from us in context.users
+                             join co in context.conversations on us.Id equals co.userID
+                             where co.userFriendID == user.Id && us.Pseudo.Contains(search)
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
+                            .Union
+                            (from us in context.users
+                             join co in context.conversations on us.Id equals co.userFriendID
+                             where co.userID == user.Id && us.Pseudo.Contains(search)
+                             select new
+                             {
+                                 FriendId = us.Id,
+                                 FriendMail = us.Email,
+                                 FriendPseudo = us.Pseudo,
+                                 FriendPhoto = us.Photo,
+                                 FriendConnected = us.Etat,
+                                 FriendInvitation = co.invitation,
+                                 ConversationUser1 = co.userID,
+                                 ConversationUser2 = co.userFriendID
+                             })
+                            ;
+
+                List<JointureDTO> lst = new List<JointureDTO>();
+                foreach (var item in query)
+                {
+                    lst.Add(new JointureDTO(item.FriendId, item.FriendPseudo, item.FriendMail, item.FriendPhoto, item.FriendConnected, item.ConversationUser1, item.ConversationUser2, item.FriendInvitation));
+                }
+                return lst;
+            }
+        }
+
+
+
+
         public List<JointureDTO> findFriendsAndOthers(UserDTO user, string search)
         {
             using (MyContext context = new MyContext())
