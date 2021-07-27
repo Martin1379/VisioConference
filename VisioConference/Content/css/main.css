@@ -408,26 +408,14 @@ footer .row {
 
 #div-list-amis {
     position: relative;
-    bottom: 16px;
+    top: 12px;
     padding: 0 10px 5px 10px;
     width: 111%;
     right: 10px;
     overflow: auto;
-    max-height: 67.6vh;
-    min-height: 67.6vh;
+    max-height: 71.7vh;
+    min-height: 71.7vh;
 }
-
-}
-
-#div-list-amis > div,
-#div-list-invit-in > div {
-    display: inline-flex;
-    padding: 15px 5px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.29);
-    width: -webkit-fill-available;
-}
-
 
 #div-list-amis > hr,
 #div-list-invit-in > hr {
