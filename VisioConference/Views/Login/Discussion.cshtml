@@ -281,8 +281,21 @@
         @* LISTE AMIS *@
         <div id="div-list-amis">
 
+
             @*AMI CARD*@
-            @foreach (JointureDTO item in Model)
+            @{List<JointureDTO> temp = new List<JointureDTO>();}
+
+            @if (ViewBag.ListFriend != null)
+            {
+                temp = (List<JointureDTO>)ViewBag.ListFriend;
+            }
+            else
+            {
+                temp = Model;
+            }
+
+            @*AFFICHAGE LIST AMIS*@
+            @foreach (JointureDTO item in temp)
             {
                 if (item.invitation)
                 {

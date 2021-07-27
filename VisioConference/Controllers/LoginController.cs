@@ -111,12 +111,10 @@ namespace VisioConference.Controllers
             //SEARCH FRIEND
             if (TempData["search-friend"] != null)
             {
-                friendList= Cvservice.findFriends(userDTO, (string)TempData["search-friend"]);
+                ViewBag.ListFriend = Cvservice.findFriends(userDTO, (string)TempData["search-friend"]);
             }
-            else
-            {
-                friendList = Cvservice.findFriends(userDTO);
-            }
+
+            friendList = Cvservice.findFriends(userDTO);
 
             //SEARCH MEMBER
             if (TempData["search"] != null)
@@ -154,7 +152,6 @@ namespace VisioConference.Controllers
         public ActionResult EnvoyerMessage(System.Web.Mvc.FormCollection form)
         {
             if (TempData["Id_ami"] != null)
-            if (TempData["Id_ami"] != null)
             {
                 UserDTO utilisateur = (UserDTO)Session["userNormal"];
                 UserDTO ami = service.findById((int)TempData["Id_ami"]);
@@ -165,6 +162,7 @@ namespace VisioConference.Controllers
 
             //TempData["message"]= contenu;
             //TempData.Keep();
+            TempData.Remove("search");
             return RedirectToAction("Discussion");
 
         }
@@ -180,8 +178,8 @@ namespace VisioConference.Controllers
             TempData.Keep();
             TempData.Remove("search");
             return RedirectToAction("Discussion");
-
         }
+
         [HttpPost]
         public ActionResult SupprimerAmi(System.Web.Mvc.FormCollection form)
         {
@@ -394,10 +392,10 @@ namespace VisioConference.Controllers
         public ActionResult SearchFriend(System.Web.Mvc.FormCollection form)
         {
             TempData["search-friend"] = form.Get("search-friend");
+            TempData.Remove("search");
             TempData.Keep();
             return RedirectToAction("Discussion");
         }
-
         
         public ActionResult Contact()
         {
@@ -408,7 +406,6 @@ namespace VisioConference.Controllers
         {
             return View();
         }
-
     }
 }
 /*
