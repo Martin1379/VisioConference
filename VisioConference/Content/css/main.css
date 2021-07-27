@@ -712,3 +712,15 @@ footer .row {
     text-align: center;
     border-radius: 0.25em;
 }
+
+/*SARA*/
+
+.alert-error {
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+    .alert-error ul {
+        padding: 0 15px;
+        margin: 0;
+    }
