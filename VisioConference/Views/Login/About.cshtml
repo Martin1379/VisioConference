@@ -2,12 +2,13 @@
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<header>
+    <link href="~/Content/css/About.css" rel="stylesheet" />
+</header>
 <br />
 <br />
-
 <div class="container body-content">
-    <div class="jumbo-about">
-
+    <div class="jumbotron" style="padding-top:0px; padding-bottom: 10px;">
         @*LOGO & TITRE*@
         <h2 id="h2-accueil">Notre équipe</h2>
 
@@ -18,95 +19,68 @@
             Et surtout, nous prenons <b>beaucoup de plaisir</b>  à construire l'application <b>YouCom.</b>
         </p>
     </div>
-
-    @*REMY*@
-    <div">
-        <div class="row profil-about">
-
-            <div class="col-md-2">
-                <img src="/Content/img/remy-irl.jpg" class="about-img" id="remy-img" />
-            </div>
-
-            <div class="col-md-10">
-
-                <div class="row">
-                    @*NOM*@
-                    <div class="col-md-5">
-                        <h3 class="h3-about">Remy Charpentier</h3>
-                    </div>
-                    @*MAIL*@
-                    <div class="col-md-4" style="        display: flex;
-        position: relative;
-        left: 296px;
-        top: 10px;">
-                        <i class="fas fa-envelope"></i>
-                        <strong class="mail-2">remycha@msn.com</strong>
-                    </div>
-                    @*TEL*@
-                    <div class="col-md-4" style="        display: flex;
-        position: relative;
-        left: 335px;
-        top: 10px;">
-                        <i class="fas fa-phone"></i>
-                        <strong class="phone-2">06 17 39 45 41</strong>
-                    </div>
+    <div class="row col-lg-12 ">
+        <div class="grayscale div img ">
+            <d-iv class="grayscale div:hover img" style="margin-right: 400px;">
+                <div class="col-lg-2">
+                    <img src="~/Content/img/remy.jpg" style="width: 150px; height: 150px; border-radius: 50%; margin-left: 50px; " alt="Blueprint Wire illustration" />
                 </div>
-                <p style=" padding-left: 28px;">
-                    Bonjour,
-                    <br />                    J'ai <strong>32 ans</strong> et j'habite à <strong>Bordeaux centre</strong>.
-                    Mes centres d'intérêts dans la vie de tous les jours sont les sciences,
-                    l'espace et les nouvelles technologies. C'est pourquoi je me suis naturellement tourné vers
-                    le multimédia et plus précisément le <strong>code</strong> pour en faire mon <strong>métier d'avenir</strong>.
-                    Je prends énormément de plaisir à travailler dans
-                    un domaine qui nécessite de la réflexion. Si mon profile vous intéresse, n'hésitez pas à me contacter !
-                    <br />
-                </p>
-            </div>
+                <div class="row col-lg-6 boxTable ">
+                    <p class="h5 fst-normal text-muted text-justify " style="margin-left: 50px;">
+                        <b>BANI TOUAGGA Sara</b><br /> <br />
+                        Passionnée par le domaine de développement DOT NET. Je suis polyvalente, autonome,
+                        organisée, outre j’ai des bonnes capacités d’apprentissage et d’excellentes compétences dans des déférents
+                        domaines scientifiques.
+                        <br /> <br />
+                        <b>Email:</b> <ins>sarabanitouagga@gmail.com</ins><br />
+                        <b>Tel:</b> <ins>+33 7 63 93 31 33</ins>
+                    </p>
+                </div>
+            </d-iv>
         </div>
-        <hr>
-
-        @*SARA*@
-        <div class="row col-lg-12" style="text-align:end;">
-            <div class="grayscale div img">
-                <div class="grayscale div:hover img" style="margin-left: 400px;">
-                    <img src="/Content/img/SaraProfil.jpg" style="width: 150px;height: 150px;border-radius: 50%;margin-right: 50px;" alt="Blueprint Wire illustration">
-                    <div class="row col-lg-8 boxTable ">
-                        <p class="h5 fst-normal text-muted text-justify ">
-                            <b>BANI TOUAGGA Sara</b><br /> <br />
-                            Passionnée par le domaine de développement DOT NET. Je suis polyvalente, autonome,
-                            organisée, outre j’ai des bonnes capacités d’apprentissage et d’excellentes compétences dans des déférents
-                            domaines scientifiques.
-                            <br /> <br />
-                            <b>Email:</b> <ins>sarabanitouagga@gmail.com</ins><br />
-                            <b>Tel:</b> <ins>+33 7 63 93 31 33</ins>
-                        </p>
-                    </div>
+        <hr style="width: 600px; margin-left: 100px; ">
+    </div><br />
+    <div class="row col-lg-12" style="text-align:end;">
+        <div class="grayscale div img">
+            <div class="grayscale div:hover img" style="margin-left: 400px;">
+                <img src="/Content/img/SaraProfil.jpg" style="width: 150px;height: 150px;border-radius: 50%;margin-right: 50px;" alt="Blueprint Wire illustration">
+                <div class="row col-lg-8 boxTable ">
+                    <p class="h5 fst-normal text-muted text-justify ">
+                        <b>BANI TOUAGGA Sara</b><br /> <br />
+                        Passionnée par le domaine de développement DOT NET. Je suis polyvalente, autonome,
+                        organisée, outre j’ai des bonnes capacités d’apprentissage et d’excellentes compétences dans des déférents
+                        domaines scientifiques.
+                        <br /> <br />
+                        <b>Email:</b> <ins>sarabanitouagga@gmail.com</ins><br />
+                        <b>Tel:</b> <ins>+33 7 63 93 31 33</ins>
+                    </p>
                 </div>
             </div>
-            <hr style="width: 600px; margin-right: 100px; ">
         </div>
-
-        @*MARTIN*@
-        <div class="row col-lg-12 ">
-            <div class="grayscale div img ">
-                <d-iv class="grayscale div:hover img" style="margin-right: 400px;">
-                    <div class="col-lg-2">
-                        <img src="~/Content/img/MartinProfil.JPG" style="width: 150px; height: 150px; border-radius: 50%; margin-left: 50px; " alt="Blueprint Wire illustration" />
-                    </div>
-                    <div class="row col-lg-6 boxTable ">
-                        <p class="h5 fst-normal text-muted text-justify " style="margin-left: 50px;">
-                            <b>TAQUET Martin</b><br /> <br />
-                            Ingénieur généraliste, j'ai cottoyé l'univers de la programmation tout au long de mes études.
-                            D'abord hésitant, je suis à présent certain de ma reconversion en développeur.
-                            Ce projet a été un experience très enrichissante d'un point de vue technique, mais aussi humain,
-                            grâce à une approche d'entraide et de partage de connaissances menée tout au long de celui-ci.
-                            <br /> <br />
-                            <b>Email:</b> <ins>martin.taquet@gmail.com</ins><br />
-                            <b>Tel:</b> <ins>+33 6 75 40 67 18</ins>
-                        </p>
-                    </div>
-                </d-iv>
-            </div>
-            <hr style="width: 600px; margin-left: 100px; ">
+        <hr style="width: 600px; margin-right: 100px; ">
+    </div>
+    <div class="row col-lg-12 ">
+        <div class="grayscale div img ">
+            <d-iv class="grayscale div:hover img" style="margin-right: 400px;">
+                <div class="col-lg-2">
+                    <img src="~/Content/img/MartinProfil.JPG" style="width: 150px; height: 150px; border-radius: 50%; margin-left: 50px; " alt="Blueprint Wire illustration" />
+                </div>
+                <div class="row col-lg-6 boxTable ">
+                    <p class="h5 fst-normal text-muted text-justify " style="margin-left: 50px;">
+                        <b>TAQUET Martin</b><br /> <br />
+                        Ingénieur généraliste, j'ai cottoyé l'univers de la programmation tout au long de mes études.
+                        D'abord hésitant, je suis à présent certain de ma reconversion en développeur.
+                        Ce projet a été un experience très enrichissante d'un point de vue technique, mais aussi humain,
+                        grâce à une approche d'entraide et de partage de connaissances menée tout au long de celui-ci.
+                        <br /> <br />
+                        <b>Email:</b> <ins>martin.taquet@gmail.com</ins><br />
+                        <b>Tel:</b> <ins>+33 6 75 40 67 18</ins>
+                    </p>
+                </div>
+            </d-iv>
         </div>
+        <hr style="width: 600px; margin-left: 100px; ">
+    </div>
 </div>
+
+
