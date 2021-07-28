@@ -22,7 +22,6 @@
     <input class="input-recherche" type="text" name="search" placeholder="Recherche" />
     <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search" style="border:none;outline:none;"></i></button>
     }
-
 </div>
 
 
@@ -36,10 +35,9 @@
         <div>
             <table class="table">
                 <tr>
-
-                    @*<th>
-                            @Html.DisplayNameFor(model => model.First().Id)
-                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Id)
+                    </th>
                     <th>
                         <strong>Avatar</strong>
                     </th>
@@ -69,38 +67,40 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Pseudo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Password)
-                            </td>*@
+            <tr>
 
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Connected)
-                            </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IsAdmin)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    <img src="~/Content/avatar_user/@item.Photo" class="img-thumbnail" style="height:30px" />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pseudo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>*@
+
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Connected)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>
+                <td>
+                    @Html.ActionLink("Amis", "DisplayFriends", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
                 }
 
             </table>

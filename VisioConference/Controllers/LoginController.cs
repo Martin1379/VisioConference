@@ -193,8 +193,7 @@ namespace VisioConference.Controllers
         }
 
 
-
-            [HttpPost]
+        [HttpPost]
         public ActionResult AcceptInvite(System.Web.Mvc.FormCollection form)
         {
             //Afficher nouvelle conversation
@@ -307,7 +306,7 @@ namespace VisioConference.Controllers
 
         private void SendEmail(string emailAddress, string body, string subject)
         {
-            using (MailMessage mm = new MailMessage("sarabanitouagga@gmail.com", emailAddress))
+            using (MailMessage mm = new MailMessage("martin.taquet@gmail.com", emailAddress))
             {
                 mm.Subject = subject;
                 mm.Body = body;
@@ -315,7 +314,7 @@ namespace VisioConference.Controllers
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
-                NetworkCredential NetworkCred = new NetworkCredential("banisara565@gmail.com", "sara@@0624");
+                NetworkCredential NetworkCred = new NetworkCredential("supprimerdelete01@gmail.com", "AZQSwx123");
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = NetworkCred;
                 smtp.Port = 587;
